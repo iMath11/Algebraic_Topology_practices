@@ -1,0 +1,1028 @@
+\section{Đồng luân và nhóm cơ bản}
+\begin{exercise}
+Xây dựng nhóm cơ bản của một không gian tô pô có điểm gốc.
+\end{exercise}
+
+Cho $X$ là một không gian topo và $I=[0,1] \subset \R$.
+
+\begin{definition}[Đường cong trong $X$]    
+    Một \textit{đường cong} trong $X$ là một ánh xạ liên tục 
+    \[\omega: I \to X.\]
+    \begin{itemize}
+        \item Ta nói $\text{orig}(\omega):= \omega(0),~\text{end}(\omega):=\omega(1)$ lần lượt là điểm đầu và điểm cuối của $\omega$.
+        
+        \item Nếu $\omega(0)=\omega(1)$ ta nói $\omega$ là một \textit{đường cong đóng}.
+    \end{itemize}
+\end{definition}
+    
+\begin{definition}[Phép nối hai đường cong]
+    Cho $\omega,~\omega': I\to X$ là hai đường cong thoả mãn $\omega(1) = \omega'(0)$. Khi đó ánh xạ \textit{nối hai đường cong} $\omega$ và $\omega'$ được định nghĩa bởi
+    \[\omega * \omega': I \to X,~t \mapsto \begin{cases}
+        \omega(2s)&\quad s \in [0,1/2]\\
+        \omega'(2s-1)&\quad s \in [1/2,1]
+    \end{cases}\]
+\end{definition}
+
+\begin{definition}[Hai đường cong đồng luân]
+    Cho hai đường cong $\omega_1,~\omega_2: I \to X$ thoả mãn $\omega_1(0)=\omega_2(0),~\omega_1(1) =  \omega_2(1)$. Ta nói $\omega_1$ đồng luân với $\omega_2$ nếu $\omega_1 \simeq \omega_2~\rel \partial I = \{0,1\}$. Tức là tồn tại 
+    \[F: I \times I \to X \text{ thoả mãn } \begin{cases}
+        F(s,0) &= \omega_1(s)\\
+        F(s,1) &= \omega_2(s)\\
+        F(0,t) &= \omega_1(0) = \omega_2(0)\\
+        F(1,t) &= \omega_1(1) = \omega_2(1)
+    \end{cases}\]
+\end{definition}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{\omega_1(0)=\omega_2(0)=F(0,t)} \&\&\& {\omega_1(1)=\omega_2(1)=F(1,t)}
+	\arrow["{\omega_1(s) = F(s,0)}", color={rgb,255:red,214;green,92;blue,92}, curve={height=-30pt}, tail, from=1-1, to=1-4]
+	\arrow["{\omega_2(s)=F(s,1)}"', color={rgb,255:red,5;green,18;blue,255}, curve={height=30pt}, tail, from=1-1, to=1-4]
+	\arrow["{F(s,t)}", tail, from=1-1, to=1-4]
+\end{tikzcd}\]
+
+\begin{proposition}
+    Quan hệ đồng luân của hai đường cong trong $X$ là một quan hệ tương đương.
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item \textbf{Phản xạ}. Giả sử $\omega: I \in X$ là một đường cong. Khi đó $F: I \times I \to X,~(s,t) \mapsto \omega(s)$ là phép đồng luân giữa $\omega$ và chính nó.
+
+        \item \textbf{Đối xứng}. Giả sử $F(s,t):\omega_1 \simeq \omega_2$ qua phép đồng luân $F(s,t)$. Khi đó $\omega_2 \simeq \omega_1$ qua phép đồng luân $F'(s,t) = F(s,1-t)$.
+
+        \item \textbf{Bắc cầu}. Giả sử $\omega_1 \simeq \omega_2$ qua phép đồng luân $F(s,t)$ và $\omega_2 \simeq \omega_3$ qua phép đồng luân $G(s,t)$. Khi đó $\omega_1 \simeq \omega_3$ qua phép đồng luân $H(s,t)$ được định nghĩa bởi
+        \[H(s,t) = \begin{cases}
+            F(s,2t) &\quad t\in [0,1/2]\\
+            G(s,2t-1) &\quad t\in [1/2,1]
+        \end{cases}\]
+    \end{enumerate}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{\omega_i(0)} \&\&\& {\omega_i(1)}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\omega_1(s)}"{description}, color={rgb,255:red,214;green,92;blue,92}, curve={height=-30pt}, tail, from=1-1, to=1-4]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{\omega_3(s)}"{description}, color={rgb,255:red,5;green,18;blue,255}, curve={height=30pt}, tail, from=1-1, to=1-4]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{\omega_2(s)}"{description}, tail, from=1-1, to=1-4]
+	\arrow["{F(s,2t)}"{description}, color={rgb,255:red,184;green,51;blue,255}, between={0.2}{0.8}, from=0, to=2]
+	\arrow["{G(s,2t-1)}"{description}, between={0.2}{0.8}, from=2, to=1]
+\end{tikzcd}\]
+Khi đó mỗi lớp tương đương của đường cong $\omega$ là
+\[[\omega]=\{\omega': I \to X \mid \omega' \simeq \omega \rel \partial I\}.\]
+\end{proof}
+
+\begin{proposition}
+    Phép nối hai đường cong bảo toàn quan hệ đồng luân.
+\end{proposition}
+\begin{proof}
+    Giả sử $F(s,t): \omega_1 \simeq \omega_1'$ và $G(s,t): \omega_2 \simeq \omega_2'$, tức là
+    \[F: I \times I \to X \text{ thoả mãn } \begin{cases}
+        F(s,0) &= \omega_1(s)\\
+        F(s,1) &= \omega_1'(s)\\
+        F(0,t) &= \omega_1(0) = \omega_1'(0)\\
+        F(1,t) &= \omega_1(1) = \omega_1'(1)
+    \end{cases}\]
+    \[G: I \times I \to X \text{ thoả mãn } \begin{cases}
+        G(s,0) &= \omega_2(s)\\
+        G(s,1) &= \omega_2'(s)\\
+        G(0,t) &= \omega_2(0) = \omega_2'(0)\\
+        G(1,t) &= \omega_2(1) = \omega_2'(1)
+    \end{cases}\]
+    Định nghĩa 
+        \[(F*G)(s,t) :=  \begin{cases}
+            F(2s,t),&\quad s \in [0,1/2]\\
+            G(2s-1,t), &\quad s \in [1/2,1]
+        \end{cases} \]
+    Ta có
+        \begin{align*}
+        (F * G)(s,0) &= \begin{cases}
+            F(2s,0),&\quad s \in [0,1/2]\\
+            G(2s-1,0), &\quad s \in [1/2,1]
+        \end{cases}\\
+        &=\begin{cases}
+            \omega_1(2s),&\quad s \in [0,1/2]\\
+            \omega_2(2s-1), &\quad s \in [1/2,1]
+        \end{cases} \\
+        &= (\omega_1 * \omega_2)(s)
+        \end{align*}
+
+        \begin{align*}
+        (F * G)(s,1) &= \begin{cases}
+            F(2s,1),&\quad s \in [0,1/2]\\
+            G(2s-1,1), &\quad s \in [1/2,1]
+        \end{cases}\\
+        &=\begin{cases}
+            \omega_1'(2s),&\quad s \in [0,1/2]\\
+            \omega_2'(2s-1), &\quad s \in [1/2,1]
+        \end{cases} \\
+        &= (\omega_1' * \omega_2')(s)
+        \end{align*}
+
+        \[(F * G)(0,t) = F(0,t) = \omega_1(0) = \omega_1'(0) =(\omega_1 * \omega_2)(0) = (\omega_1' * \omega_2')(0).\]
+        
+        \[(F * G)(1,t) = G(1,t) = \omega_2(1) = \omega_2'(1) =(\omega_1 * \omega_2)(1) = (\omega_1' * \omega_2')(1).\]
+    Vậy $F * G : \omega_1 * \omega_2 \simeq \omega_1' * \omega_2'$.
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	x \&\&\& y \&\&\& z
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\omega_1(s)=F(s,0)}", color={rgb,255:red,214;green,92;blue,92}, curve={height=-30pt}, from=1-1, to=1-4]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{\omega_1'(s)=F(s,1)}"', color={rgb,255:red,92;green,92;blue,214}, curve={height=30pt}, from=1-1, to=1-4]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{\omega_2(s)=G(s,0)}", color={rgb,255:red,214;green,92;blue,92}, curve={height=-30pt}, from=1-4, to=1-7]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{\omega_2'(s)=G(s,1)}"', color={rgb,255:red,92;green,92;blue,214}, curve={height=30pt}, from=1-4, to=1-7]
+	\arrow["{F(s,2t)}"{description}, dashed, from=0, to=1]
+	\arrow["{G(s,2t-1)}"{description}, dashed, from=2, to=3]
+\end{tikzcd}\]
+\end{proof}
+
+\begin{corollary}
+    Với $\omega_1, \omega_2 : I \to X$ mà $\omega_1(1) =  \omega_2(0)$ thì
+    phép toán sau được định nghĩa tốt
+    \[[\omega_1]*[\omega_2]:= [\omega_1 * \omega_2]\] 
+    
+\end{corollary}
+
+\begin{proposition}[Tính kết hợp đồng luân]
+    Cho $\omega_1,~\omega_2,~\omega_3: I \to X$ thoả mãn $\omega_1(1) =  \omega_2(0),~\omega_2(1) = \omega_3(0)$. Khi đó
+    \[(\omega_1 * \omega_2) * \omega_3 \simeq \omega_1 * (\omega_2 * \omega_3).\]
+\end{proposition}
+\begin{proof}
+\begin{figure}[!htp]
+    \centering
+    \includegraphics[width=0.75\linewidth]{contents//images/association_homotopy.png}
+\end{figure}
+    Ta có 
+    \begin{align*}
+        (\omega_1 * \omega_2) * \omega_3 (s)
+        &= \begin{cases}
+            (\omega_1 * \omega_2)(2s), &\quad s \in [0,1/2]\\
+            \omega_3(2s-1), &\quad s \in [1/2,1]\\
+            \end{cases}\\
+        &= \begin{cases}
+            \omega_1(4s) &\quad s \in [0,1/4]\\
+            \omega_2(4s-1), &\quad s \in [1/4,1/2]\\
+            \omega_3(2s-1), &\quad s \in [1/2,1]\\
+        \end{cases}
+    \end{align*}
+    \begin{align*}
+        \omega_1 * (\omega_2 * \omega_3) (s)
+        &= \begin{cases}
+            \omega_1 (2s), &\quad s \in [0,1/2]\\
+            (\omega_2 * \omega_3)(2s-1), &\quad s \in [1/2,1]\\
+            \end{cases}\\
+        &= \begin{cases}
+            \omega_1(2s) &\quad s \in [0,1/2]\\
+            \omega_2(4s-2), &\quad s \in [1/2,3/4]\\
+            \omega_3(4s-3), &\quad s \in [3/4,1]\\
+        \end{cases}
+    \end{align*}
+    Định nghĩa
+    \begin{equation}
+        F: I \times I \to X, \quad (s,t)\mapsto \begin{cases}
+            \omega_1\left(\dfrac{4s}{t+1}\right)&\quad s \in [0,(1+t)/4]\\
+            \omega_2(4s-t-1), &\quad s \in [(1+t)/4,(2+t)/4]\\
+            \omega_3\left(\dfrac{4s-t-2}{2-t}\right), &\quad s \in [(2+t)/4,1]\\
+        \end{cases}
+    \end{equation}
+    Khi đó
+    \begin{itemize}
+        \item $F(s,0) =  (\omega_1 * \omega_2) * \omega_3 (s)$.
+
+        \item $F(s,1) =  \omega_1 * (\omega_2 * \omega_3) (s)$.
+
+        \item $F(0, t) =  \omega_1 (0) =  (\omega_1 * \omega_2) * \omega_3 (0) = \omega_1 * (\omega_2 * \omega_3) (0)$.
+
+        \item $F(1, t) =  \omega_3 (1) =  (\omega_1 * \omega_2) * \omega_3 (1) = \omega_1 * (\omega_2 * \omega_3) (1)$.
+    \end{itemize}
+    Vì vậy \[F:(\omega_1 * \omega_2) * \omega_3 \simeq \omega_1 * (\omega_2 * \omega_3).\]
+\end{proof}
+
+\begin{proposition}[Đơn vị đồng luân]
+    Với mỗi $x \in X$, đặt 
+    \[\varepsilon_x: I \to X,~ s\mapsto x.\]
+    Với $\omega: I \to X$ mà $\omega(0) = x_0,~\omega(1)=x_1$ thì
+    \[\omega * \varepsilon_{x_1} \simeq \omega,\quad \varepsilon_{x_0}*\omega \simeq \omega\]
+\end{proposition}
+\begin{proof}
+    \begin{figure}[!htp]
+        \centering
+        \includegraphics[width=0.5\linewidth]{contents//images/identify_homotopy_x1.png}
+    \end{figure}
+
+    Ta có
+    \[(\omega * \varepsilon_{x_1})(s) = \begin{cases}
+        \omega(2s), &\quad s \in [0,1/2]\\
+        \varepsilon_{x_1}(2s-1)=x_1, &\quad s \in [1/2,1]\\
+    \end{cases}\]
+    Định nghĩa 
+    \begin{equation*}
+        F_{x_1}: I \times I \to X,\quad (s,t) \mapsto \begin{cases}
+        \omega\left(\dfrac{2s}{1+t}\right), &\quad s \in [0,(1+t)/2]\\
+        x_1, &\quad s \in [(1+t)/2,1]
+        \end{cases}
+    \end{equation*}
+    Khi đó $\omega * \varepsilon_{x_1} \simeq \omega$ vì $F_{x_1}$ liên tục và
+    \begin{itemize}
+        \item $F_{x_1}(s,0)=(\omega * \varepsilon_{x_1})(s)$.
+
+        \item $F_{x_1}(s,1)=\omega(s)$.
+
+        \item $F_{x_1}(0,t)= \omega(0) = (\omega * 
+        \varepsilon_{x_1})(0)$.
+
+        \item $F_{x_1}(1,t)= x_1= \omega(1) = (\omega * \varepsilon_{x_1})(1)$.
+    \end{itemize}
+
+    Tiếp theo ta chỉ ra $\varepsilon_{x_0} * \omega \simeq \omega$.
+    \begin{figure}[!htp]
+        \centering
+        \includegraphics[width=0.5\linewidth]{contents//images/identify_homotopy_x0.png}
+    \end{figure}
+    Ta có
+    \[(\varepsilon_{x_0} * \omega)(s) = \begin{cases}
+        \varepsilon_{x_0}(2s)=x_0, &\quad s \in [0,1/2]\\
+        \omega(2s-1), &\quad s \in [1/2,1]\\
+    \end{cases}\]
+    Định nghĩa 
+    \begin{equation*}
+        F_{x_0}: I \times I \to X,\quad (s,t) \mapsto \begin{cases}
+        x_0, &\quad s \in [0,(1-t)/2]\\
+        \omega\left(\dfrac{2s-1+t}{1+t}\right), &\quad s \in [(1-t)/2,1]
+        \end{cases}
+    \end{equation*}
+    Khi đó $\varepsilon_{x_0} * \omega \simeq \omega$ vì $F_{x_0}$ liên tục và
+    \begin{itemize}
+        \item $F_{x_0}(s,0)=(\varepsilon_{x_0} * \omega)(s)$.
+
+        \item $F_{x_0}(s,1)=\omega(s)$.
+
+        \item $F_{x_0}(0,t)= x_0 = \omega(0) = (\varepsilon_{x_0}*\omega)(0)$.
+
+        \item $F_{x_0}(1,t)=\omega(1) = (\omega * \varepsilon_{x_1})(1)$.
+    \end{itemize}
+\end{proof}
+
+\begin{proposition}
+    Với mỗi đường cong $\omega: I \to X$, đặt $\omega^{-1}: I \to X,~s \mapsto \omega(1-s)$. Khi đó 
+    \[\omega * \omega^{-1} \simeq \varepsilon_{\omega(0)},\quad \omega^{-1} * \omega \simeq \varepsilon_{\omega(1)}.\]
+\end{proposition}
+\begin{proof}
+    \begin{figure}[!htp]
+        \centering
+        \includegraphics[width=0.5\linewidth]{contents//images/inverse_homotopy.png}
+    \end{figure}
+    Ta có
+    \begin{align*}
+        (\omega * \omega^{-1})(s) = \begin{cases}
+            \omega(2s), &\quad s \in [0,1/2]\\
+            \omega^{-1}(2s-1) = \omega(2-2s), &\quad s \in [1/2,1]\\
+        \end{cases}
+    \end{align*}
+    Định nghĩa
+    \[H: I \times I \to X,~(s,t) \mapsto \begin{cases}
+        \omega(0), &\quad s \in [0,t/2]\\
+        \omega\left(2s-t\right), &\quad s \in [t/2,1/2]\\
+        \omega\left(2-t-2s\right), &\quad s \in [1/2,1-t/2]\\
+        \omega(0), &\quad s \in [1-t/2,1]
+    \end{cases}\]
+    Khi đó
+    \begin{itemize}
+        \item $H(s,0)= \begin{cases}
+        \omega(0), &\quad s =0\\
+        \omega\left(2s\right), &\quad s \in [0,1/2]\\
+        \omega\left(2-2s\right), &\quad s \in [1/2,1]\\
+        \omega(0), &\quad s =1
+    \end{cases} = (\omega * \omega^{-1})(s)$.
+
+        \item $H(s,1)= \begin{cases}
+        \omega(0), &\quad s \in [0,1/2]\\
+        \omega\left(0\right), &\quad s = 1/2\\
+        \omega\left(0\right), &\quad s =1/2\\
+        \omega(0), &\quad s \in [1/2,1]
+    \end{cases} = \varepsilon_{\omega(0)}(s)$.
+    
+        \item $H(0,t) = \omega(0) = \varepsilon_{\omega(0)}(0) = (\omega * \omega^{-1})(0)$.
+
+        \item $H(1,t) = \omega(0) = \varepsilon_{\omega(0)}(1) = (\omega * \omega^{-1})(1)$. 
+    \end{itemize}
+    
+    Hoặc ta có phép đồng luân khác là
+    \[K(s,t) = \begin{cases}
+        \omega(2s(1-t)), &\quad s \in [0,1/2]\\
+        \omega(2(1-s)(1-t)), &\quad s \in [1/2,1]
+    \end{cases}\]
+    thoả mãn 
+    \begin{itemize}
+        \item $K(s,0) = \begin{cases}
+        \omega(2s), &\quad s \in [0,1/2]\\
+        \omega(2-2s), &\quad s \in [1/2,1]
+    \end{cases} = (\omega * \omega^{-1})(s)$.
+
+        \item $K(s,1) = \begin{cases}
+        \omega(0), &\quad s \in [0,1/2]\\
+        \omega(0), &\quad s \in [1/2,1]
+    \end{cases} = \varepsilon_{\omega(0)}(s)$.
+
+        \item $K(0,t) =  \omega(0) = (\omega * \omega^{-1})(0) = \varepsilon_{\omega(0)}(0)$.
+
+        \item $K(1,t) =  \omega(0) = (\omega * \omega^{-1})(1) = \varepsilon_{\omega(0)}(1)$.
+        
+    \end{itemize}
+    Do đó $\omega * \omega^{-1} \simeq \varepsilon_{\omega(0)}$.
+
+    Hoàn toàn tương tự, $\omega^{-1} * \omega \simeq \varepsilon_{\omega(1)}$.
+\end{proof}
+\begin{proposition}
+    Cố định $x_0 \in X$, khi đó
+    \[\pi(X,x_0) =  \{[\omega]\mid \omega:I \to X,~\omega(0)=\omega(1)=x_0\}.\]
+    cùng với phép toán $[\omega_1]*[\omega_2]:= [\omega_1 * \omega_2]$ tạo thành một nhóm và được gọi là nhóm cơ bản của $X$ có điểm gốc tại $x_0$.    
+\end{proposition}
+
+\begin{proof}
+    \begin{enumerate}
+        \item (\textbf{Tính kết hợp}). 
+        
+        Sử dụng \textbf{Mệnh đề 2.8} ta có
+            \begin{align*}
+            ([\omega_1]*[\omega_2])*[\omega_3]
+            &=[\omega_1 * \omega_2] * [\omega_3] \\
+            &=  [(\omega_1 * \omega_2) * \omega_3]\\
+            &= [\omega_1 * (\omega_2 * \omega_3)]\\
+            &= [\omega_1]*[\omega_2*\omega_3]\\
+            &= [\omega_1] * ([\omega_2] * [\omega_3])
+            \end{align*}
+
+        \item (\textbf{Tồn tại đơn vị}). 
+        
+        Sử dụng \textbf{Mệnh đề 2.9}, tồn tại $\varepsilon_{x_0}$ sao cho với mọi $\omega: I \to X,~\omega(0)=\omega(1)=x_0$, ta có
+        \[\omega * \varepsilon_{x_0} \simeq \omega \simeq \varepsilon_{x_0} * \omega\]
+        Do đó
+        \[[\omega] * [\varepsilon_{x_0}] =  [\omega] = [\varepsilon_{x_0}]*[\omega].\]
+
+        \item (\textbf{Tồn tại nghịch đảo}).
+
+        Sử dụng \textbf{Mệnh đề 2.10}, với mỗi $\omega:I\to X,~\omega(0)=\omega(1)=x_0$ thì tồn tại $\omega^{-1}(s)=\omega(1-s)$ thoả mãn
+        \[\omega * \omega^{-1} \simeq \varepsilon_{x_0} \simeq \omega^{-1} * \omega.\]
+        Do đó 
+        \[[\omega] * [\omega^{-1}] = [\varepsilon_{x_0}] = [\omega^{-1}] * [\omega].\]
+        Tức $[\omega]^{-1}=[\omega^{-1}]$.
+        
+        
+    \end{enumerate}
+\end{proof}
+
+
+\newpage\begin{exercise}
+Chứng minh nhóm cơ bản là một bất biến đồng luân.
+\end{exercise}
+\begin{proposition}
+    Cho $x_0,x_1 \in X$. Nếu tồn tại $h: I \to X$ nối $x_0$ với $x_1$ thì
+    \[h^*:\pi(X,x_0) \to \pi(X,x_1),~[\omega]\mapsto [h^{-1}*\omega * h]\]
+    là một đẳng cấu nhóm.
+\end{proposition}
+\begin{proof}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{x_1} \& {x_0} \& {x_0} \& {x_1}
+	\arrow["{h^{-1}}", curve={height=-12pt}, from=1-1, to=1-2]
+	\arrow["{h^{-1}*\omega *h}"', curve={height=18pt}, from=1-1, to=1-4]
+	\arrow["\omega", curve={height=-12pt}, from=1-2, to=1-3]
+	\arrow["h", curve={height=-12pt}, from=1-3, to=1-4]
+\end{tikzcd}\]
+\begin{enumerate}
+    \item Ta có $h^{-1}:I\to X,~s\mapsto h(1-s)$ là đường trong $X$ nối $x_1$ với $x_0$. Khi đó $h^{-1}*\omega * h$ là đường đóng tại $x_1$ trong $X$.
+
+    \item $h^*$ được định nghĩa tốt. Thật vậy, giả sử $[\omega]=[\omega'] \in \pi(X,x_0)$, vì phép nối $*$ bảo toàn tính đồng luân nên
+    \[\omega \simeq \omega' \Rightarrow h^{-1}*\omega * h \simeq h^{-1}*\omega' * h \Rightarrow h^*[\omega] = h^*[\omega'].\]
+
+    \item $h^*$ là một đồng cấu nhóm. Thật vậy, giả sử $[\omega_1],~[\omega_2] \in \pi(X,x_0)$. Khi đó 
+    \begin{align*}
+        h^*([\omega_1] * [\omega_2]) &= h^*([\omega_1 * \omega_2])\\
+        &= [h^{-1}*(\omega_1 * \omega_2) * h]\\
+        &= [h^{-1}*(\omega_1 *\varepsilon_{x_0}* \omega_2) * h]\\
+        &= [h^{-1}*(\omega_1 *(h * h^{-1})* \omega_2) * h]\\
+        &= [(h^{-1}*\omega_1 *h) * (h^{-1}* \omega_2 * h)]\\
+        &= [h^{-1}*\omega_1 *h] * [h^{-1}* \omega_2 * h]\\
+        &= h^*(\omega_1) * h^*([\omega_2]).
+    \end{align*}
+
+    \item $h^*$ là một song ánh với ánh xạ ngược là 
+    \[(h^{-1})^*: \pi(X,x_1) \to \pi(X,x_0),\quad [\omega] \mapsto [h * \omega * h^{-1}].\]
+
+    Vậy $h^*$ là một đẳng cấu nhóm.
+\end{enumerate}
+\end{proof}
+\begin{corollary}
+    Nếu $X$ là liên thông đường thì $\pi(X,x) \simeq \pi(X,y)$ với mọi $x,y \in X$.
+\end{corollary}
+\begin{proof}
+    Vì $X$ là liên thông đường nên với mọi $x,y\in X$, tồn tại đường $h:I\to X$ nối $x$ và $y$. Do đó $\pi(X,x)\xrightarrow[h^*]{\cong}\pi(X,y)$.
+\end{proof}
+
+\begin{proposition}
+    $\pi$ là một hàm tử hiệp biến từ $\mathbf{Top}$ vào phạm trù $\mathbf{Grp}$.
+\end{proposition}
+\begin{proof}
+    Với mỗi không gian topo $X \in \mathbf{Top}$ và $x_0 \in X$ thì $\pi(X,x_0) \in \mathbf{Grp}$. 
+    
+    Với mỗi ánh xạ liên tục $f:(X,x_0) \to (Y,y_0)$ cảm sinh đồng cấu nhóm
+    \[\pi(f): \pi(X,x_0) \to \pi(Y,y_0),\quad [\omega] \mapsto [f\circ \omega].\]
+    Thật vậy, với $[\omega_1],[\omega_2] \in \pi(X,x_0)$ ta có
+    \begin{align*}
+        \pi(f)([\omega_1] * [\omega_2])
+        &= \pi(f)([\omega_1*\omega_2])\\
+        &= [f\circ (\omega_1 * \omega_2)]\\
+        &= [(f\circ \omega_1) * (f \circ \omega_2)]\quad (*)\\
+        &= [f\circ \omega_1] * [f\circ \omega_1]\\
+        &= \pi(f)([\omega_1]) * \pi(f)([\omega_2])
+    \end{align*}
+    Ta đi chứng minh $(*)$, ta có
+    \begin{align*}
+        f\circ (\omega_1 * \omega_2)(s) 
+        &= f((\omega_1 * \omega_2)(s)) \\
+        &=\begin{cases}
+            f(\omega_1(2s)), &\quad s\in [0,1/2]\\
+            f(\omega_2(2s-1)), &\quad s\in [1/2,1]
+        \end{cases}\\
+        &= \begin{cases}
+            (f \circ \omega_1)(2s), &\quad s\in [0,1/2]\\
+            (f\circ \omega_2)(2s-1), &\quad s\in [1/2,1]
+        \end{cases}\\
+        &= (f\circ \omega_1) * (f\circ \omega_2)(s)
+    \end{align*}
+    Hơn nữa, $\pi(\Id_X) = \Id_{\pi(X,x_0)}$ và với $f:(X,x_0)\to (Y,y_0),~g:(Y,y_0) \to (Z,z_0)$, $\forall [\omega] \in \pi(X,x_0)$  ta có
+    \[\pi(gf)([\omega])=[(g\circ f)\circ\omega]= [g\circ (f\circ\omega)] = \pi(g)([f \circ \omega])=\pi(g)\pi(f)([\omega]).\]
+
+    Vậy $\pi$ là một hàm tử thuận biến từ phạm trù $\mathbf{Top}$ vào phạm trù $\mathbf{Grp}$.
+\end{proof}
+\begin{proposition}
+    $\pi$ bảo toàn quan hệ đồng luân.
+\end{proposition}
+\begin{proof}
+    Giả sử $f,g: (X,x_0) \to (Y,y_0)\quad \rel \{x_0\}$. Ta sẽ chứng minh $\pi(f) = \pi(g)$, tức cần chỉ ra
+    \[[f\circ \omega] = [g\circ \omega]\quad\forall [\omega] \in \pi(X,x_0).\]
+    Vì $f\simeq g$ nên tồn tại phép đồng luân $H:X \times I \to Y$ sao cho $H(x,0)=f(x),~H(x,1)=g(x)~\forall x\in X$ và $H(x_0,t) = y_0~\forall t\in I$.
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\begin{array}{c} I \times I\\(s,t) \end{array} \&\& \begin{array}{c} X\times I\\(\omega(s),t) \end{array} \&\& \begin{array}{c} Y\\H(\omega(s),t) \end{array}
+	\arrow["{\omega\times 1_I}", from=1-1, to=1-3]
+	\arrow["{H\circ (\omega\times 1_I)}"', curve={height=24pt}, from=1-1, to=1-5]
+	\arrow["H", from=1-3, to=1-5]
+\end{tikzcd}\]
+Định nghĩa ánh xạ liên tục $F = H \circ (\omega \times 1_I): I \times I \to X \times I \to Y,\quad (s,t)\mapsto H(\omega(s),t)$ thoả mãn
+\begin{itemize}
+    \item $F(s,0)=H(\omega(s),0) = f(\omega(s)) = (f \circ \omega)(s)$.
+
+    \item $F(s,1)=H(\omega(s),1) = g(\omega(s)) = (g \circ \omega)(s)$.
+
+    \item $F(0,t) = H(\omega(0),t) = H(x_0,t) = y_0$.
+
+    \item $F(1,t) = H(\omega(1),t) = H(x_0,t) = y_0$.
+\end{itemize}
+Do đó $F:f\circ \omega \simeq g \circ \omega$, dẫn đến $[f\circ \omega] = [g\circ \omega]$.
+
+Tiếp theo ta sẽ chỉ ra, nếu $(X,x_0) \simeq (Y,y_0)$ thì $\pi(X,x_0) \cong \pi(Y,y_0)$.
+
+Thật vậy, tồn tại $f: (X,x_0) \to (Y,y_0)$ và $g: (Y,y_0) \to (X,x_0)$ liên tục thoả mãn
+\[g\circ f \simeq \Id_X,\quad f \circ g \simeq \Id_Y.\]
+Khi đó
+\[\pi(g)\circ \pi(f) =  \pi(g \circ f) = \pi(\Id_X) =  \Id_{\pi(X,x_0)}.\]
+\[\pi(f)\circ \pi(g) =  \pi(f \circ g) = \pi(\Id_Y) =  \Id_{\pi(Y,y_0)}.\]
+Nói cách khác $\pi(X,x_0) \xrightarrow[\pi(f)]{\cong} \pi(Y,y_0)$.
+
+\end{proof}
+
+\newpage\begin{exercise}
+Chứng minh rằng
+\[
+  \pi_1(\mathbb{S}^n,x_0)=
+  \begin{cases}
+    \mathbb{Z}, & n=1,\\
+    0, & n\ge 2.
+  \end{cases}
+\]
+\end{exercise}
+\begin{lemma}
+    $\mathbb{S}^n$ là liên thông đường.
+\end{lemma}
+\begin{proof}
+    Với mỗi $x \neq y \in \mathbb{S}^n$, tồn tại đường cong $\gamma: I \to \mathbb{S}^n,~ t \mapsto \dfrac{(1-t)x+ty}{\norm{(1-t)x+ty}}$ nối $x$ với $y$ trong $\mathbb{S}^n$. Do đó, $\mathbb{S}^n$ là liên thông đường.
+\end{proof}
+\begin{corollary}
+    $\pi(\mathbb{S}^n, x_0) \cong \pi(\mathbb{S}^n, y_0)$ với mọi $x_0,y_0 \in \mathbb{S}^n$.
+\end{corollary}
+\begin{proof}
+    Áp dụng hệ quả $2.14$ ta có điều phải chứng minh. Từ bây giờ để đơn giản ta sẽ kí hiệu nhóm cơ bản của $\mathbb{S}^n$ là $\pi(\mathbb{S}^n)$.
+\end{proof}
+\begin{proposition}
+    $\pi(\mathbb{S}^1) \cong \Z$.
+\end{proposition}
+\textit{Đầu tiên ta sẽ đi tìm hiểu về nhóm $\pi(\mathbb{S}^1)$.}
+
+\begin{proposition}
+    $\pi(\mathbb{S}^1)$ là một nhóm abel.
+\end{proposition}
+\begin{proof}
+    Ta sẽ lần lượt chỉ ra 
+    \begin{enumerate}
+        \item $\mathbb{S}^1$ là một nhóm topo.
+
+        \item Với $\alpha,~\beta: I \to \mathbb{S}^1$, trang bị phép nhân $\alpha \cdot \beta$ và chỉ ra $[\alpha]*[\beta] = [\alpha \cdot \beta]$. Từ đó chứng minh $\pi(\mathbb{S}^1,1)$ là một nhóm abel ($1$ ở đây là đơn vị $e$ của nhóm topo $\mathbb{S}^1$).
+    \end{enumerate}
+    \begin{proof}[Chứng minh $(1)$.]
+        $X=\mathbb{S}^1 = \{(a,b) \in \R^2 \mid a^2+b^2=1\}$ là một nhóm topo có đơn vị $e = (1,0)$, với phép toán nhân của nhóm
+        \[(a,b) \cdot (c,d) := (ac-bd,ad+bc)\]
+        và phép lấy nghịch đảo
+        \[(a,b)^{-1}:=(a,-b)\]
+        là các ánh xạ liên tục. 
+    \end{proof}
+    \begin{proof}[Chứng minh $(2)$.]
+        Với $\alpha,~\beta: I \to X$ là hai đường trên $X$, định nghĩa
+        \[\alpha \cdot \beta: I \to X,\quad s \mapsto \alpha(s)\cdot \beta(s),~\forall s \in I.\]
+        Ta có các kết quả sau
+        \begin{enumerate}
+            \item \textit{$\alpha \cdot \beta: I \to X$ là một đường trong $X$. }
+            
+            Thật vậy, $\alpha \cdot \beta$ là hợp thành của hai ánh xạ liên tục $(\alpha,\beta)$ và $\mu$ là luật hợp thành trong $X$ nên $\alpha \cdot \beta$ là liên tục và do đó là một đường trong $X$.
+            \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\begin{array}{c} I\\s \end{array} \&\& \begin{array}{c} X\times X \\(\alpha(s),\beta(s)) \end{array} \&\& \begin{array}{c} X\\\alpha(s)\cdot \beta(s) \end{array}
+	\arrow["{(\alpha,\beta)}", shift left=2, from=1-1, to=1-3]
+	\arrow["\mu", shift left=2, from=1-3, to=1-5]
+\end{tikzcd}\]
+
+            \item \textit{Nếu $\alpha,\beta:I \to X$ là hai đường đóng tại đơn vị $e \in X$ thì $\alpha \cdot \beta$ cũng vậy.}
+
+            Thật vậy, $(\alpha \cdot \beta)(0)=\alpha(0)\cdot \beta(0)=e\cdot e=e$ và $(\alpha \cdot \beta)(1)=\alpha(1)\cdot \beta(1)=e\cdot e=e$.
+        
+
+            \item \textit{Nếu $\alpha \simeq \alpha',~\beta \simeq \beta'$ thì $\alpha \cdot \beta \simeq \alpha'\cdot \beta'$. }
+
+            Thật vậy, giả sử $H,K:I \times I \to X$ lần lượt là các phép đồng luân giữa $\alpha$ với $\alpha'$ và $\beta$ với $\beta'$. Khi đó ánh xạ
+            \[F: I \times I \to X,\quad (s,t) \mapsto H(s,t) \cdot K(s,t)\]
+            là liên tục và $F: \alpha \cdot \beta \simeq \alpha'\cdot \beta'$
+            \begin{itemize}
+                \item $F(s,0) = H(s,0)\cdot K(s,0) = \alpha(s)\cdot \beta(s) =  (\alpha \cdot \beta)(s)$.
+
+                \item $F(s,1) = H(s,1)\cdot K(s,1) = \alpha'(s)\cdot \beta'(s) =  (\alpha' \cdot \beta')(s)$.
+
+                \item $F(0,s) = H(0,s)\cdot K(0,s) = \alpha(0)\cdot \beta(0) =  e \cdot e = e$.
+
+                \item $F(1,s) = H(1,s)\cdot K(1,s) = \alpha(1)\cdot \beta(1) =  e \cdot e = e$.
+            \end{itemize}
+
+            \item \textit{$(\alpha * \varepsilon_e) \cdot (\varepsilon_e * \beta) = \alpha * \beta$ và $(\varepsilon_e * \alpha) \cdot (\beta * \varepsilon_e) = \beta * \alpha$ với $\varepsilon_e: I \to X,~x\mapsto e$.}
+
+            Thật vậy, với $s \in I$ ta có
+            \begin{align*}
+                ((\alpha * \varepsilon_e) \cdot (\varepsilon_e * \beta))(s)
+                &= (\alpha * \varepsilon_e)(s) \cdot (\varepsilon_e * \beta)(s)\\
+                &= \begin{cases}
+                    \alpha(2s) \cdot \varepsilon_e(2s) = \alpha(2s) \cdot e = \alpha(2s), &\quad s \in [0,1/2]\\
+                    \varepsilon_e(2s-1) \cdot \beta(2s-1) =  e \cdot \beta(2s-1) = \beta(2s-1), &\quad s \in [1/2,1]
+                \end{cases}\\
+                &=(\alpha * \beta)(s).
+            \end{align*}
+            Tương tự
+            \begin{align*}
+                ((\varepsilon_e * \alpha) \cdot (\beta * \varepsilon_e))(s)
+                &= (\varepsilon_e * \alpha)(s) \cdot (\beta * \varepsilon_e)(s)\\
+                &= \begin{cases}
+                    \varepsilon_e(2s) \cdot \beta(2s) = e \cdot \beta(2s) = \beta(2s), &\quad s \in [0,1/2]\\
+                    \alpha(2s-1) \cdot \varepsilon_e(2s-1) =  \alpha(2s-1)\cdot e = \alpha(2s-1), &\quad s \in [1/2,1]
+                \end{cases}\\
+                &=(\beta * \alpha)(s).
+            \end{align*}
+
+            \item \textit{$[\alpha] * [\beta] = [\alpha \cdot \beta]$ với mọi $[\alpha],~[\beta] \in \pi(X,e)$.}
+
+            Thật vậy, ta có
+            \[\alpha * \beta = (\alpha * \varepsilon_e) \cdot (\varepsilon_e * \beta),\quad \beta * \alpha =  (\varepsilon_e * \alpha) \cdot  (\beta * \varepsilon_e).\]
+            Vì $\alpha * \varepsilon_e \simeq \alpha \simeq \varepsilon_e * \alpha$ và $\beta * \varepsilon_e \simeq \beta \simeq \varepsilon_e * \beta$ nên theo ý thứ $(3)$ cho ta 
+            \[\alpha * \beta \simeq \alpha \cdot \beta,\quad \beta*\alpha \simeq \alpha\cdot \beta.\]
+            Do đó
+            \[[\alpha]*[\beta] = [\alpha * \beta] = [\alpha \cdot \beta] = [\beta * \alpha] = [\beta]*[\alpha].\]
+            Vậy $\pi(\mathbb{S}^1,1)$ là một nhóm abel.
+            \end{enumerate}
+    \end{proof}
+\end{proof}
+
+\textit{Tiếp theo, ta sẽ xây dựng một đẳng cấu giữa hai nhóm abel $\pi(\mathbb{S}^1,1)$ và $(\Z,+)$ lần lượt bởi các bước sau}
+
+\begin{enumerate}
+    \item \textit{Thiết lập ánh xạ phủ từ $\R$ lên $\mathbb{S}^1$}.
+
+    Ta xây dựng ánh xạ $\xi: (\R,+) \to (\mathbb{S}^1, \cdot),~t\mapsto e^{it} \equiv (\cos(t), \sin(t))$ là một toàn cấu nhóm và chỉ ra $\xi$ là một ánh xạ phủ bởi
+    \begin{enumerate}
+        \item $\xi$ là một ánh xạ mở.
+        
+        \item Với mỗi $t \in \R$ thì $\xi|_{(t, t+2\pi)}: (t,t+2\pi) \to \mathbb{S}^1 \setminus \{\xi(t)\}$ là một đồng phôi.
+
+        \item Với mỗi $u \in \mathbb{S}^1$, chỉ ra tồn tại lân cận mở $V$ chứa $u$ mà $\xi^{-1}(V)$ là hợp rời của các tập mở $I_n \subset \mathbb{R}$ mà mỗi $\xi|_{I_n}: I_n \to V$ là một đồng phôi.
+    \end{enumerate}
+
+    \item \textit{Định nghĩa bậc của một đường cong đóng trong $\mathbb{S}^1$}.
+    \begin{enumerate}
+        \item \textbf{Tính chất nâng duy nhất} 
+        
+        Với mọi đường cong $\alpha: I \to S^1$ và một điểm $t_0 \in \mathbb{R}$ sao cho $\xi(t_0) = \alpha(0)$, tồn tại duy nhất một đường cong $\tilde{\alpha}: I \to \mathbb{R}$ sao cho $\alpha = \xi \circ \tilde{\alpha}$ và $\tilde{\alpha}(0) = t_0$. 
+        
+        % $\tilde{\alpha}$ còn được gọi là hàm đo góc của $\alpha$.
+    
+        \item \textbf{Nâng của đường cong đóng}
+        
+        Nếu $\alpha$ là một đường cong đóng tại 1, ta chọn $t_0$ sao cho $\xi(t_0) = 1$ (ví dụ $t_0 = 0$). Khi đó, ta có $\xi(\tilde{\alpha}(1)) = \alpha(1) = \alpha(0) = \xi(\tilde{\alpha}(0))$.
+    
+        \item \textbf{Định nghĩa bậc} 
+        
+        Vì $\ker(\xi) = 2\pi\mathbb{Z}$ nên $\dfrac{\tilde{\alpha}(1)-\tilde{\alpha}(0)}{2\pi} = k \in \mathbb{Z}$.
+        Ta chứng minh $k$ không phụ thuộc vào việc chọn $\tilde{\alpha}$. Từ đó  định nghĩa \textbf{bậc} của đường cong đóng $\alpha$ là:
+    $$ \deg(\alpha) := \frac{\tilde{\alpha}(1)-\tilde{\alpha}(0)}{2\pi} \quad \text{}. $$
+    \end{enumerate}
+    
+    \item \textit{Chứng minh $\deg$ là một đẳng cấu giữa $\pi(\mathbb{S}^1,1)$ với $\Z$.}
+
+\begin{enumerate}
+    \item \textbf{$\deg$ là một đồng cấu} 
+    \[\deg(\alpha * \beta) = \deg(\alpha) + \deg(\beta).\]
+    
+    \item \textbf{$\deg$ là một đơn cấu}. 
+    \[\deg(\alpha) = \deg(\beta)\iff \alpha \simeq \beta.\]
+    
+    \item \textbf{$\deg$ là một toàn cấu}. 
+    
+    $\forall ~k \in \mathbb{Z}, \exists~\alpha: I \to \mathbb{S}^1$ đóng tại 1 sao cho $\deg(\alpha) = k$. 
+\end{enumerate}
+\end{enumerate}
+\begin{proof}
+    \begin{proof}[Chứng minh bước $(1)$.]
+        \begin{enumerate}
+            \item \textbf{$\xi$ là một ánh xạ mở}.
+
+            Giả sử $U \subset \R$ là một tập con mở, ta cần chỉ ra $\xi(U)$ là mở trong $\mathbb{S}^1$, tức chỉ ra $F=\mathbb{S}^1\setminus \{\xi(U)\}$ là đóng trong $\mathbb{S
+            }^1$. Thật vậy, với mỗi $t \in U$ thì $\xi^{-1}(\xi(t)) = t + 2\pi\Z$ nên
+            \begin{align*}
+                \xi^{-1}(\xi(U))
+                &= \{t \in \R \mid \xi(t) \in U\}\\
+                &= \{t \in \R \mid \exists~u\in U, \xi(t) =  \xi(u)\}\\
+                &= \{t \in \R \mid \exists~u\in U, t = u+2\pi n \in U + 2\pi n,~n\in \Z\}\\
+                &= \bigcup_{n \in \Z}(U+ 2\pi n).
+            \end{align*}   
+            là một tập mở trong $\R$ (do $U$ mở trong $\R$ và ánh xạ $\R \to \R,~t \mapsto t+2\pi n$ là một đồng phôi nên $U +2\pi n$ là mở trong $\R$). Do đó phần bù $\R\setminus \xi^{-1}(\xi(U)) =  \xi^{-1}(\mathbb{S}^1)\setminus \xi^{-1}(\xi(U))=\xi^{-1}(F)$ là đóng trong $\R$.
+
+            Mặt khác, $\xi\mid_{[0,2\pi]}:[0,2\pi]\to \mathbb{S}^1$ là một toàn ánh nên với mỗi $x\in \R$, tồn tại $x' \in [0,2\pi]$ sao cho $\xi(x')=\xi(x)$. Do đó 
+            \[F =  \xi(\xi^{-1}(F))=\xi(\xi^{-1}(F) \cap [0,2\pi]).\]
+            Vì $\xi^{-1}(F) \cap [0,2\pi]$ là compact nên ảnh của nó qua $\xi$ cũng là compact, nghĩa là $F$ là compact và do đó là một tập đóng trong $\mathbb{S}^1$.
+
+            \item \textbf{Với mỗi $t \in \R$ thì $\xi|_{(t, t+2\pi)}: (t,t+2\pi) \to \mathbb{S}^1 \setminus \{\xi(t)\}$ là một đồng phôi.}
+
+            Thật vậy, ánh xạ $\xi\mid_{(t,t+2\pi)}:(t,t+2\pi)\to \mathbb{S}^1\setminus\{\xi(t)\}$ là một song ánh và liên tục. Mặt khác theo chứng minh trên thì $\xi$ là một ánh xạ mở nên $\xi\mid_{(t,t+2\pi)}$ cũng là mở và do đó là một đồng phôi.
+
+            \item \textbf{Với mỗi $u \in \mathbb{S}^1$, chỉ ra tồn tại lân cận mở $V$ chứa $u$ mà $\xi^{-1}(V)$ là hợp rời của các tập mở $I_n \subset \mathbb{R}$ mà mỗi $\xi|_{I_n}: I_n \to V$ là một đồng phôi.}
+            
+            Với mỗi $u  =  \xi(t) = e^{it} \in \mathbb{S}^1$, điểm đối cực $u^*=e^{i(t+\pi)}=-u \in \mathbb{S}^{1}$ và do đó $V_u:= \mathbb{S}^1\setminus\{u\}$ là một lân cận mở của $u$ (vì $\mathbb{S}^1$ là không gian Hausdorff và compact). Hơn nữa,
+            \begin{align*}
+                \xi^{-1}(V) 
+                &= \{s\in \R \mid e^{is} \neq e^{i(t+pi)}\}\\
+                &= \{s \notin \R \mid s \neq (t+ \pi)+2n\Z\}\\
+                &= \bigsqcup_{n \in \Z}\underbrace{(t+\pi(2n-1),~t+\pi(2n+1))}_{:= I_n}
+            \end{align*}
+            Theo chứng minh trên thì mỗi $\xi\mid_{I_n}:I_n \to V$ là một đồng phôi.
+
+            Vậy $\xi$ là một ánh xạ phủ.
+        \end{enumerate}
+    \end{proof}
+
+    \begin{proof}[Chứng minh bước $(2)$.]
+        \begin{enumerate}
+        \item \textbf{Tính chất nâng duy nhất} 
+        \begin{lemma}
+        Cho $J = [s_0,s_1] \subset \R$ và $\alpha: J \to \mathbb{S}^1$ là một ánh xạ liên tục và $t_0 \in \R$ sao cho $\alpha(s_0) = e^{it_0}$. Khi đó tồn tại duy nhất một ánh xạ liên tục $\overline{\alpha}: J \to \R$ sao cho  $\alpha = \xi \circ \overline{\alpha}$ và $\overline{\alpha}(s_0) = t_0$.
+        % Với mọi đường cong $\alpha: I \to S^1$ và một điểm $t_0 \in \mathbb{R}$ sao cho $\xi(t_0) = \alpha(0)$, tồn tại duy nhất một đường cong $\tilde{\alpha}: I \to \mathbb{R}$ sao cho $\alpha = \xi \circ \tilde{\alpha}$ và $\tilde{\alpha}(0) = t_0$. 
+        \end{lemma}
+        \begin{proof}
+            \textbf{Trường hợp 1. $\alpha(J) \subsetneq \mathbb{S}^1$, tức tồn tại $y \in \mathbb{S}^1 \setminus \alpha(I)$ sao cho $\alpha(I) \subset \mathbb{S}^1\setminus \{y\}$.}
+
+            Vì $\alpha(s_0)=e^{it_0} \neq y$ nên tồn tại $x \in \xi^{-1}(y)$ sao cho $t_0 \in (x, x+ 2\pi)$. Kết hợp với $\xi_x:=\xi\mid_{(x,x+2\pi)}$ là một đồng phôi lên $\mathbb{S}^1\setminus \{y\}$ ta thu được $\overline{\alpha}=\xi_x^{-1} \circ \alpha$ là ánh xạ cần tìm.
+
+            \textbf{Trường hợp 2. $\alpha(J) = \mathbb{S}^1$, nhưng $J = J_1 \cup J_2$ với $J_1,~J_2$ là hai khoảng con compact chung điểm $s_*$ của $J$}.
+
+            Giả sử bổ đề đúng cho các hạn chế $\alpha_1=\alpha\mid_{J_1}$ và $\alpha_2 = \alpha\mid_{J_2}$. Khi đó, tồn tại $\overline{\alpha_1}: J_1 \to \R$ sao cho $\overline{\alpha_1}(s_0) = t_0$ và $\alpha_1 = \xi \circ \overline{\alpha_1}$. Tiếp theo, ta chọn $\overline{\alpha_2}:J_2 \to \R$ sao cho $\alpha_2 = \xi \circ \overline{\alpha_2}$ và $\overline{\alpha_2}(s_*) = \overline{\alpha_1}(s_*)$, điều này khả thi vì $\xi(\overline{\alpha_1}(s_*)) = \alpha_1(s_*) = \alpha_2(s_*)=\xi(\overline{\alpha_2}(s_*))$. Cuối cùng, ta định nghĩa $\overline{\alpha}: J \to \R$ bằng cách nối $\overline{\alpha_1}$ và $\overline{\alpha_2}$, tức
+            \[\overline{\alpha}\mid_{J_1}=\overline{\alpha_1},\quad \overline{\alpha}\mid_{J_2}=\overline{\alpha_2}.\]
+
+            \textbf{Trường hợp tổng quát.}
+            
+            Sự tồn tại của $\overline{\alpha}$ được suy ra từ hai trường hợp đặc biệt ở trên. Vì tính compact của $J$, với mọi ánh xạ liên tục $\alpha:J \to \mathbb{S}^1$, tồn tại phân hoạch $J = J_1 \cup J_2 \cup \cdots \cup J_k$ thành các khoảng đóng liên tiếp sao cho $\alpha(J_i) \neq \mathbb{S}^1$ với mọi $i = 1,\ldots,k$.
+
+            Tiếp theo ta chỉ ra tính duy nhất của $\overline{\alpha}$.
+
+            Giả sử, tồn tại hai ánh xạ liên tục $\overline{\alpha},~\widehat{\alpha}: J \to \R$ sao cho $e^{i\overline{\alpha}(s)} = e^{i\widehat{\alpha}(s)}$ với mọi $s \in J$. Khi đó ánh xạ $f: J \to \R,~s \mapsto \dfrac{\overline{\alpha}(s)-\widehat{\alpha}(s)}{2\pi}$ là liên tục theo $s$ và nhận giá trị nguyên nên $f$ là một hàm hằng. Hơn nữa, vì $\overline{\alpha}(s_0) = \widehat{\alpha}(s_0)$ nên $\overline{\alpha} = \widehat{\alpha}$.
+        \end{proof}
+    
+        \item \textbf{Nâng của đường cong đóng}
+        
+        Nếu $\alpha: I \to \mathbb{S}^1$ là một đường cong đóng tại 1, ta chọn $t_0$ sao cho $\xi(t_0) = 1$ (ví dụ $t_0 = 0$). Khi đó, ta có $\xi(\overline{\alpha}(1)) = \alpha(1) = \alpha(0) = \xi(\overline{\alpha}(0))$. Dẫn đến
+        \[\dfrac{\overline{\alpha}(1)-\overline{\alpha}(0)}{2\pi} \in \Z\]
+        Giá trị này không phụ thuộc vào việc chọn hàm đo góc $\overline{\alpha}$ của $\alpha$. Thật vậy, giả sử $\widehat{\alpha}$ là một hàm đo góc khác của $\alpha$, khi đó với mọi $s \in I$ ta có
+        \[e^{i\overline{\alpha}(s)}=\alpha(s) = e^{i\widehat{\alpha}(s)}\]
+        Do đó, theo chứng minh trên thì  $k(s)=\dfrac{\widehat{\alpha}(s)-\overline{\alpha}(s)}{2\pi}$
+        là một ánh xạ liên tục nhận giá trị nguyên nên nó là một hàm hằng.
+        
+        Khi đó
+        \[\dfrac{\widehat{\alpha}(1)-\widehat{\alpha}(0)}{2\pi} = \dfrac{(\overline{\alpha}(1)+2n\pi)-(\overline{\alpha}(0)+2n\pi)}{2\pi} = \dfrac{\overline{\alpha}(1)-\overline{\alpha}(0)}{2\pi}\]
+        
+        \begin{definition}
+            Cho $\alpha: I \to \mathbb{S}^1$ là một đường cong đóng và $\overline{\alpha}: I \to \R$ là một hàm đo góc của $\alpha$, định nghĩa
+            \[\deg(\alpha):= \dfrac{\overline{\alpha}(1)-\overline{\alpha}(0)}{2\pi}.\]
+            Số nguyên $\deg(\alpha)$ được gọi là bậc của đường cong $\alpha$.
+        \end{definition}
+    \end{enumerate}
+    \end{proof}
+    \begin{proof}[Chứng minh $(3)$.]
+    Cho $\alpha, \beta: I \to \mathbb{S}^1$ là hai đường cong đóng tại $1$.
+    \begin{enumerate}
+        \item \textbf{Chứng minh
+        \[\deg(\alpha * \beta) =  \deg(\alpha) + \deg(\beta).\]}
+
+        Với $t_0 \in \R$ thoả mãn $e^{it_0} = \alpha(0)$, tồn tại duy nhất $\overline{\alpha}: I \to \R$ sao cho $\alpha = \xi \circ \overline{\alpha}$ và $\overline{\alpha}(0)= t_0$. Từ đó suy ra
+        \[\overline{\alpha}(1) = \overline{\alpha}(0) + 2\pi \deg(\alpha) = t_0 + 2\pi\deg(\alpha).\]
+        Tương tự, với $t_0' = t_0 +2\pi\deg(\alpha) \in \R$, ta thấy $e^{it_0'}=e^{it_0}=:\beta(0)$ nên tồn tại duy nhất ánh xạ liên tục $\overline{\beta}:I \to \R$ sao cho $\beta= \xi \circ \overline{\beta}$ và $\overline{\beta}(0) = t_0'$. Từ đó ta định nghĩa 
+        \[\overline{\alpha*\beta}: I \to \R,\quad s\mapsto \begin{cases}
+            \overline{\alpha}(2s),&\quad s\in [0,1/2]\\
+            \overline{\beta}(2s-1), &\quad s \in [1/2,1]
+        \end{cases}\]
+        Ta có $\overline{\alpha * \beta}$ là liên tục và
+        \[(\xi \circ \overline{\alpha * \beta})(s) = e^{i~\overline{\alpha * \beta}(s)} = \begin{cases}
+            e^{i\overline{\alpha}(2s)},&\quad s\in [0,1/2]\\
+            e^{i~\overline{\beta}(2s-1)}, &\quad s \in [1/2,1]
+        \end{cases}=\begin{cases}
+            \alpha(2s),&\quad s\in [0,1/2]\\
+            \beta(2s-1), &\quad s \in [1/2,1]
+        \end{cases} =  (\alpha * \beta)(s).\]
+        Chứng tỏ $\overline{\alpha * \beta}$ là một hàm đo góc của $\alpha * \beta$. Từ đó
+        \begin{align*}
+            \deg(\alpha * \beta) 
+            &= \dfrac{\overline{\alpha * \beta}(1)-\overline{\alpha * \beta}(0)}{2\pi}\\
+            &= \dfrac{\overline{\beta}(1)-\overline{\alpha}(0)}{2\pi}\\
+            &= \dfrac{\overline{\alpha}(1)-\overline{\alpha}(0)}{2\pi} + \dfrac{\overline{\beta}(1)-\overline{\beta}(0)}{2\pi}\quad (\overline{\beta}(0)=\overline{\alpha}(1))\\
+            &= \deg(\alpha) + \deg(\beta).
+        \end{align*}
+
+        \item \textbf{Chứng minh}
+        \[\deg(\alpha) =  \deg(\beta) \iff \alpha \simeq \beta.\]
+
+        Giả sử $\alpha \simeq \beta$ và $H: I \times I \to \mathbb{S}^1$ là một phép đồng luân giữa chúng. Vì $I \times I$ compact nên $H$ là liên tục đều. Do đó tồn tại $\delta>0$ sao cho với mọi $t,t'$ thoả mãn $|t-t'|<\delta$ thì
+        \[|H(s,t) - H(s,t')| < 2 \quad \forall s\in I.\]
+        Xét phân hoạch $0=t_0<t_1<\ldots<t_k=1$ sao cho $t_{i+1}-t_i < \delta$. Với mỗi $i \in 0,\ldots,k-1$, ta định nghĩa
+        \[\alpha_i: I \to \mathbb{S}^1,\quad \alpha_i(s) = H(s,t_i).\]
+        Ta có các $\alpha_i$ là các đường cong đóng tại $1$ trong $\mathbb{S}^1$ và
+        \[|\alpha_i(s)-\alpha_{i+1}(s)|<2\quad \forall s\in I\]
+        với $\alpha_0 = \alpha,\alpha_k = \beta$, áp dụng bổ đề chứng minh bên dưới ta được
+        \[\deg(\alpha) =  \deg(\alpha_1)=\cdots = \deg(\alpha_{k-1})=\deg(\beta).\]
+
+        Bây giờ, giả sử $\deg(\alpha) =  \deg(\beta)$, ta sẽ chứng minh $\alpha \simeq \beta$. Gọi $\overline{\alpha},~\overline{\beta}:I \to \R$ là các hàm đo góc của $\alpha,~\beta$ mà $\overline{\alpha}(0)= \overline{\beta}(0)=0$. Ta có
+        \[\overline{\alpha}(1)-\overline{\alpha}(0)= 2\pi \deg(\alpha) = 2\pi \deg(\beta)= \overline{\beta}(1)-\overline{\beta}(0).\]
+        Định nghĩa
+        \[H: I \times I \to \R,\quad (s,t) \mapsto (1-t)\overline{\alpha}(s) + t \overline{\beta}(s)\]
+        thì $H:\overline{\alpha} \simeq \overline{\beta}$. Khi đó, với mỗi $t \in I$ ta có
+        \[H(1,t)-H(0,t) = (1-t)(\overline{\alpha}(1)-\overline{\alpha}(0))+t(\overline{\beta}(1)-\overline{\beta}(0)) = (1-t)\cdot 2\pi n + t\cdot 2\pi n =  2\pi n\]
+        với $n = \deg(\alpha)=\deg(\beta).$
+
+        Suy ra $K=\xi \circ H$ là một ánh xạ liên tục thoả mãn
+        \[K(s,0) =  \alpha(s),\quad K(s,1)=\beta(s),\quad K(0,t)=1=K(1,t).\]
+        Tức $K:\alpha \simeq \beta$.
+
+        \item Chứng minh $\deg$ là một toàn cấu.
+
+        Với mỗi $k \in \Z$, xét ánh xạ
+        \[\alpha_k: I \to \mathbb{S}^1,\quad s\mapsto e^{i2k\pi s}\equiv (\cos(2k\pi s), \sin(2k\pi s)).\]
+        Ta thấy $\alpha_k$ là một đường cong đóng tại $1$ của $\mathbb{S}^1$ và có một hàm đo góc 
+        \[\overline{\alpha_k}(s)= 2k\pi s\]
+        Do đó
+        \[\deg(\alpha_k) = \dfrac{\overline{\alpha_k}(1)-\overline{\alpha_k}(0)}{2\pi}=k.\]
+    \end{enumerate}
+    Vậy $\deg: \pi(\mathbb{S}^1,1) \to \Z,~[\alpha] \mapsto \deg(\alpha)$ là một đẳng cấu nhóm.
+    \end{proof}
+
+    Ta chứng minh nốt bổ đề sau:
+    \begin{lemma}
+        Cho $\alpha,\beta: I \to \mathbb{S}^1$ là các đường cong đóng tại 1 thoả mãn $|\alpha(s)-\beta(s)|<2$ với mọi $s\in I$. Khi đó $\deg(\alpha) =  \deg(\beta)$.
+    \end{lemma}
+    \begin{proof}
+        Tồn tại các hàm đo góc $\overline{\alpha},~\overline{\beta}: I \to \R$ sao cho $\alpha(s) = e^{i\overline{\alpha}(s)}, \beta(s) = e^{i\overline{\beta}(s)}~\forall s \in I$ và $\overline{\alpha}(0) = 0 = \overline{\beta}(0)$.
+
+        Ta có
+        \[|\alpha(s)-\beta(s)|=|e^{i\overline{\beta}(s)}-e^{i\overline{\alpha}(s)}| = |e^{i(\overline{\alpha}(s)-\overline{\beta}(s))}-1| < 2\]
+        nên $\alpha(s),\beta(s)$ không là đối cực của nhau với mọi $s \in I$. Suy ra $e^{i(\overline{\alpha}(s)-\overline{\beta}(s))} \neq -1~\forall s\in I$ hay $\overline{\alpha}(s) - \overline{\beta}(s) \notin \pi + 2\pi \Z$ với mọi $s\in I$. Ta thấy rằng nếu
+        \[|\overline{\alpha}(s)-\overline{\beta}(s)|<\pi~\forall s\in I\quad (**)\]
+        thì
+        \begin{align*}
+            |\deg(\alpha)-\deg(\beta)|
+            &= \left|\dfrac{(\overline{\alpha}(1)-\overline{\alpha}(0)) - (\overline{\beta}(1)-\overline{\beta}(0))}
+            {2\pi}\right|\\
+            &\leq \left|\dfrac{\overline{\alpha}(1)-\overline{\beta}(1)}
+            {2\pi}\right| + \left|\dfrac{(\overline{\alpha}(0)-\overline{\alpha}(0)}
+            {2\pi}\right|\\
+            &<\dfrac{\pi}{2\pi} + \dfrac{\pi}{2\pi}=1.
+        \end{align*}
+        Kết hợp $\deg(\alpha),\deg(\beta) \in \Z$ cho ta $\deg(\alpha) = \deg(\beta)$.
+
+        Ta đi chứng minh $(**)$.
+
+        Định nghĩa $\theta(s) = \overline{\alpha}(s) - \overline{\beta}(s)~\forall s\in I$. Ta có $\theta$ liên tục, $\theta(0)=0$ và $\theta(s) \notin \pi + 2\pi\Z~\forall s \in I$. Giả sử phản chứng tồn tại $s_0 \in I$ sao cho $|\theta(s_0)|\geq \pi$, tức $\theta(s_0) \geq \pi$ hoặc $\theta(s_0) \leq -\pi$.
+
+        \begin{itemize}
+            \item Nếu $\theta(s_0)\geq \pi$ thì $\theta(s_0)\geq \pi > \theta(0)$. Vì $\theta$ liên tục nên theo định lý giá trị trung gian, tồn tại $s' \in [0,s_0]$ sao cho $\theta(s')=\pi \in \pi + 2\pi \Z$, mâu thuẫn với giả thiết $\theta(s) \notin \pi + 2\pi\Z~\forall s \in I$.
+
+            \item Nếu $\theta(s_0)\leq -\pi$ thì $\theta(s_0)\leq -\pi < \theta(0)$. Vì $\theta$ liên tục nên theo định lý giá trị trung gian, tồn tại $s' \in [0, s_0]$ sao cho $\theta(s')=-\pi \in \pi + 2\pi \Z$, mâu thuẫn với giả thiết $\theta(s) \notin \pi + 2\pi\Z~\forall s \in I$.
+        \end{itemize}
+        Vậy ta có điều phải chứng minh.
+    \end{proof}
+\end{proof}
+\begin{corollary}
+    $\pi(\mathbb{B}^2\setminus\{0\})\cong \Z$.
+\end{corollary}
+\begin{proof}
+    $\mathbb{S}^1$ là một co rút của $\mathbb{B}^2\setminus\{0\}$ qua phép đồng luân co rút
+    \[H: \mathbb{B}^2\setminus\{0\} \times I \to \mathbb{B}^2\setminus\{0\},\quad (x,t) \mapsto (1-t)x+t\dfrac{x}{\norm{x}}\]
+    Cụ thể $H(x,0)=x,~H(x,1)=\dfrac{x}{\norm{x}} \in \mathbb{S}^1,~H(x,t)= x~\forall x \in \mathbb{S}^1$.
+
+    Do đó $\pi(\mathbb{B}^2\setminus\{0\})\cong \pi(\mathbb{S}^1,1) \cong \Z$.
+\end{proof}
+\begin{proposition}
+    $\pi(\mathbb{S}^n) \cong 0$ với mọi $n \geq 2$.
+\end{proposition}
+Ta sẽ chỉ ra, với $n\geq 2$ thì $\mathbb{S}^n$ là một không gian đơn liên, tức một không gian topo liên thông đường và có nhóm cơ bản tầm thường lần lượt theo các bước sau
+    
+    \begin{theorem}
+        Cho $X = U \cup V$ thoả mãn $U,V$ mở, liên thông đường và $x_0 \in U \cap V$. Gọi $i:U \to X$ và $j:V \to X$ là các ánh xạ nhúng. Khi đó nhóm $\pi_1(X,x_0)$ sinh bởi ảnh của các đồng cấu cảm sinh
+        \[i_*: \pi_1(U,x_0)\to \pi_1(X,x_0),\quad j_*:\pi_1(V,x_0) \to \pi_1(X,x_0). \]
+    \end{theorem}
+    \begin{proposition}
+        Giả sử $X = U \cup V$ với $U,V$ mở trong $X$ và $U \cap V \neq \emptyset$, liên thông đường. Nếu $U,V$ là đơn liên thì $X$ đơn liên.
+    \end{proposition}
+    \begin{proof}
+        Ta có $U,V$ liên thông đường và $U \cap V \neq \emptyset$ nên $X= U \cup V$ là liên thông đường.
+
+        Lấy $x_0 \in U\cap V$, do hai tập mở $U,V$ là đơn liên nên $\pi_1(U,x_0)$ và $\pi_1(V,x_0)$ là các nhóm tầm thường. Nên theo \textbf{Định lý $2.27$} ở trên thì $\pi_1(X,x_0)$ là tầm thường và do đó $X$ là đơn liên.
+    \end{proof}
+    \textit{Cuối cùng ta sẽ chỉ ra $\mathbb{S}^n$ là đơn liên với $n\geq 2$ bởi các bước}
+    \begin{itemize}
+        \item Chứng minh $U = \mathbb{S}^n\setminus\{N\}$ và $V = \mathbb{S}^n\setminus\{S\}$ là các tập mở trong không gian Hausdorff $\mathbb{S}^n$ với topo con cảm sinh bởi topo trên $\R^{n+1}$ và hơn nữa chúng là đơn liên vì hiển nhiên chúng liên thông và $\mathbb{S}^n\setminus\{N\} \approx \R^n$ nên $\pi_1(\mathbb{S}^n\setminus\{N\})\cong \pi_1(\R^n)\cong 0$.
+
+        \item Tiếp theo chỉ ra $U \cap V =  \mathbb{S}^n\setminus\{N,S\} \approx \R^{n}\setminus\{0\}$ là liên thông đường nên $U\cap V$ liên thông đường. Do đó $\mathbb{S}^n$ là đơn liên nếu $n \geq 2$.
+    \end{itemize}
+\begin{corollary}
+    $\mathbb{S}^1$ và $\mathbb{S}^n$ không cùng kiểu đồng luân với $n \geq 2$.
+\end{corollary}
+\begin{corollary}
+    $\R^2$ và $\R^n$ không đồng phôi với nhau nếu $n \geq 3$.
+\end{corollary}
+\begin{proof}
+    Giả sử phản chứng tồn tại đồng phôi $f: \R^2 \to \R^n$. Khi đó $f$ cảm sinh đồng phôi $\overline{f}:\R^2\setminus\{0\} \to \overline{f}:\R^n\setminus\{0\}$. Mà $\R^2\setminus\{0\} \approx \mathbb{S}^1$ và $\R^n\setminus\{0\} \approx \mathbb{S}^{n-1}$. Khi đó
+    \[\Z \cong \pi_1(\mathbb{S}^1) \cong \pi_1(\R^2\setminus\{0\})\cong \pi_1(\R^n\setminus\{0\}) \cong \pi_1(\mathbb{S}^{n-1})\cong 0.\]
+    Mâu thuẫn.
+\end{proof}
+Ta đi chứng minh \textbf{Định lý 2.27} bằng hai bổ đề sau
+\begin{lemma}
+    Cho $X$ là một không gian metric compact có $\mathcal{U}=\{U_{\alpha}\}_{\alpha \in I}$ là một phủ mở. Khi đó tồn tại $\delta>0$ sao cho với mọi $A \subset X$ với $\text{diam}(A) < \delta$ thì $A \subset U_{\alpha}$ nào đó.
+\end{lemma}
+\begin{lemma}
+    Với mọi $\alpha: I \to X$ là một đường cong và $P: 0=t_0<t_1<\ldots<t_n=1$ là một phân hoạch của $I$ . Với mỗi $a,b \in I$, kí hiệu $\lambda_{a,b}: I \to I,~t\mapsto (1-t)a+tb$ và $\gamma_i= \alpha \circ \lambda_{t_{i-1},t_i}$. Khi đó
+    \[\alpha \simeq \gamma_1 * \gamma_2 *\cdots *\gamma_n\]
+\end{lemma}
+\begin{proof}
+    Ta có
+    \begin{align*}
+        \gamma_1 * \gamma_2 *\cdots * \gamma_n 
+        &= (\alpha \circ \lambda_{t_0,t_1})*\cdots * (\alpha \circ \lambda_{t_{n-1},t_n})\\
+        &= \alpha \circ (\lambda_{t_0,t_1}*\cdots*\lambda_{t_{n-1},t_n})\\
+        &\simeq \alpha \circ \Id_I = \alpha.
+    \end{align*}
+\end{proof}
+\begin{proof}[Định lý 2.27]
+    Giả sử $\alpha:I\to X=U\cup V$ là một đường cong đóng tại $x_0$. Ta cần chỉ ra 
+    \[[\alpha]=[w_1]*\cdots*[w_n]\] 
+    với $w_i:I\to X$ là các đường cong đóng tại $x_0$ và $w_i(I)$ chứa trong $U$ hoặc $V$. 
+
+    Do $\alpha$ liên tục và $\{U,V\}$ là một phủ mở của $X$ nên $\alpha^{-1}(U), \alpha^{-1}(V)$ là một phủ mở của $I$. Mà $I$ là không gian metric compact, nên theo bổ đề phủ Lebesgue, tồn tại $\delta>0$ sao cho với mọi phân hoạch $P': 0=t'_0<t'_1<\ldots<t'_m=1$ của $I$ có đường kính $\text{diam}(P') <\delta$ thì với mọi $i$ ta có $[t'_{i-1},t'_i]$ chứa trong $\alpha^{-1}(U)$ hoặc $\alpha^{-1}(V)$, tức $\alpha([t'_{i-1},t'_i])$ chứa trong $U$ hoặc $V$. 
+    
+    Gọi $P:0=t_0<t_1<\ldots<t_n=1$ là phân hoạch con của $P'$ thu được bằng cách hợp nhất các khoảng $[t'_{i-1},t'_i]$ và $[t'_i,t'_{i+1}]$ không còn hai tập ảnh liên tiếp $\alpha([t'_{i-1},t'_i])$ và $\alpha([t'_{i},t'_{i+1}])$ cùng nằm trong $U$ và cùng nằm trong $V$. Khi đó tại mỗi điểm nối $t_i$, nếu $\alpha([t_{i-1},t_i])\subset U$ thì $\alpha([t_i,t_{i+1}])\subset V$ và ngược lại. Dẫn đến $\alpha(t_i)\in \alpha([t_{i-1},t_i]) \cap \alpha([t_{i},t_{i+1}])\subset U\cap V$. 
+    
+    Bây giờ, với $x_0 \in U\cap V$ là liên thông đường nên với mỗi $\alpha(t_i)$ nói trên, tồn tại một đường cong $\alpha_i:I\to U\cap V$ sao cho $\alpha_i(0)=x_0, \gamma_i(1)=\alpha(t_i)$. Hơn nữa, vì $\alpha(t_0)=x_0=\alpha(t_n)$ nên ta có thể chọn $\alpha_0,\alpha_n$ cùng là ánh xạ hằng $I\to U\cap V, t\mapsto x_0$. 
+
+    Đặt $\gamma_i = \alpha\circ \lambda_{t_{i-1},t_i}$ và $\alpha_i^{-1}(s)=\alpha_i(1-s)~\forall s\in I$. Mỗi $g_i:=(\alpha_{i-1}*\gamma_i)*\alpha_i^{-1}: I\to X$ là đường cong đóng tại $x_0$ với ảnh chứa trong $U$ hoặc $V$. Khi đó $[g_i]\in \pi_1(U,x_0)$ hoặc $[g_i]\in \pi_1(V,x_0)$ và 
+    \begin{align*}
+        [g_1]*[g_2]*\ldots*[g_n]
+        &=[\alpha_{0}*\gamma_i*\alpha_1^{-1}]*[\alpha_{1}*\gamma_i*\alpha_2^{-1}]*\cdots*[\alpha_{n-1}]*[\gamma_i]*[\alpha_n^{-1}]\\
+        &=[\alpha_{0}]*[\gamma_i]*[\alpha_1^{-1}]*[\alpha_{1}]*[\gamma_i]*[\alpha_2^{-1}]*\cdots*[\alpha_{n-1}]*[\gamma_i]*[\alpha_n^{-1}]\\
+        &=[\varepsilon_{x_0}]*[\gamma_1]*[\gamma_2]*\cdots*[\gamma_n]*[\varepsilon_{x_0}]\\
+        &=[\gamma_1]*[\gamma_2]*\cdots*[\gamma_n]\\
+        &=[\alpha] \quad (\text{theo Bổ đề 2.12}).
+    \end{align*}
+\end{proof}
+\newpage\begin{exercise}
+Chứng minh rằng $\pi_1(\mathbb{R}^n)=0$ với mọi $n\ge 0$. Hỏi với $m\ne n$ hai không gian $\mathbb{R}^m$ và $\mathbb{R}^n$ có đồng phôi với nhau hay không? Vì sao.
+\end{exercise}
+\begin{definition}
+    Không gian topo $X$ được gọi là co rút được nếu nó đồng luân với không gian chỉ có 1 điểm.
+\end{definition}
+\begin{proposition}
+    $X \neq \emptyset$. Khi đó $X$ co rút được $\iff \forall~Y,~\#[Y,X]=1 \iff \Id_X \simeq \varepsilon_{x_0}$.
+\end{proposition}
+\begin{proof}
+    Nếu $X \simeq Y$ thì tồn tại $f: X\to Y,~g:Y \to X$ sao cho $g \circ f\simeq \Id_X$ và $f \circ g \simeq \Id_Y$. Từ đó dẫn đến một song ánh giữa $[Z,X]$ đến $[Z,Y]$ với mọi không gian topo $Z$.
+    \[\overline{f}: [Z,X]\to [Z,Y],\quad [\phi] \mapsto [f\circ \phi]\]
+    \[\overline{g}: [Z,Y] \to [Z,X],\quad [\psi] \mapsto [g\circ \psi]\]
+
+    Bây giờ nếu $X$ co rút được thì $X\simeq \{pt\}$. Khi đó tồn tại song ánh giữa $[Y,\{pt\}]$ đến $[Y,X]$. Suy ra $\#[Y,X]=\#[Y,\{pt\}]=1$.
+
+    Tiếp theo, nếu $\#[Y,X]=1$ thì nói riêng $\#[X,X]=1$. Suy ra $[\Id_X]=[\varepsilon_{x_0}]$ hay $\Id_X \simeq \varepsilon_{x_0}$.
+
+    Cuối cùng, nếu $\Id_X \simeq \varepsilon_{x_0}$ xét các ánh xạ liên tục
+    \[\phi: X \to \{pt\},~x\mapsto pt,\quad \psi: \{pt\} \to X,~pt \mapsto x_0\]
+    thoả mãn $\psi \circ \phi \simeq \Id_X$ và $\phi \circ \psi \simeq \Id_{\{pt\}}$. Nghĩa là $X \simeq \{pt\}$.
+\end{proof}
+\begin{exercise}
+    Chứng minh nếu $X$ co rút được thì $\pi_1(X,x_0) =0$.
+\end{exercise}
+\begin{proof}
+    Vì $X$ co rút được nên $\Id_X \simeq \varepsilon_{x_0}$, tức tồn tại phép đồng luân
+    \[H: X \times I \to X,~H(x,0)=\Id_X(x)=x,~H(x,1)=\varepsilon_{x_0}(x)=x_0,~H(x_0,t)=x_0~\forall t \in I.\]
+    Khi đó, với mọi $[\omega]\in \pi_1(X,x_0)$, xét ánh xạ liên tục
+    \[h: I \times I \to X,~(s,t) \mapsto H(\omega(s),t)\]
+    thoả mãn là một phép đồng luân.
+
+    Như vậy, $\omega \simeq \varepsilon_{x_0}$, tức $[\omega]=[\varepsilon_{x_0}]$. Suy ra $\pi_1(X,x_0)\cong 0$.
+\end{proof}
+\begin{exercise}
+    Cho $X$ là một không gian rời rạc. Tính $\pi_1(X,x_0)$.
+\end{exercise}
+\begin{proof}
+    Mọi ánh xạ liên tục từ một không gian liên thông $A$ vào không gian rời rạc $X$ phải là ánh xạ hằng. 
+    
+    Thật vậy, giả sử phản chứng tồn tại $f:A \to X$ liên tục và có $a,b \in X$ sao cho $f(a) \neq f(b)$. Vì $X$ là không gian rời rạc nên $U = \{f(a)\}$ và $V=X\setminus\{f(a)\}\ni f(b)$ là các tập mở trong $X$ rởi nhau. Do $f$ liên tục nên $f^{-1}(U)$ và $f^{-1}(V)$ là các tập mở khác rỗng trong $A$ thoả mãn
+    \[f^{-1}(U) \cup f^{-1}(V)=f^{-1}(U \cup V)=f^{-1}(X)=A,~f^{-1}(U) \cap f^{-1}(V) = f^{-1}(U \cap V)=\emptyset.\]
+    Mâu thuẫn với $A$ liên thông.
+
+    Vậy với $A = I =[0,1]$ là một không gian liên thông thì mọi ánh xạ $\omega: I \to X$ phải là ánh xạ hằng. Bây giờ, xét $[\omega] \in \pi_1(X,x_0)$ thì $\omega: I \to X$ là liên tục và $\omega(0)=\omega(1)=x_0$, do đó theo nhận xét trên thì $\omega(s) = x_0 =  \varepsilon_{x_0}~\forall s \in I$. Vì vậy $\pi_1(X,x_0)=\{[\varepsilon_{x_0}]\}\cong 0$.
+\end{proof}
+\begin{proposition}
+    $\R^n$ co rút được.
+\end{proposition}
+\begin{proof}
+    $H: \R^n \times I \to \R^n,~(x,t) \mapsto (1-t)x$.
+
+    Hơn nưã, $\R^n$ lồi.
+\end{proof}
+\begin{proposition}[Điểm bất động Brower]
+    Mọi ánh xạ liên tục $f: \mathbb{B}^2 \to \mathbb{B}^2$ đểu tồn tại $x\in \mathbb{B}^2$ sao cho $f(x)=x$.
+\end{proposition}
+\begin{proof}
+    Phản chứng $f(x) \neq x~\forall x\in \mathbb{B}^2$. 
+    Tồn tại 
+    \[r: B^2 \to S^1,~x\mapsto r(x)\]
+    là giao của tia $x$ nối $f(x))$ với $S^1$. Với $x \in S^1$ thì $r(x)=x$. Tức $r$ là một phép co rút từ $B^2$ về $S^1$.
+
+    Khi đó, lấy $x_0 \in S^1$ ta có
+    \[\pi_1(S^1,x_0) \xrightarrow[\pi(i)] {}\pi_1(B^2,x_0)\xrightarrow[\pi(r)]{}\pi_1(S^1,x_0)\]
+    thoả mãn $\pi(r)\circ \pi(i)=\pi(\Id_{S^1})=\Id_{\pi_1(S^1,x_0)}$. Vì $B^2$ co rút được nên $\pi_1(B^2,x_0)=0$. Suy ra 
+
+    \[[w]=\Id_{\pi_1(S^1,x_0)}([w])=\pi(r)\pi(i)[w]=[0].\]
+    Mâu thuẫn.
+\end{proof}
+\begin{proposition}
+    Mọi ánh xạ liên tục $f: S^2 \to \R^2$ luôn tồn tại $x\in S^2$ sao cho $f(x)=f(-x)$.
+\end{proposition}
+\begin{proof}
+    Đặt $g(x) = f(x)-f(-x)$ là liên tục và là hàm lẻ $g(-x) = g(x)$. 
+
+    Định lý Borsuk Ulam, mọi ánh xạ liên tục lẻ $h: S^n \to \R^n$ thì phải có ít nhất một $x_0 \in S^n$ để $h(x_0)=0$.
+\end{proof}
+\begin{theorem}
+    Mọi đa thức phức đều có nghiệm phức.
+\end{theorem}
+\begin{proof}
+    Giả sử tồn tại $p(x) \in \C[x]$ bậc dương và không có nghiệm trong $\C$. Coi $\C = \R^2$, xét ánh xạ 
+    \[p: \R^2-0 \to \R^2-0, x\mapsto p(x)\]
+    \[\widehat{p}:S^1 \to \R^2-0,\quad x\mapsto \dfrac{p(x)}{\norm{p(x)}}\]
+    tồn tại do $p(x) \neq 0 ~\forall x\in \C$. Thì $\widehat{p}:S^1 \to S^1$.
+
+    Đặt $x_1 = \widehat{p}(1) \in S^1$.
+
+    Khi đó 
+    \[\pi(\widehat{p})\pi_1(S^1,1) \to \pi_1(S^1,x_1),\quad [f]\mapsto [\widehat{p}\circ f]\]
+    là một đồng cấu.
+
+    Xét 
+    \[F: S^1 \times I \to S^1,\quad (x,t) \mapsto \dfrac{p(tx)}{\norm{p(tx)}}\]
+    liên tục và $F: \widehat{p} \simeq \varepsilon_{x_0}$ với $x_0 = \dfrac{p(0)}{\norm{p(0)}}$.
+
+    Đặt $h=F(1,t): I \to S^1$ là một đường nối $x_0$ đến $x_1$. Suy ra đẳng cấu
+    \[h^*: \pi_1(X,x_0) \cong \pi_1(X,x_1)\]
+    sao cho $\pi(\widehat{p})=h^*(\pi(\varepsilon_{x_0}))$
+    nên $\pi(\widehat{p})[w]=h^*([\varepsilon_{x_0}]) =  [\varepsilon_{x_1}]$.
+
+    Xét ánh xạ 
+    \[k(x,t) = x^n + t(a_{n-1}t^{n-1}+\cdots+a_1tx^{n-2}+a_0t^{n-1})\]
+    mà $k(x,0)=x^n$ và $k(x,t) = t^np(x/t) \neq 0$ với $t \neq 0$ và $p(z)\neq 0$ với mọi $z$.
+
+    Đặt $G(x,t)=\dfrac{k(x,t)}{\norm{k(x,t)}}: S^1 \times I \to S^1$ mà $G: f_n(x)=x^n \simeq \widehat{p}(x)$.
+
+    Tồn tại $h_2^*:\pi_1(S^1,1) \to \pi_1(S^1,x_1)$ mà
+    \[\pi(\widehat{p})[w]=h_2^*([w]^n)=[h^*_2([w])]^n\]
+    $h_2^*$ đẳng cấu nên $h_2^*[w]$ là một phần tử sinh của $\pi_1(X,x_1)\cong \Z$ nên cấp của nó bằng $\infty$. vô lý vì
+    \[(h^*_2[w])^n=[\varepsilon_{x_1}].\]
+    
+\end{proof}
+

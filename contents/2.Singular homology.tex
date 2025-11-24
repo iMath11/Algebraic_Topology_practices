@@ -1,0 +1,2184 @@
+\section{Đồng điều kì dị}
+\begin{problem}
+Trình bày đồng điều của một phức các nhóm abel. Chứng minh rằng với mỗi bậc $n$, đồng điều bậc $n$, $H_n$, là một hàm tử từ phạm trù các phức dây chuyền tới phạm trù các nhóm abel. (Xem Dold, Ch.~II, Mục~1.)
+\end{problem}
+\begin{definition}[Phức dây chuyền]
+    Một phức $K$ là một dãy các nhóm abel $\{K_n\}_{n \in \Z}$ cùng với các đồng cấu $\partial_n: K_n \to K_{n-1}$, được gọi là các \textit{toán tử biên} thoả mãn $\partial_n \partial_{n+1} = 0$ với mọi $n \in \Z$.
+
+    Kí hiệu
+    \begin{itemize}
+        \item $Z_nK := \ker(\partial_n)$, tập các \textit{$n-$chu trình} (cycle) của $K$.
+        
+        \item $B_nK :=  \im(\partial_{n+1})$, tập các \textit{$n-$biên} (boundary) của $K$.
+
+        \item Điều kiện $\partial_n\partial_{n+1}=0$ cho ta $B_nK=\im(\partial_{n+1})\leq  \ker(\partial_n) = Z_nK$. Khi đó
+        \[H_nK:=\dfrac{Z_nK}{B_nK}\]
+        được gọi là \textit{nhóm đồng điều thứ $n$ của phức $K$}.
+    \end{itemize}
+\end{definition}
+\begin{definition}[Ánh xạ dây chuyền]
+    Cho $K,~K'$ là các phức dây chuyền. Khi đó một \textit{ánh xạ dây chuyền }$f: K \to K'$ là một dãy các đồng cấu $f_n: K_n \to K_n'$ thoả mãn 
+    \[f_{n-1}\partial_n = \partial_n'f_n,\quad \forall~n \in \Z\]
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \&\& {K_{n+1}} \&\& {K_n} \&\& {K_{n-1}} \&\& \cdots \\
+	\\
+	\cdots \&\& {K_{n+1}'} \&\& {K'_n} \&\& {K'_{n-1}} \&\& \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow["{\partial_{n+1}}", from=1-3, to=1-5]
+	\arrow["{f_{n+1}}"{description}, from=1-3, to=3-3]
+	\arrow["{\partial_n}", from=1-5, to=1-7]
+	\arrow["{f_n}"{description}, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{f_{n-1}}"{description}, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial'_{n+1}}"', from=3-3, to=3-5]
+	\arrow["{\partial'_n}"', from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+\end{definition}
+
+\begin{definition}[Hợp thành hai ánh xạ dây chuyền]
+    Cho $f: K \to L$ và $g: L \to M$ là các ánh xạ dây chuyền. Khi đó, hợp thành của hai ánh xạ dây chuyền $gf$ là một dãy các đồng cấu $(gf)_n:=g_nf_n$ với $n \in \Z$.
+\end{definition}
+
+\begin{proposition}
+    Hợp thành của hai ánh xạ dây chuyền cũng là một ánh xạ dây chuyền.
+\end{proposition}
+\begin{proof}
+    Giả sử $f: K \to L$ và $g:L \to M$ là các ánh xạ dây chuyền. 
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \&\& {K_{n+1}} \&\& {K_n} \&\& {K_{n-1}} \&\& \cdots \\
+	\\
+	\cdots \&\& {L_{n+1}} \&\& {L_n} \&\& {L_{n-1}} \&\& \cdots \\
+	\\
+	\cdots \&\& {M_{n+1}} \&\& {M_n} \&\& {M_{n-1}} \&\& \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow["\partial", from=1-3, to=1-5]
+	\arrow["{f_{n+1}}"{description}, from=1-3, to=3-3]
+	\arrow["\partial", from=1-5, to=1-7]
+	\arrow["{f_n}"{description}, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{f_{n-1}}"{description}, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["\partial", from=3-3, to=3-5]
+	\arrow["{g_{n+1}}"{description}, from=3-3, to=5-3]
+	\arrow["\partial", from=3-5, to=3-7]
+	\arrow["{g_n}"{description}, from=3-5, to=5-5]
+	\arrow[from=3-7, to=3-9]
+	\arrow["{g_{n-1}}"{description}, from=3-7, to=5-7]
+	\arrow[from=5-1, to=5-3]
+	\arrow["\partial", from=5-3, to=5-5]
+	\arrow["\partial", from=5-5, to=5-7]
+	\arrow[from=5-7, to=5-9]
+    \end{tikzcd}\]
+    Với mọi $n \in \Z$ ta có
+    \begin{align*}
+        (g_{n-1}f_{n-1})\partial
+        = g_{n-1}(f_{n-1}\partial)
+        = g_{n-1}(\partial f_n)
+        = (g_{n-1}\partial)f_n
+        = (\partial g_n)f_n
+        = \partial (g_nf_n).
+    \end{align*}
+\end{proof}
+\begin{corollary}
+    Với các vật là các phức dây chuyền và các cấu xạ là các ánh xạ dây chuyền tạo thành một phạm trù, kí hiệu $\partial \mathcal{A}\mathcal{G}$.
+
+    Nói riêng, ánh xạ dây chuyền $f$ là một đẳng cấu (trong $\partial \mathcal{AG}$) nếu và chỉ nếu mỗi $f_n$ là một đẳng cấu (trong $\mathcal{AG}$).
+\end{corollary}
+
+\begin{remark}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \&\& {K_{n+1}} \&\& {K_n} \&\& {K_{n-1}} \&\& \cdots \\
+	\\
+	\cdots \&\& {K_{n+1}'} \&\& {K'_n} \&\& {K'_{n-1}} \&\& \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow["{\partial_{n+1}}", from=1-3, to=1-5]
+	\arrow["{f_{n+1}}"{description}, from=1-3, to=3-3]
+	\arrow["{\partial_n}", from=1-5, to=1-7]
+	\arrow["{f_n}"{description}, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{f_{n-1}}"{description}, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial'_{n+1}}"', from=3-3, to=3-5]
+	\arrow["{\partial'_n}"', from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+    Từ ánh xạ dây chuyền $f: K \to K'$ có điều kiện $f_{n}\partial_{n+1} = \partial'_{n+1}f_{n+1}$ cho ta 
+    \begin{itemize}
+        \item $f_{n}(B_{n}K) \subseteq B_{n}K'$.
+
+        \item $f_{n}(Z_{n}K) \subseteq Z_{n}K'$.
+    \end{itemize}
+    \end{remark}
+    \begin{proposition}
+    \[H_nf: H_nK=\dfrac{Z_nK}{B_nK} \to H_nK'=\dfrac{Z_nK'}{B_nK'},\quad [z] \mapsto [f_n(z)]\]
+    là một đồng cấu nhóm.
+    \end{proposition}
+    \begin{proof}
+        \begin{enumerate}
+            \item $H_nf$ được định nghĩa tốt.
+    
+            Thật vậy, giả sử $[z]=[z'] \in H_nK$, tức $z'-z = \partial_{n+1}(a)\in B_nK$. Khi đó 
+            \[f_n(z)-f_n(z')=f_n(z-z')=(f_n\partial_{n+1})(a) = (\partial'_{n+1} f_{n+1})(a) \in \im(\partial'_{n+1}) = B_nK'.\]
+            
+            Do đó $[f_n(z)] - [f_n(z')] =  [f_n(z) - f_n(z')]=[0] \in H_nK'$. Hay $[f_n(z)] =  [f_n(z')]$.
+        
+            \item $H_nf$ là một đồng cấu nhóm vì với mọi $[z],~[z'] \in H_nK$ ta có
+            \[H_nf([z]+[z']) = H_nf([z+z'])=[f(z+z')]=[f(z)+f(z')]=[f(z)] + [f(z')]=H_nf([z])+H_nf([z']).\]
+        \end{enumerate}
+    \end{proof}
+    \begin{proposition}
+        Cho $f: K \to L$ và $g:L\to M$ là các ánh xạ phức dây chuyền. Khi đó
+        \[H_n(gf) = (H_ng)(H_nf) \text{ và } H_n(\Id_K) =  \Id_{H_nK}.\]
+    \end{proposition}
+    \begin{proof}
+        Với mỗi $n \in \Z$, ta có các đồng cấu nhóm
+        \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+    	{H_nK} \&\& {H_nL} \&\& {H_nM}
+    	\arrow["{H_nf}", from=1-1, to=1-3]
+    	\arrow["{H_n(gf)}"{description}, curve={height=30pt}, from=1-1, to=1-5]
+    	\arrow["{H_ng}", from=1-3, to=1-5]
+        \end{tikzcd}\]
+        Khi đó, với mọi $[z] \in H_nK$ ta có
+        \[(H_ng)(H_nf)[z]=H_ng[f_n(z)]=[g_nf_n(z)]=H_n(gf)[z].\]
+        Dẫn đến $H_n(gf) = (H_ng)(H_nf)$.
+
+        Nói riêng, với $\Id_K: K \to K$ là ánh xạ phức dây chuyền đồng nhất trên $K$. Khi đó ta có đồng cấu nhóm
+        \[H_n(\Id_K): H_nK \to H_nK,~[z]\mapsto [\Id_K(z)]=[z]\]
+        Hay $H_n(\Id_K) = \Id_{H_nK}$.
+    \end{proof}
+    \begin{corollary}
+        Với mỗi $n \in \Z$, $H_n$ là một hàm tử từ $\partial\mathcal{AG}$ vào $\mathcal{AG}$.
+    \end{corollary}
+    \begin{proof}
+        Với mỗi phức dây chuyền $K \in \partial\mathcal{AG}$ ta có $H_nK \in \mathcal{AG}$.
+
+        Với mỗi ánh xạ dây chuyền $f: K \to L$, cảm sinh đồng cấu nhóm
+        \[H_nf:H_nK \to H_nL,~[z]\mapsto [f_n(z)]\]
+        Hơn nữa, theo \textbf{Prop 3.9} ta có 
+        \[H_n(gf) = (H_ng)(H_nf) \text{ và } H_n(\Id_K) =  \Id_{H_nK}.\]
+        Dẫn đến $H_n:\partial\mathcal{AG} \to \mathcal{AG}$ là một hàm tử.
+    \end{proof}
+    
+    \begin{proposition}
+        Cho $\{K^{\lambda}_{\lambda \in \Lambda}\}$ là một họ các phức dây chuyền. Khi đó tổng trực tiếp $K:=\bigoplus_{\lambda \in \Lambda}K^{\lambda}$ định nghĩa bởi
+        \[K_n:= \bigoplus_{\lambda \in \Lambda}K_n^{\lambda},\quad \partial \{c^{\lambda}\}_{\lambda \in \Lambda}:= \{\partial c^{\lambda}\}_{\lambda \in \Lambda}\]
+        cũng là một phức dây chuyền. Hơn nữa, $\forall~n \in \Z$ ta có
+        \begin{itemize}
+            \item $Z_n\left(\bigoplus_{\lambda \in \Lambda}K^{\lambda}\right) = \bigoplus_{\lambda \in \Lambda}Z_n(K^{\lambda})$.
+            
+            \item $B_n\left(\bigoplus_{\lambda \in \Lambda}K^{\lambda}\right) = \bigoplus_{\lambda \in \Lambda}B_n(K^{\lambda})$.
+            
+            \item $H_n\left(\bigoplus_{\lambda \in \Lambda}K^{\lambda}\right) = \bigoplus_{\lambda \in \Lambda}H_n(K^{\lambda})$.
+        \end{itemize}
+    \end{proposition}
+    \begin{proof}
+        \begin{enumerate}
+            \item \textit{Chứng minh $K$ là một phức dây chuyền.}
+
+            Với mỗi $\lambda \in \Lambda$, ta có phức dây chuyền 
+            \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+        	\cdots \&\& {K_{n+1}^{\lambda}} \&\& {K_n^{\lambda}} \&\& {K_{n-1}^{\lambda}} \&\& \cdots
+        	\arrow[from=1-1, to=1-3]
+        	\arrow["{\partial^{\lambda}_{n+1}}", from=1-3, to=1-5]
+        	\arrow["{\partial^{\lambda}_{n}}", from=1-5, to=1-7]
+        	\arrow[from=1-7, to=1-9]
+            \end{tikzcd}\]
+            Ta xây dựng phức $K$ với 
+            \begin{itemize}
+                \item Các nhóm abel $K_n = \bigoplus_{\lambda \in \Lambda}K_n^{\lambda}=\{(c^{\lambda})_{\lambda \in \Lambda}\mid \text{chỉ hữu hạn các thành phần khác $0$}\}$.
+            
+                
+
+                \item Toán tử biên $\partial_n: K_n \to K_{n-1},~(c^{\lambda})_{\lambda \in \Lambda} \mapsto \left(\partial_n^{\lambda}(c^{\lambda})\right)_{\lambda \in \Lambda}$.
+            
+                \item Với mỗi $x=(c^{\lambda})_{\lambda} \in K_n$ ta có
+                \[\partial_{n-1}\partial_n(x)=\partial_{n-1}\left(\partial_n^{\lambda}(c^{\lambda})\right)_{\lambda \in \Lambda} = \left(\partial_{n-1}^{\lambda}\partial_n^{\lambda}(c^{\lambda})\right)_{\lambda \in \Lambda}=(0)_{\lambda \in \Lambda}=0.\]
+                Dẫn đến $\partial_{n-1} \partial_n = 0$.
+            \end{itemize}
+
+            \item \textit{Chứng minh $Z_n\left(\bigoplus_{\lambda \in \Lambda}K^{\lambda}\right) = \bigoplus_{\lambda \in \Lambda}Z_n(K^{\lambda})$.}
+
+            Ta có 
+            \[z=(z^{\lambda})_{\lambda} \in Z_nK \iff 0 =(\partial_n^{\lambda}(z^{\lambda}))_{\lambda}\iff \partial_n^{\lambda}(z^{\lambda})=0~\forall \lambda\iff z^{\lambda} \in Z_n(K^{\lambda})~\forall \lambda \iff z \in \bigoplus_{\lambda \in \Lambda}Z_n(K^{\lambda})\]
+            (do chỉ có hữu hạn các $z^{\lambda}\neq 0$).
+
+            \item \textit{Chứng minh $B_n\left(\bigoplus_{\lambda \in \Lambda}K^{\lambda}\right) = \bigoplus_{\lambda \in \Lambda}B_n(K^{\lambda})$.}
+
+            Ta có
+            \[y \in B_n\left(\bigoplus_{\lambda \in \Lambda}K^{\lambda}\right) \iff y = \partial_{n+1}[(x^{\lambda})_{\lambda}]=(\underbrace{\partial_{n+1}^{\lambda}(x^{\lambda})}_{\in B_nK^{\lambda}})_{\lambda} \in \bigoplus_{\lambda \in \Lambda}B_n(K^{\lambda})\]
+            (vì $x=(x^{\lambda})_{\lambda}$ có giá hữu hạn nên $y$ cũng có giá hữu hạn).
+
+            \item \textit{Chứng minh $H_n\left(\bigoplus_{\lambda \in \Lambda}K^{\lambda}\right) = \bigoplus_{\lambda \in \Lambda}H_n(K^{\lambda})$}.
+
+            Ta có
+            \[H_nK=\dfrac{Z_nK}{B_nK}=\dfrac{\bigoplus_{\lambda \in \Lambda}Z_n(K^{\lambda})}{\bigoplus_{\lambda \in \Lambda}B_n(K^{\lambda})}\cong \bigoplus_{\lambda \in \Lambda}\dfrac{Z_n(K^{\lambda})}{B_n(K^{\lambda})}= \bigoplus_{\lambda \in \Lambda}H_nK^{\lambda}.\]
+        \end{enumerate} 
+        \textit{Ta có sử dụng các bổ đề sau}
+        \begin{lemma}
+            Cho một họ $R$-module $\{A_\lambda\}_{\lambda\in\Lambda}$ và các $R$-submodule $B_\lambda \subseteq A_\lambda$. Khi đó tồn tại một đẳng cấu tự nhiên
+            \[
+            \dfrac{\prod_{\lambda\in\Lambda} A_\lambda}{\prod_{\lambda\in\Lambda} B_\lambda}
+            \;\cong\;
+            \prod_{\lambda\in\Lambda} \dfrac{A_\lambda}{B_\lambda}.
+            \]
+        \end{lemma}
+            
+        \begin{proof}
+            Xét đồng cấu
+            \[
+            \Psi : \prod_{\lambda} A_\lambda \longrightarrow \prod_{\lambda} (A_\lambda/B_\lambda),
+            \quad
+            \Psi\big( (a^\lambda)_\lambda \big) := \big( a^\lambda + B_\lambda \big)_\lambda.
+            \]
+            Rõ ràng $\Psi$ là đồng cấu $R$-module, với
+            \[
+            \ker\Psi = \prod_{\lambda} B_\lambda.
+            \]
+            Do đó $\Psi$ cảm sinh một đơn ánh
+            \[
+            \overline{\Psi} : 
+            \dfrac{\prod_{\lambda} A_\lambda}{\prod_{\lambda} B_\lambda}
+            \longrightarrow
+            \prod_{\lambda} (A_\lambda/B_\lambda).
+            \]
+            Tính toàn ánh của $\overline{\Psi}$ là hiển nhiên vì trong tích trực tiếp, mỗi toạ độ độc lập và không có ràng buộc hỗ trợ hữu hạn.  
+            Vậy $\overline{\Psi}$ là đẳng cấu $R$-module.
+        \end{proof}
+        \begin{lemma}
+            Cho một họ $R$-module $\{A_\lambda\}_{\lambda\in\Lambda}$ và các $R$-submodule $B_\lambda \subseteq A_\lambda$. Khi đó tồn tại một đẳng cấu tự nhiên
+            \[
+            \dfrac{\prod_{\lambda\in\Lambda} A_\lambda}{\prod_{\lambda\in\Lambda} B_\lambda}
+            \;\cong\;
+            \prod_{\lambda\in\Lambda} \dfrac{A_\lambda}{B_\lambda}.
+            \]
+        \end{lemma}
+            
+        \begin{proof}
+            Xét đồng cấu
+            \[
+            \Psi : \prod_{\lambda} A_\lambda \longrightarrow \prod_{\lambda} (A_\lambda/B_\lambda),
+            \quad
+            \Psi\big( (a^\lambda)_\lambda \big) := \big( a^\lambda + B_\lambda \big)_\lambda.
+            \]
+            Rõ ràng $\Psi$ là đồng cấu $R$-module, với
+            \[
+            \ker\Psi = \prod_{\lambda} B_\lambda.
+            \]
+            Do đó $\Psi$ cảm sinh một đơn ánh
+            \[
+            \overline{\Psi} : 
+            \dfrac{\prod_{\lambda} A_\lambda}{\prod_{\lambda} B_\lambda}
+            \longrightarrow
+            \prod_{\lambda} (A_\lambda/B_\lambda).
+            \]
+            Tính toàn ánh của $\overline{\Psi}$ là hiển nhiên vì trong tích trực tiếp, mỗi toạ độ độc lập và không có ràng buộc hỗ trợ hữu hạn.  
+            Vậy $\overline{\Psi}$ là đẳng cấu $R$-module.
+        \end{proof}
+        \textit{Chứng minh hoàn toàn tương tự cho tích trực tiếp ta thu được các kết quả sau}
+        \begin{itemize}
+            \item $Z_n\left(\prod_{\lambda \in \Lambda}K^{\lambda}\right) = \prod_{\lambda \in \Lambda}Z_n(K^{\lambda})$.
+            
+            \item $B_n\left(\prod_{\lambda \in \Lambda}K^{\lambda}\right) = \prod_{\lambda \in \Lambda}B_n(K^{\lambda})$.
+            
+            \item $H_n\left(\prod_{\lambda \in \Lambda}K^{\lambda}\right) = \prod_{\lambda \in \Lambda}H_n(K^{\lambda})$.
+        \end{itemize}
+\end{proof}
+\begin{definition}
+    Dãy $G = \{G_n\}_{n \in \Z}$ các nhóm (abel) được gọi là \textit{một nhóm (abel) phân bậc} (a graded (abelian) group). 
+
+    Mọi nhóm abel phân bậc $G$ đều có thể tạo thành một phức dây chuyền với toán tử biên $\partial = 0$. Do đó ta có phép nhúng phạm trù
+    \[\mathcal{GAG} \subset \partial\mathcal{AG}.\]
+\end{definition}
+\begin{example}
+    Với $K = (K_n,\partial_n)_{n\in \Z}$ là một phức dây chuyền thì $ZK=\{Z_nK\}_{n},~BK=\{B_nK\}_{n},~HK=\{H_nK\}_{n}$ là các nhóm abel phân bậc. 
+
+    Nói riêng, ta luôn xem $ZK,~BK,~HK$ là các phức dây chuyền với toán tử biên bằng $0$.
+\end{example}
+\begin{proposition}
+    $Z,~B,~H$ là các hàm tử hiệp biến (covariant functors) từ phạm trù $\partial\mathcal{AG}$ vào phạm trù các nhóm abel phân bậc $\mathcal{GAG}$.
+\end{proposition}
+\begin{proof}
+    Với mỗi phức $K \in \partial\mathcal{AG}$ thì $ZK=\{Z_nK\}_{n},~BK=\{B_nK\}_{n},~HK=\{H_nK\}_{n} \in \mathcal{GAG}$.
+
+    Mỗi ánh xạ dây chuyền $f:K\to L$ trong $\partial\mathcal{AG}$ là một dãy các đồng cấu $f_n:K_n \to L_n$. Hơn nữa, mỗi $f_n$ cũng cảm sinh các đồng cấu
+    \begin{enumerate}
+        \item $Z_nf:= f_n|_{Z_nK}: Z_nK \to Z_nL$.
+
+        \item $B_nf:= f_n|_{B_nK}: B_nK \to B_nL$.
+
+        \item $H_nf: H_nK \to H_nL$.
+    \end{enumerate}
+    
+    Tức $Z,~B,~H$ gửi mỗi ánh xạ dây chuyền $f=\{f_n\}_n$ thành một dãy các đồng cấu trong phạm trù $\mathcal{GAG}$ là $Zf=\{Z_nf\}_n,Bf=~\{B_nf\}_n,~Hf=\{H_nf\}_n$.
+
+    Nói riêng, với mỗi $G = \{G_n\}_{n\in \Z}\in \mathcal{GAG}$ thì ta coi $G$ là một phức với toán tử biên bằng $0$, thế nên $ZG=G,~BG=0,~HG=G$.
+\end{proof}
+\begin{definition}
+    Cho $A$ là một nhóm abel và $k \in \Z$. Kí hiệu $(A,k):=\{(A,k)_n\}_{n \in \Z}$ là một nhóm abel phân bậc với 
+    \[(A,k)_n := \begin{cases}
+        A,&\quad n=k\\
+        0,&\quad n\neq k
+    \end{cases}\]
+    Từ đó ta có phép nhúng 
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\begin{array}{c} \mathcal{AG}\\A \end{array} \&\& \begin{array}{c} \mathcal{GAG}\\\{(A,k)_n\}_n \end{array} \&\& \begin{array}{c} \partial\mathcal{AG}\\\{(A,k)_n,\partial_n=0\}_{n} \end{array}
+	\arrow[hook, from=1-1, to=1-3]
+	\arrow[hook, from=1-3, to=1-5]
+    \end{tikzcd}\]
+\end{definition}
+\begin{remark}
+    Ta thấy $Z_n(A,k)=(A,k)_n=\begin{cases}
+        A,&\quad n=k\\
+        0,&\quad n\neq k
+    \end{cases}$
+    
+    $B_n(A,k)=0$ với mọi $n$ và $H_n(A,k)=(A,k)=\begin{cases}
+        A,&\quad n=k\\
+        0,&\quad n\neq k
+    \end{cases}$
+\end{remark}
+
+\begin{definition}[Nón ánh xạ (the mapping cone)]
+Cho $f:K \to L$ là một ánh xạ dây chuyền. Định nghĩa một phức cảm sinh từ $f$, kí hiệu $Cf$, được gọi là \textit{nón ánh xạ} được định nghĩa bởi
+\begin{equation}
+    (Cf)_n = L_n \oplus K_{n-1},\quad \partial^{Cf}_n(y,x) = (\partial_n^L(y)+f_{n-1}(x),~-\partial_{n-1}^K(x)).
+\end{equation}
+\end{definition}
+\begin{remark}
+    Trước hết ta kiểm tra $\partial^{Cf}_{n-1}\partial^{Cf}_n=0$ với mọi $n \in \Z$. Thật vậy
+    \[\partial\partial(y,x) = \partial(\partial y + fx, -\partial x) = (\partial (\partial y + fx) + f(-\partial x),~-\partial (-\partial x))= (\partial^2y + (\partial f - f\partial)x, \partial^2 x)=(0,0).\]
+
+    Đặc biệt khi $L = 0$ thì $f = 0$. Khi đó $Cf = K[-1]$, hay $(K[-1])_n=K_{n-1}$ và $\partial^{K[-1]}=-\partial^K$. Từ đó $H_n(K[-1])=H_{n-1}K$ và $H(K[-1])=(HK)[1]$.
+
+    Nói thêm, vì $\partial^{Cf}_n(y,x) = (\partial_n^L(y)+f_{n-1}(x),~-\partial_{n-1}^K(x)) = \begin{pmatrix}
+        \partial^L_n & f_{n-1}\\
+        0 & -\partial^K_{n-1}
+    \end{pmatrix}\begin{pmatrix}
+        y\\x
+    \end{pmatrix}$
+\end{remark}
+\begin{remark}
+    Ta có dãy khớp ngắn các phức dây chuyền
+    \begin{equation}
+        0\longrightarrow L \xlongrightarrow[]{i}Cf \xlongrightarrow[]{p}K[-1]\longrightarrow 0
+    \end{equation}
+    trong đó phức $K[-1]$ là phức mà $(K[-1])_n=K_{n-1}$ và $\partial^{K[-1]} = -\partial^K$.
+    
+    Dãy khớp dài cảm sinh từ dãy khớp phức dây chuyền trên là
+    \[\cdots \longrightarrow H_nL\xlongrightarrow{i_*} H_n(Cf) \xlongrightarrow{p*} H_n(K[-1]) = H_{n-1}K \xlongrightarrow{\partial_* = f_*} H_{n-1}L \longrightarrow \cdots \]
+    
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	0 \&\& 0 \\
+	\\
+	\begin{array}{c} K_{n-1}\\x \end{array} \&\& \begin{array}{c} K_{n-2}\\-\partial^K_{n-1}(x) \end{array} \\
+	\& \begin{array}{c} L_{n-1}\\f_{n-1}(x) \end{array} \\
+	\begin{array}{c} (Cf)_n=L_n \oplus K_{n-1}\\(y,x) \end{array} \&\& \begin{array}{c} (Cf)_{n-1}=L_{n-1} \oplus K_{n-2} \\(\partial_n^L(y)+f_{n-1}(x),~-\partial^K_{n-1}(x)) \end{array} \\
+	\\
+	\begin{array}{c} L_n\\y \end{array} \&\& \begin{array}{c} L_{n-1}\\\partial^L_n(y) \end{array} \\
+	\\
+	0 \&\& 0
+	\arrow[from=3-1, to=1-1]
+	\arrow["{-\partial_{n-1}^K}", from=3-1, to=3-3]
+	\arrow["{f_{n-1}}"{description}, from=3-1, to=4-2]
+	\arrow[from=3-3, to=1-3]
+	\arrow["{i_{n-1}}"{description}, hook, from=4-2, to=5-3]
+	\arrow["{p_n}", two heads, from=5-1, to=3-1]
+	\arrow["{\partial_{n}^{Cf}}", from=5-1, to=5-3]
+	\arrow["{p_{n-1}}", two heads, from=5-3, to=3-3]
+	\arrow["{i_n}", hook, from=7-1, to=5-1]
+	\arrow["{\partial^L_n}", from=7-1, to=7-3]
+	\arrow["{i_{n-1}}", hook, from=7-3, to=5-3]
+	\arrow[from=9-1, to=7-1]
+	\arrow[from=9-3, to=7-3]
+\end{tikzcd}\]
+    Ở mỗi bậc $n$ ta thu được dãy khớp ngắn chẻ ra 
+    \[0\longrightarrow L_{n}\longrightarrow (Cf)_n =  L_n \oplus K_{n-1} \longrightarrow K_{n-1} \longrightarrow 0\]
+    Tuy nhiên dãy khớp ngắn các phức dây chuyền \[0\longrightarrow L \xlongrightarrow[]{i}Cf \xlongrightarrow[]{p}K[-1]\longrightarrow 0\]
+    chưa chắc đã chẻ ra vì để dãy khớp này chẻ ra cần tồn tại ánh xạ dây chuyền $s: K[-1] \to Cf$ sao cho $p \circ s = \Id_{K[-1]}$. Đầu tiên, để $s$ là một ánh xạ dây chuyền thì $\partial^{Cf}s=s\partial^{K[-1]}$. Lấy $s(x) = (0,x)$, ta được 
+    \[\partial^{Cf}s(x)=s\partial^{K[-1]}(x) \iff \partial^{Cf}(0,x)=s(-\partial^{K}x) \iff (f(x),-\partial^Kx) = (0, -\partial^Kx)\iff f = 0.\]
+
+    Chọn $K=L=(\Z,0)$ và $f=\Id_K \neq 0$. Khi đó 
+    \begin{itemize}
+        \item $\partial_n^K =0,~\partial^{K[-1]}_n = 0$.
+
+        \item $K_n = (\Z,0)_n = \begin{cases}
+        \Z,&\quad n =0\\
+        0,&\quad n \neq 0
+        \end{cases}$
+        
+        \item $K[-1]_n = K_{n-1} =  (\Z,0)_{n-1} = \begin{cases}
+        \Z,&\quad n = 1\\
+        0,&\quad n \neq 1
+        \end{cases} = (\Z,1)_n$.
+
+        \item $(CK)_n:=C(\Id_K)_n = K_n \oplus K[-1]_n = K_n \oplus K_{n-1} = \begin{cases}
+            \Z \oplus 0 \cong \Z, &\quad n = 0\\
+            0 \oplus \Z \cong \Z, &\quad n = 1\\
+            0 \oplus 0 \cong 0, &\quad n \neq 0,1
+        \end{cases}$
+
+        \item $\partial^{CK}_n = 0$ với mọi $n \neq 1$ và $\partial^{CK}_1: (CK)_1 = 0 \oplus \Z \to (CK)_0 = \Z \oplus 0$ xác định bởi 
+        \[\partial^{CK}_1(0,x)= (\partial^K(0)+ \Id(x), -\partial^K(x)) = (x,0).\]
+        Nói cách khác, $CK$ chính là phức
+        \[\cdots \longrightarrow 0 \longrightarrow \Z \xlongrightarrow{\partial_1^{CK}=\Id} \Z \longrightarrow 0 \longrightarrow \cdots\]
+        Có $H_1(CK) = \ker(\partial^{CK}_1)/0=0,~H_0(CK)=\Z/\Z=0,~H_n(CK)=0$. 
+
+        % Việc $i_*$ nói chung không đơn cấu và $p_*$ nói chung không toàn cấu, nên ta có $\ker(i_*)$ chính là sự \textit{đo lường mức độ để $i_*$} trở thành đơn cấu và $\coker(p_*) = $
+    \end{itemize}
+    
+\end{remark}
+\begin{proposition}
+    Cho $K, L$ là các phức dây chuyền. Định nghĩa 
+    \[[\Hom(K,L)]_n:= \prod_{v \in \Z}\Hom(K_v, L_{n+v})\]
+    là tích trực tiếp các đồng cấu bậc $n$, tức  là mỗi phần tử của $[\Hom(K,L)]_n$ có dạng 
+    \[f = \{f_v: K_v \to L_{n+v}\}_{v\in \Z}.\]
+
+    Định nghĩa đồng cấu vi phân 
+    \[\partial(f):= \{\partial_{n+v}^L  f_v - (-1)^nf_{v-1}\partial_{v}^K\}_{v \in \Z}\]
+
+    Khi đó $\Hom(K,L)$ cùng với toán tử vi phân $\partial$ là một phức dây chuyền.
+\end{proposition}
+\begin{proof}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{K_v} \&\& {K_{v-1}} \\
+	\\
+	{L_{n+v}} \&\& {L_{n+v-1}}
+	\arrow["{\partial^K}", from=1-1, to=1-3]
+	\arrow["{f_v}"{description}, from=1-1, to=3-1]
+	\arrow["\partial"{description}, from=1-1, to=3-3]
+	\arrow["{f_{v-1}}"{description}, from=1-3, to=3-3]
+	\arrow["{\partial^L}"', from=3-1, to=3-3]
+    \end{tikzcd}\]
+
+    Lấy bất kỳ $f = \{f_v: K_v \to L_{n+v}\}_{v\in \Z} \in \Hom(K,L)_n$, ta cần tính thành phần ở chỉ số $v$ của $\partial(\partial f)$. Theo định nghĩa ta có
+    \begin{align*}
+        (\partial(\partial f))_v
+        &= \partial_{n+v-1}^L(\partial f)_v - (-1)^{n-1}(\partial f)_{v-1}\partial_v^K\\
+        &= \partial_{n+v-1}^L(\partial_{n+v}^L f_v - (-1)^nf_{v-1}\partial_{v}^K) - (-1)^{n-1}(\partial_{n+v-1}^L  f_{v-1} - (-1)^nf_{v-2}\partial_{v-1}^K)\partial_v^K\\
+        &= 0.
+    \end{align*}
+    Do đó $\partial^2=0$.
+\end{proof}
+\begin{problem}
+Trình bày về sự tồn tại, tính tự nhiên, tính khớp của đồng cấu nối. Làm Bài tập~2.16, trang~23 (xem Dold, Ch.~II, Mục~2).
+\end{problem}
+\begin{proposition}
+    Nếu $0 \longrightarrow K' \xlongrightarrow{i} K \xlongrightarrow{p} K'' \longrightarrow 0$ là một dãy khớp các phức dây chuyền thì dãy sau cũng là khớp
+    \[HK' \xlongrightarrow{i_*} HK \xlongrightarrow{p_*} HK''\]
+\end{proposition}
+
+\begin{proof}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\&\& 0 \&\& 0 \&\& 0 \\
+	\\
+	\cdots \&\& {K'_{n+1}} \&\& \begin{array}{c} K'_n\\z' \end{array} \&\& \begin{array}{c} K'_{n-1}\\\partial'z' \end{array} \&\& \cdots \\
+	\\
+	\cdots \&\& \begin{array}{c} K_{n+1}\\y\in p^{-1}(z'') \end{array} \&\& \begin{array}{c} K_n\\z= \partial y + (z-\partial y) \end{array} \&\& \begin{array}{c} K_{n-1}\\ \partial z = 0 \end{array} \&\& \cdots \\
+	\\
+	\cdots \&\& \begin{array}{c} K''_{n+1}\\z'' \end{array} \&\& \begin{array}{c} K''_n\\p(z)=\partial''(z'') +0 \end{array} \&\& \begin{array}{c} K''_{n-1}\\\partial''\partial''(z'')=0 \end{array} \&\& \cdots \\
+	\\
+	\&\& 0 \&\& 0 \&\& 0
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow[from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial'}", from=3-3, to=3-5]
+	\arrow["i"{description}, from=3-3, to=5-3]
+	\arrow["{\partial'}", from=3-5, to=3-7]
+	\arrow["i"{description}, from=3-5, to=5-5]
+	\arrow[shift left=3, curve={height=-18pt}, dashed, from=3-5, to=5-5]
+	\arrow[from=3-7, to=3-9]
+	\arrow["i"{description}, from=3-7, to=5-7]
+	\arrow[from=5-1, to=5-3]
+	\arrow["\partial", from=5-3, to=5-5]
+	\arrow["p"{description}, from=5-3, to=7-3]
+	\arrow["\partial", from=5-5, to=5-7]
+	\arrow["p"{description}, from=5-5, to=7-5]
+	\arrow[from=5-7, to=5-9]
+	\arrow["p"{description}, from=5-7, to=7-7]
+	\arrow[from=7-1, to=7-3]
+	\arrow["{\partial''}", from=7-3, to=7-5]
+	\arrow[from=7-3, to=9-3]
+	\arrow["{\partial''}", from=7-5, to=7-7]
+	\arrow[from=7-5, to=9-5]
+	\arrow[from=7-7, to=7-9]
+	\arrow[from=7-7, to=9-7]
+\end{tikzcd}\]
+    \textit{Ta sẽ chứng minh $\ker(p_*) = \im(i_*)$}.
+
+    Đầu tiên, vì $p\circ i = 0$ nên $0 = 0_*=(p\circ i)_* = p_* \circ i_*$, và do đó $\im(i_*) \subseteq \ker(p_*)$.
+
+    Ngược lại, lấy bất kỳ $[z] \in \ker(p_*) \subset H_nK = Z_nK/B_nK$, ta sẽ chứng minh $[z] \in \im(i_*)$ tức chỉ ra $[z] = i_*([z']) = [i(z')]$ với $z' \in K'_n$ nào đó.
+    
+    Ta có
+    \[[0]=p_*([z]) = [p(z)] \in H_nK'' \iff p(z) \in B_nK'' \iff \exists z'' \in K''_{n+1}: p(z) = \partial'' z''.\]
+    Lấy bất kỳ $y \in p^{-1}(z'')$, ta được
+    \[p(z-\partial y)  =  p(z)- p(\partial y) = (\partial''p)(y)-(p\partial) y=0\]
+    Dẫn đến $z-\partial y \in \ker(p) =  \im(i)$, tức $\exists~z' \in K'_n: z-\partial y = i(z')$.
+
+    Vì thế 
+    \[i(\partial'z')=(i\partial')(z') = (\partial i)(z') = \partial (z-\partial y) = \partial z -\partial^2x=\partial z = 0\]
+    (vì $[z] \in H_nK$ nên $z \in Z_nK$, dẫn đến $\partial z =0)$. 
+
+    Mà $i$ là đơn ánh nên $\partial'z'=0$, tức $z' \in Z_nK''$ và do đó 
+    \[i_*([z'])=[i(z')]=[z-\partial y]=[z].\]
+\end{proof}
+\begin{remark}
+    Nói riêng thì $H$ là một hàm tử \textit{nửa khớp, không khớp trái và cũng không khớp phải}. Về mặt tổng quát thì $i_*$ không đơn cấu và $p_*$ không toàn cấu.
+    \begin{example}
+        Với $K = (\Z,0),~(CK)=C(\Z,0),~K[-1]=(\Z,1)$ ta có dãy khớp các phức dây chuyền
+        \[0 \longrightarrow (\Z,0) \xlongrightarrow{i} C(\Z,0)\xlongrightarrow{p} (\Z,1) \longrightarrow 0.\]
+
+        Ta có $H(\Z,0)= (\Z,0),~HC(\Z,0)= 0,~H(\Z,1) = (\Z,1)$. 
+        
+        Hơn nữa, $~\ker(i_*) = (\Z,0) \neq 0,~\im(p_*) \neq (\Z,1)$ nên $i_*$ không đơn cấu và $p_*$ không toàn cấu.
+
+        Do đó, $\ker(i_*)$ đo lường mức độ mà $i_*$ không thành đơn cấu và $\coker(p_*) = H_nK''/\im(p_*)$ đo lường mức độ mà $p_*$ không thành toàn cấu. 
+        
+        Một cách tự nhiên, ta muốn xây dựng ánh xạ $\partial_*: H_nK'' \to H_{n-1}K'$. 
+    \end{example}
+\end{remark}
+\begin{remark}
+    Nếu $0 \longrightarrow K' \xlongrightarrow{i} K \xlongrightarrow{p} K'' \longrightarrow 0$ là một dãy khớp các phức dây chuyền thì
+    \[\im(i) \cong K'/\ker(i) = K'/0\cong K',\quad K''=\im(p)\cong K/\ker(p)=K/\im(i) \cong K/K'.\]
+    Do đó mọi dãy khớp ngắn các phức dây chuyền đều có thể xem như dãy khớp ngắn dạng sau
+    \[0 \longrightarrow K' \xlongrightarrow{i} K \xlongrightarrow{p} (K/K') \longrightarrow 0\]
+\end{remark}
+
+\begin{definition}[Đồng cấu nối]
+Cho một dãy khớp ngắn các phức dây chuyền
+\begin{equation}\label{eq:short-exact-chain-sequence}
+0 \longrightarrow K' \xrightarrow{i} K \xrightarrow{p} K'' \longrightarrow 0,
+\end{equation}
+
+Ta muốn xây dựng một ánh xạ
+\[
+\partial_* : H_n(K'')=\dfrac{Z_nK''}{B_nK''} \longrightarrow H_{n-1}(K')=\dfrac{Z_{n-1}K'}{B_{n-1}K'},
+\]
+được gọi là \emph{đồng cấu nối} của dãy khớp ngắn ~\eqref{eq:short-exact-chain-sequence}.
+
+Một cách tự nhiên ta sẽ xây dựng ánh xạ từ $K_n'' \to K'_{n-1}$ theo sơ đồ sau
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\&\& 0 \&\& 0 \&\& 0 \\
+	\\
+	\cdots \&\& {K'_{n+1}} \&\& \begin{array}{c} K'_n\\z' \end{array} \&\& \begin{array}{c} K'_{n-1}\\y'\in i^{-1}(\partial(y)) \end{array} \&\& \cdots \\
+	\\
+	\cdots \&\& \begin{array}{c} K_{n+1}\\y\in p^{-1}(z'') \end{array} \&\& \begin{array}{c} K_n\\y\in p^{-1}(x) \end{array} \&\& \begin{array}{c} K_{n-1}\\\partial(y) \end{array} \&\& \cdots \\
+	\\
+	\cdots \&\& \begin{array}{c} K''_{n+1}\\z'' \end{array} \&\& \begin{array}{c} K''_n\\x \end{array} \&\& \begin{array}{c} K''_{n-1}\\\partial''\partial''(z'')=0 \end{array} \&\& \cdots \\
+	\\
+	\&\& 0 \&\& 0 \&\& 0
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow[from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial'}", from=3-3, to=3-5]
+	\arrow["i"{description}, from=3-3, to=5-3]
+	\arrow["{\partial'}", from=3-5, to=3-7]
+	\arrow["i"{description}, from=3-5, to=5-5]
+	\arrow["{\partial'}", from=3-7, to=3-9]
+	\arrow["i"{description}, from=3-7, to=5-7]
+	\arrow[from=5-1, to=5-3]
+	\arrow["\partial", from=5-3, to=5-5]
+	\arrow["p"{description}, from=5-3, to=7-3]
+	\arrow["\partial", color={rgb,255:red,214;green,92;blue,92}, from=5-5, to=5-7]
+	\arrow["p"{description}, from=5-5, to=7-5]
+	\arrow["{i^{-1}}"{description}, shift left=3, color={rgb,255:red,214;green,92;blue,92}, curve={height=24pt}, dashed, from=5-7, to=3-7]
+	\arrow["\partial", from=5-7, to=5-9]
+	\arrow["p"{description}, from=5-7, to=7-7]
+	\arrow["{i^{-1}}"{description}, curve={height=18pt}, dashed, from=5-9, to=3-9]
+	\arrow[from=7-1, to=7-3]
+	\arrow["{\partial''}", from=7-3, to=7-5]
+	\arrow[from=7-3, to=9-3]
+	\arrow["{p^{-1}}"{description}, shift left=3, color={rgb,255:red,214;green,92;blue,92}, curve={height=-18pt}, dashed, from=7-5, to=5-5]
+	\arrow["{\partial''}", from=7-5, to=7-7]
+	\arrow[from=7-5, to=9-5]
+	\arrow[from=7-7, to=7-9]
+	\arrow[from=7-7, to=9-7]
+\end{tikzcd}\]
+
+\textbf{Bước 1: Không gian trung gian.}
+
+Ta định nghĩa hai ánh xạ:
+\[
+H_{n-1}(K') \xleftarrow{\;\bar{\partial}\;} p^{-1}(Z_n(K'')) \xrightarrow{\;\bar{p}\;} H_n(K''),
+\]
+với:
+\begin{align*}
+\bar{p}(x) &= [p(x)]\\
+\bar{\partial}(y) &= [\,i^{-1}(\partial y)\,]
+\end{align*}
+
+Đầu tiên ta thấy $\bar{\partial}$ được định nghĩa tốt, 
+vì nếu $y\in p^{-1}(Z_nK'')$ thì $p(y)\in Z_nK''$. Khi đó
+\[0=\partial''(p(y))=p\partial(y) \iff \partial(y) \in \ker(p) =  \im(i) \iff \exists!~y'\in K'_{n-1}: \partial(y) = i(y')\text{(vì $i$ đơn cấu)}\]
+Đặt
+\[
+\bar{\partial}(y) := [y'] = [\,i^{-1}(\partial y)\,] \in H_{n-1}(K').
+\]
+
+Hơn nữa,
+\[
+\partial'(y') = i^{-1}(\partial^2 y) = 0,
+\]
+nên $y'$ là một chu trình trong $K'$, tức là $\bar{\partial}(x)$ được xác định tốt.
+
+\textbf{Bước 3: Tính chất của $\bar{p}$ và $\bar{\partial}$.}
+
+Rõ ràng, $\overline{p}$ là một toàn ánh, vì với mọi $[z''] \in H_nZ''$ thì $z'' \in Z_nK'' \subset K_n''$, do $p$ toàn ánh nên tồn tại $x \in K_n$ sao cho $z'' = p(x)$.
+
+Mặt khác, nếu $\overline{p}(x) = [0] \in H_nK''$ thì 
+\[p(x) = \partial''(p(y))=p\partial (y), \text{ với $y\in K_{n+1}$ nào đó}.\]
+
+Khi đó $x - \partial y \in \ker(p) = \im(i)$, nên tồn tại $y' \in K'_n$ sao cho $i(y') = x - \partial y$.
+
+Ta có
+\[i\partial'(y') = \partial i(y') = \partial (x-\partial y) = \partial x \Rightarrow [i^{-1}\partial x] = [\partial' y']=[0] \in H_{n-1}K'\]
+
+Suy ra $\bar{\partial}|_{\ker(\bar{p})} = 0$.
+
+\textbf{Bước 4: Định nghĩa ánh xạ trên lớp đồng điều.}
+
+Do $\bar{p}$ toàn ánh và $\bar{\partial}$ triệt tiêu trên $\ker(\bar{p})$, nên có thể đi qua thương để thu được một ánh xạ duy nhất:
+\[
+\partial_* := \bar{\partial} \circ \bar{p}^{-1} : H_n(K'') \longrightarrow H_{n-1}(K').
+\]
+Cụ thể, với một lớp $[p(x)] \in H_n(K'')$, ta có:
+\[
+\boxed{\;\partial_*[p(x)] = [\,i^{-1}(\partial x)\,].\;}
+\]
+
+\medskip
+\noindent
+\textbf{Kết luận.}  
+Ánh xạ $\partial_*$ như trên được gọi là \emph{đồng cấu liên kết của dãy ngắn chính xác}~\eqref{eq:short-exact-chain-sequence}.  
+\end{definition}
+
+\begin{proposition}[Tính chất của $\partial_*$]
+    \begin{enumerate}
+        \item \textbf{Tính tự nhiên}:
+        
+        Nếu \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	0 \& {K'} \& K \& {K''} \& 0 \\
+	\\
+	0 \& {L'} \& L \& {L''} \& 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["i", from=1-2, to=1-3]
+	\arrow["{f'}"{description}, from=1-2, to=3-2]
+	\arrow["p", from=1-3, to=1-4]
+	\arrow["f"{description}, from=1-3, to=3-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f''}"{description}, from=1-4, to=3-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow["j", from=3-2, to=3-3]
+	\arrow["q", from=3-3, to=3-4]
+	\arrow[from=3-4, to=3-5]
+\end{tikzcd}\]
+là một biểu đồ giao hoán các ánh xạ dây chuyền với các hàng là khớp thì ta thu được biểu đồ giao hoán sau
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{H_nK''} \&\& {H_{n-1}K'} \\
+	\\
+	{H_nL''} \&\& {H_{n-1}L'}
+	\arrow["{\partial_*}"{description}, from=1-1, to=1-3]
+	\arrow["{f''_*}"{description}, from=1-1, to=3-1]
+	\arrow["{f'_*}"{description}, from=1-3, to=3-3]
+	\arrow["{\partial_*}"{description}, from=3-1, to=3-3]
+\end{tikzcd}\]
+
+    \item \textbf{Tính khớp}.
+
+    Dãy khớp ngắn các phức dây chuyền \ref{eq:short-exact-chain-sequence} cảm sinh dãy khớp dài các đồng điều
+\[
+\cdots \longrightarrow H_n(K') \xrightarrow{i_*} H_n(K) \xrightarrow{p_*} H_n(K'')
+\xrightarrow{\partial_*} H_{n-1}(K') \xrightarrow{i_*} H_{n-1}(K) \longrightarrow \cdots
+\]
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item Ta cần chỉ ra $f'_* \circ \partial_* = \partial_* \circ f''_*$.
+
+        Thật vậy, với mọi $[p(x)] \in H_nK''$ ta có
+        \begin{align*}
+            f'_* \circ \partial_*[px]
+            = f'_*[i^{-1}(\partial x)]
+            = [f'i^{-1}\partial x]
+            = [j^{-1}f\partial x]
+            = [j^{-1}\partial fx]
+            = \partial_*[q fx]
+            = \partial_*[f''px]
+            = \partial_* f_*''[px].
+        \end{align*}
+
+        \item Do $H_nK'' \xlongrightarrow{i_*} H_nK \xlongrightarrow{p_*} H_nK''$ là khớp, nên ta chỉ cần chỉ ra  $\ker(\partial_*) = \im(p_*)$ và $\ker(i_*) = \im(\partial_*)$.
+
+        \begin{enumerate}
+            \item \textbf{Khớp tại $H_nK''$}.
+
+            Đầu tiên, với mọi $[y] \in H_nK = \dfrac{\ker(\partial_n)}{\im(\partial_{n+1})}$ ta có
+            \[\partial_* p_*[y]=\partial_*[p(y)] = [i^{-1}\underbrace{\partial y}_{0}]=[0] \Rightarrow \im(p_*) \subset \ker(\partial_*).\]
+
+            Ngược lại, giả sử $[px] \in \ker(\partial_*)$, khi đó 
+            \[H_{n-1}K' \ni [0]=\partial_*[px]=[i^{-1}\partial x] \Rightarrow i^{-1}\partial x = \partial' x'\in B_{n-1}K'.\]
+            Dẫn đến $\partial (x - ix') = \partial x- \partial i x'=\partial x - i\partial' x' = 0$ và $[px]=p_*[x-ix'] \in \im(p_*)$.
+
+            \item \textbf{Khớp tại $H_{n-1}K'$}.
+
+            Đầu tiên, với mọi $[px] \in H_nK''$ ta có
+            \[i_*\partial_*[px]=i_*[i^{-1}\partial x]=[\partial x]=[0] \Rightarrow \im(\partial) \subset \ker(i_*).\]
+
+            Ngược lại, giả sử $[y'] \in H_{n-1}K'$ và $H_{n-1}K \ni [0]=i_*[y']=[iy']$. Khi đó 
+            \[iy' = \partial y,~y\in K_n \Rightarrow \partial''py = p\partial y=piy'=0 \Rightarrow [y']=[i^{-1}\partial y]=\partial_*[py] \in \im(\partial_*).\]
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
+\begin{corollary}
+    Nếu
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	0 \& {K'} \& K \& {K''} \& 0 \\
+	\\
+	0 \& {L'} \& L \& {L''} \& 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["i", from=1-2, to=1-3]
+	\arrow["{f'}"{description}, from=1-2, to=3-2]
+	\arrow["p", from=1-3, to=1-4]
+	\arrow["f"{description}, from=1-3, to=3-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f''}"{description}, from=1-4, to=3-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow["j", from=3-2, to=3-3]
+	\arrow["q", from=3-3, to=3-4]
+	\arrow[from=3-4, to=3-5]
+    \end{tikzcd}\]
+    là một biểu đồ giao hoán các ánh xạ dây chuyền với các hàng là khớp và hai trong số 3 cột là đẳng cấu thì cột còn lại cũng đẳng cấu.
+\end{corollary}
+\begin{proof}
+    Hai dãy khớp ở hai hàng cảm sinh các dãy khớp dài 
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \& {H_{n+1}K''} \& {H_nK'} \& {H_nK} \& {H_nK''} \& {H_{n-1}K'} \& {H_{n-1}K} \& \cdots \\
+	\\
+	\cdots \& {H_{n+1}L''} \& {H_nL'} \& {H_nL} \& {H_nL''} \& {H_{n-1}L'} \& {H_{n-1}L} \& \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f_{n+1}''}"{description}, from=1-2, to=3-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{f_n'}"{description}, from=1-3, to=3-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f_n}"{description}, from=1-4, to=3-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["{f_n''}"{description}, from=1-5, to=3-5]
+	\arrow[from=1-6, to=1-7]
+	\arrow["{f_{n-1}'}"{description}, from=1-6, to=3-6]
+	\arrow[from=1-7, to=1-8]
+	\arrow["{f_{n-1}}"{description}, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=3-5, to=3-6]
+	\arrow[from=3-6, to=3-7]
+	\arrow[from=3-7, to=3-8]
+    \end{tikzcd}\]
+    Nếu $f',f''$ là các đẳng cấu thì theo bổ đề five lemma ta cũng thu được $f$ là đẳng cấu. Tương tự cho các trường hợp còn lại.
+\end{proof}
+
+\begin{definition}
+    Dãy khớp các ánh xạ dây chuyền 
+    \[0 \longrightarrow K' \xlongrightarrow{i} K \xlongrightarrow{p} K'' \longrightarrow 0\]
+    được gọi là \textit{trực tiếp (direct)} nếu nó chẻ ra tại mọi chiều.
+
+    Điều này có nghĩa $i$ có nghịch đảo trái và $p$ có nghịch đảo phải tại mỗi chiều $n$.
+
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\&\& 0 \&\& 0 \&\& 0 \\
+	\\
+	\cdots \&\& {K'_{n+1}} \&\& {K'_n} \&\& \textcolor{rgb,255:red,214;green,92;blue,92}{{K'_{n-1}}} \&\& \cdots \\
+	\\
+	\cdots \&\& {K_{n+1}} \&\& \textcolor{rgb,255:red,214;green,92;blue,92}{{K_n}} \&\& {K_{n-1}} \&\& \cdots \\
+	\\
+	\cdots \&\& {K''_{n+1}} \&\& \textcolor{rgb,255:red,214;green,92;blue,92}{{K''_n}} \&\& {K''_{n-1}} \&\& \cdots \\
+	\\
+	\&\& 0 \&\& 0 \&\& 0
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow[from=1-7, to=3-7]
+	\arrow["{\partial'}"{description}, from=3-1, to=3-3]
+	\arrow["{\partial'}"{description}, from=3-3, to=3-5]
+	\arrow["{i_{n+1}}", shift left=3, from=3-3, to=5-3]
+	\arrow["{\partial'}"{description}, from=3-5, to=3-7]
+	\arrow["{i_n}", shift left=3, from=3-5, to=5-5]
+	\arrow["{\partial'}"{description}, from=3-7, to=3-9]
+	\arrow["{i_{n-1}}", shift left=3, from=3-7, to=5-7]
+	\arrow["\partial"{description}, from=5-1, to=5-3]
+	\arrow["{j_{n+1}}", shift left=3, dashed, from=5-3, to=3-3]
+	\arrow["\partial"{description}, from=5-3, to=5-5]
+	\arrow["{p_{n+1}}", shift left=3, from=5-3, to=7-3]
+	\arrow["{j_{n}}", shift left=3, dashed, from=5-5, to=3-5]
+	\arrow["\partial"{description}, color={rgb,255:red,214;green,92;blue,92}, from=5-5, to=5-7]
+	\arrow["{p_n}", shift left=3, from=5-5, to=7-5]
+	\arrow["{j_{n-1}}", shift left=3, color={rgb,255:red,214;green,92;blue,92}, dashed, from=5-7, to=3-7]
+	\arrow["\partial"{description}, from=5-7, to=5-9]
+	\arrow["{p_{n-1}}", shift left=3, from=5-7, to=7-7]
+	\arrow["{\partial''}"{description}, from=7-1, to=7-3]
+	\arrow["{q_{n+1}}", shift left=3, dashed, from=7-3, to=5-3]
+	\arrow["{\partial''}"{description}, from=7-3, to=7-5]
+	\arrow[from=7-3, to=9-3]
+	\arrow["{q_{n}}", shift left=3, color={rgb,255:red,214;green,92;blue,92}, dashed, from=7-5, to=5-5]
+	\arrow["{\partial''}"{description}, from=7-5, to=7-7]
+	\arrow[from=7-5, to=9-5]
+	\arrow["{q_{n-1}}", shift left=3, dashed, from=7-7, to=5-7]
+	\arrow["{\partial''}"{description}, from=7-7, to=7-9]
+	\arrow[from=7-7, to=9-7]
+\end{tikzcd}\]
+    Rõ hơn thì
+    \begin{itemize}
+        \item $j_n\circ i_n = \Id_{K'_n}$.
+
+        \item $p_n\circ q_n = \Id_{K''_n}$.
+
+        \item $i_n \circ j_n + q_n \circ p_n = \Id_{K_n}$.
+    \end{itemize}
+\end{definition}
+\begin{proposition}
+    Dãy đồng cấu $d_n:= j_{n-1} \circ \partial \circ q_n: K_n'' \to K'_{n-1}=(K'[1])_n$ là một ánh xạ dây chuyền giữa hai phức $d: K'' \to K'[1]$. Đồng cấu cảm sinh $d_*: H_nK'' \to H_n(K'[1])=H_{n-1}K'$ chính là đồng cấu nối $\partial_*$.
+\end{proposition}
+\begin{proof}
+    Trước tiên ta chỉ ra $d$ là một ánh xạ dây chuyền, tức chỉ ra $d\circ \partial'' = -\partial'\circ d$.
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{K''_n} \&\& {K''_{n-1}} \\
+	\\
+	{K'_n[1]=K'_{n-1}} \&\& {K'_{n-1}[1]=K'_{n-2}}
+	\arrow["{\partial''_n}", from=1-1, to=1-3]
+	\arrow["d_n"{description}, from=1-1, to=3-1]
+	\arrow["d_{n-1}"{description}, from=1-3, to=3-3]
+	\arrow["{-\partial_n'}", from=3-1, to=3-3]
+    \end{tikzcd}\]
+
+    % Ta có
+    % \begin{align*}
+    %     d\circ \partial'' +\partial'\circ d
+    %     &= (j\partial q) \partial'' + \partial'(j\partial q)\\
+    %     &= (\partial'jq)\partial'' + \partial'(j q \partial'')
+    % \end{align*}
+\end{proof}
+\begin{corollary}
+    Nếu $f: K \to L$ là một ánh xạ dây chuyền thì đồng cấu nối của dãy khớp dài cảm sinh từ dãy khớp ngắn 
+    \[0 \to L \xlongrightarrow{i} Cf \xlongrightarrow{\kappa} K[-1] \to 0\]
+    chính bằng $Hf: HK \to HL$.
+\end{corollary}
+\begin{corollary}
+    Nếu $f:K \to L$ là một ánh xạ  dây chuyền thì $Hf: HK \to HL$ là một đẳng cấu khi và chỉ khi nón ánh xạ $Cf$ là acyclic, tức $H(Cf)=0$.
+\end{corollary}
+
+\begin{problem}
+Trình bày về đồng luân dây chuyền: định nghĩa; đồng luân dây chuyền là một quan hệ tương đương; quan hệ đồng luân tương thích với phép hợp thành các ánh xạ dây chuyền; hai ánh xạ dây chuyền đồng luân cảm sinh cùng một đồng cấu trên các lớp đồng điều; hai dây chuyền đồng luân cảm sinh các lớp đồng điều đẳng cấu với nhau (khẳng định ngược lại có đúng không). Chứng minh rằng một ánh xạ dây chuyền giữa các phức dây chuyền tự do cảm sinh một đẳng cấu trên đồng điều thì là một tương đương dây chuyền (Mệnh đề~4.3, trang~26). (Xem Ch.~II, Mục~3+4.)
+\end{problem}
+
+\begin{remark}
+    Cho $f,g: K \to L$ là các ánh xạ dây chuyền. Ta thu được các đồng cấu cảm sinh
+    \[f_*=H_nf,~g_*=H_ng: H_nK \to H_nL\]
+    \textbf{Khi nào thì $H_nf=H_ng$?}
+
+    Nhắc lại, với $K, L$ là các phức dây chuyền thì $\{\Hom(K,L)_n = \prod_{v \in \Z}\Hom(K_v, L_{n+v})\}_{n \in \Z}$ cùng với vi phân $\partial_n(f):=\{\partial^L_{n+v}f_v - (-1)^nf_{v-1}\partial^K_{v}\}_{v\in \Z}$ (với $f = \{f_v: K_v \to L_{n+v}\}_{v \in \Z} \in \Hom(K,L)_n$) là một phức dây chuyền.
+
+    Vì $\Hom(K,L)_0=\prod_{v \in \Z}\Hom(K_v,L_v)$ nên
+    mỗi ánh xạ dây chuyền $f: K \to L$ đều thuộc $\Hom(K,L)_0$. mỗi ánh xạ dây chuyền đều là một $0-$chu trình của phức $\Hom(K,L)$ vì
+    \[f = \{f_v\}_{v\in \Z} \in \ker(\partial_0) \text{ vì } \partial_0(f) =\{\partial^L_vf_v - f_{v-1}\partial^K_v\}_{v \in \Z}=0.\]
+
+    Hơn nữa, với $s = \{s_v: K_v \to L_{v+1}\}_{v\in \Z} \in \Hom(K,L)_1$ thì 
+    \[\partial_1(s) = \{\partial_{v+1}^Ls_v + s_{v-1}\partial_v^K\}_{v\in V}.\]
+    
+    Suy ra 
+    \begin{align*}
+        &[f] = [g] \in H_0(\Hom(K,L))\iff f- g \in \im(\partial_1) \subset \ker(\partial_0) \\
+        & \iff \exists~s = \{s_v: K_v \to L_{v+1}\}_{v\in \Z} \in \Hom(K,L)_1:
+        f-g = \partial_1(s) = \{\partial_{v+1}^Ls_v + s_{v-1}\partial_v^K\}_{v\in V}\\
+        & \iff \exists s: K \to L[+1],~f-g=\partial s + s\partial.
+        \end{align*}
+    \begin{remark}
+        Nhắc lại với $L = \{L_n, \partial_n^K\}_{n \in \Z}$ là một phức thì $K=L[i]:=\{K_{n+i},~(-1)^i\partial_n^K\}_{n \in \Z}$ cũng là một phức.
+    \end{remark}
+\end{remark}
+\begin{definition}[Đồng luân dây chuyền]
+    Cho $f,g:K\to L$ là các ánh xạ dây chuyền. Ta nói \textit{$f$ đồng luân dây chuyền với $g$}, kí hiệu $f \simeq g$ nếu tồn tại một dãy các đồng cấu $s=\{s_n: K_n \to L_{n+1}\}_{n \in \Z}$ sao cho 
+    \[f_n - g_n = \partial_{n+1}^Ls_n + s_{n-1}\partial_n^K\quad \forall n \in \Z.\]
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \&\& {K_{n+1}} \&\& {K_n} \&\& {K_{n-1}} \&\& \cdots \\
+	\\
+	\cdots \&\& {L_{n+1}} \&\& {L_n} \&\& {L_{n-1}} \&\& \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow["{\partial^K_{n+1}}", from=1-3, to=1-5]
+	\arrow["{f_{n+1}}"', shift right=3, from=1-3, to=3-3]
+	\arrow["{g_{n+1}}", shift left=3, from=1-3, to=3-3]
+	\arrow["{\partial^K_n}", color={rgb,255:red,214;green,92;blue,92}, from=1-5, to=1-7]
+	\arrow["{s_{n}}"{description}, color={rgb,255:red,59;green,119;blue,247}, dashed, from=1-5, to=3-3]
+	\arrow["{g_n}", shift left=3, from=1-5, to=3-5]
+	\arrow["{f_n}"', shift right=3, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{s_{n-1}}"{description}, color={rgb,255:red,214;green,92;blue,92}, dashed, from=1-7, to=3-5]
+	\arrow["{f_{n-1}}"', shift right=3, from=1-7, to=3-7]
+	\arrow["{g_{n-1}}", shift left=3, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial^L_{n+1}}"', color={rgb,255:red,59;green,119;blue,247}, from=3-3, to=3-5]
+	\arrow["{\partial^L_n}"', from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+\end{definition}
+\begin{proposition}
+    Quan hệ đồng luân dây chuyền là một quan hệ tương đương.
+\end{proposition}
+\begin{proof}
+    Lấy bất kỳ $f,g,h: K \to L$ là các ánh xạ dây chuyền.
+    \begin{enumerate}
+        \item (Tính phản xạ).   
+        $f \simeq f$ vì $\exists~s=0:K \to L[+1]$ sao cho $f-f = 0 = \partial s + s \partial$.
+
+        \item (Tính đối xứng).
+        Nếu $s: f \simeq g$ thì $f-g=\partial s + s\partial$. Do đó $-s:g \simeq f$ vì 
+        $g - f = \partial (-s) + (-s)\partial$.
+
+        \item (Tính bắc cầu).
+        Giả sử $s: f\simeq g,~t:g\simeq h$. Khi đó
+        \[f-g = \partial s + s\partial,\quad g-h=\partial t + t\partial\]
+        Dẫn đến $s+t: f\simeq h$ vì $f-h=\partial(s+t) + (s+t)\partial$.
+    \end{enumerate}
+\end{proof}
+\begin{proposition}
+    Quan hệ đồng luân dây chuyền tương thích với phép hợp thành các ánh xạ dây chuyền, nghĩa là nếu $f\simeq g: K \to L$ và $f'\simeq g': L \to M$ là các ánh xạ dây chuyền tương đương đồng luân. Khi đó
+    \[f'f \simeq g'g: K \to M.\]
+\end{proposition}
+\begin{proof}
+    Giả sử $s: f \simeq g$ và $s': f' \simeq g'$. Khi đó 
+    \[f-g = \partial s + s\partial,\quad f'-g' = \partial s' + s'\partial.\]
+
+    Ta có
+    \[f's: f'f\simeq f'g \text{ vì } f'f-f'g = f'(f-g)=f'(\partial s + s\partial) = \partial f's+ (f's)\partial\]
+    và 
+    \[s'g: f'g\simeq g'g \text{ vì } f'g-g'g=(f'-g')g=(\partial s' + s'\partial)g = \partial(s'g) + s'\partial g= \partial(s'g) + (s'g)\partial.\]
+    Theo tính chất bắc cầu của quan hệ tương đương đồng luân thì $f'f\simeq f'g\simeq g'g$.
+\end{proof}
+
+\begin{proposition}
+    Với mỗi $f: K \to L$ là một ánh xạ dây chuyền. Kí hiệu 
+    \[[f]:=\{g: K \to L \mid g\simeq f\}\] được gọi là lớp tương đương đồng luân của $f$.  
+\end{proposition}
+\begin{remark}
+    Theo \textbf{Mệnh đề 1.38} ta có luật hợp thành của các lớp tương đương đồng luân \[[f]\circ [g]:= [f\circ g].\]
+
+    Từ đó ta định nghĩa được phạm trù $\mathcal{H\partial G}$ với các vật là các phức như trong $\mathcal{\partial AG}$ và các cấu xạ chính là các lớp đồng luân $[f]$. Hơn nữa, ta có hàm tử
+    \[\pi: \mathcal{\partial AG} \to \mathcal{H\partial G},~f \mapsto [f],\quad K \mapsto K\]
+\end{remark}
+\begin{definition}
+    Ánh xạ dây chuyền $f: K \to L$ với lớp $[f]$ là một lớp tương đương trong $\mathcal{H\partial G}$ được gọi là \textit{tương đương đồng luân}.
+
+    Hai phức $K,~L$ được gọi là \textit{tương đương đồng luân}, kí hiệu $K \simeq L$, nếu tồn tại $g: L \to K$ sao cho $gf\simeq \Id_K$ và $fg \simeq \Id_L$. Khi đó $g$ được gọi là \textit{đồng luân nghịch đảo của $f$}.
+\end{definition}
+\begin{proposition}
+    Hai ánh xạ dây chuyền đồng luân cảm sinh cùng một đồng cấu trên các lớp đồng điều, tức là nếu $f\simeq g: K \to L$ thì $f_*=g_*:H_nK \to H_nL$.
+\end{proposition}
+\begin{proof}
+    Với mọi $[z] \in H_nK$ (tức $z \in K_n$ và $\partial_n^K(z)=0$). Khi đó
+    \begin{align*}
+        (f_*-g_*)[z]
+        &=f_*[z]-g_*[z]\\
+        &=[f_n(z)]-[g_n(z)]=[(f_n-g_n)(z)] \\
+        &= [(\partial_{n+1}^L s_n-s_{n-1}\partial^K_n)(z)]\\
+        &= [\partial_{n+1}^L (s_n(z))] = [0] \in H_nL.
+    \end{align*}
+    Do đó $f_* = g_*$.
+\end{proof}
+
+\begin{proposition}
+    Nếu $f: K \simeq L$ thì $f_*: H_nK \cong H_nL$.
+\end{proposition}
+\begin{proof}
+    Vì $f: K \simeq L$ nên tồn tại ánh xạ dây chuyền $g: L \to K$ sao cho
+    \[gf \simeq \Id_K,\quad fg \simeq \Id_L.\]
+    Suy ra 
+    \[g_*~f_* = (gf)_* = (\Id_K)_*=\Id_{H_nK},\quad f_*~g_* = (fg)_* = (\Id_L)_*=\Id_{H_nL}\]
+    Do đó $f_*,~g_*$ là các đẳng cấu và là nghịch đảo của nhau.
+\end{proof}
+\begin{corollary}
+    Nếu $K \simeq 0$ tức $\Id_K \simeq 0$ thì $HK \cong 0$.
+\end{corollary}
+\begin{proposition}
+    Cho $K$ là một phức acyclic (tức $HK=0$). Khi đó $K \simeq 0$ nếu và chỉ nêú $Z_nK$ là một hạng tử trực tiếp của $K_n$ với mọi $n$.
+\end{proposition}
+\begin{proof}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \&\& {K_{n+1}} \&\& {K_n} \&\& {K_{n-1}} \&\& \cdots \\
+	\\
+	\cdots \&\& {K_{n+1}} \&\& {K_n} \&\& {K_{n-1}} \&\& \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow["{\partial_{n+1}}", from=1-3, to=1-5]
+	\arrow["\Id"', shift right=3, from=1-3, to=3-3]
+	\arrow["0", shift left=3, from=1-3, to=3-3]
+	\arrow["{\partial_n}", color={rgb,255:red,214;green,92;blue,92}, from=1-5, to=1-7]
+	\arrow["{s_{n}}"{description}, color={rgb,255:red,59;green,119;blue,247}, dashed, from=1-5, to=3-3]
+	\arrow["0", shift left=3, from=1-5, to=3-5]
+	\arrow["\Id"', shift right=3, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{s_{n-1}}"{description}, color={rgb,255:red,214;green,92;blue,92}, dashed, from=1-7, to=3-5]
+	\arrow["\Id"', shift right=3, from=1-7, to=3-7]
+	\arrow["0", shift left=3, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial_{n+1}}"', color={rgb,255:red,59;green,119;blue,247}, from=3-3, to=3-5]
+	\arrow["{\partial_n}"', from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+    \begin{itemize}
+        \item Giả sử $s:\Id_K \simeq 0$, tức $\partial_{n+1} s_n + s_{n-1}\partial_n = \Id_{K_n}$. Vì $\partial_n|_{B_{n}K} = 0$ nên \[\partial_{n+1}s_n|_{B_{n}K} = \Id_{B_{n}K}~\forall n \in \Z\]
+        Khi đó dãy khớp ngắn
+        \[0 \longrightarrow Z_{n+1} \xhookrightarrow{}K_{n+1} \xlongrightarrow{\partial_{n+1}} B_{n}K \longrightarrow 0\]
+        là chẻ ra với mọi $n$, vì $\partial_{n+1}$ có nghịch đảo phải. Do đó
+        \[K_{n+1} \cong Z_{n+1}K \oplus B_nK.\]
+
+        % \item Ngược lại, giả sử với mọi $n$ thì $Z_nK$ là một hạng tử trực tiếp của $K_n$. Khi đó kết hợp với
+        % \[K_n/Z_nK = K_n/\ker(\partial_n)\cong \im(\partial_n) = B_{n-1}K\]
+        % cho ta \[K_n \cong Z_nK \oplus B_{n-1}K\]
+        % nói cách khác dãy khớp sau là chẻ ra
+        % \[0\longrightarrow Z_nK \xlongrightarrow{i_n} K_n \xhookrightarrow{\partial_n} B_{n-1}K \longrightarrow 0\]
+        % Vì vậy, tồn tại $j_n: K_n \to Z_nK$ và $q_n: B_{n-1} \to K_n$ sao cho 
+        % \[j_n \circ i_n = \Id_{Z_nK},\quad \partial_n \circ q_n = \Id_{B_{n-1}K}.\]
+        % Vì $H_nK = 0$ nên $Z_nK = B_nK$ với mọi $n$, do đó ta định nghĩa đồng cấu
+        % \[s_n:=q_{n+1}j_n: K_n\xlongrightarrow{j_n} Z_nK = B_nK \xlongrightarrow{q_{n+1}}K_{n+1}\]
+        % và thu được 
+        % \[j_n \circ i_n = \Id_{Z_nK} = \Id_{B_nK} = \partial_{n+1}\circ q_{n+1}.\]
+        % Ta sẽ chỉ ra $s:\Id_K \simeq 0$ bằng cách chứng minh $\partial_{n+1} s_n + s_{n-1}\partial_n = \Id_{K_n}$. Thật vậy, ta có
+        % \begin{align*}
+        %     (\partial_{n+1} s_n + s_{n-1}\partial_n)|_{Z_nK}
+        %     &= \underbrace{\partial_{n+1} q_{n+1}}_{\Id_{B_nK}}~j_n + q_{n}j_{n-1}\partial_n\\
+        %     &= j_n + q_n\partial_n\\
+        %     &= \Id_{K_n}.
+        % \end{align*}
+        % Ta có
+        \item Ngược lại, giả sử tồn tại $t_n: B_{n-1}K \to K_n$ sao cho $\partial_n t_n = \Id_{B_{n-1}K}$, tức 
+        \[K_n=Z_nK \oplus t_n(B_{n-1}K) = B_nK \oplus t_n(B_{n-1}K)\]
+        Định nghĩa 
+        \[s_n: K_n = B_nK \oplus t_n(B_{n-1}K) \to K_{n+1}=B_{n+1}K \oplus t_{n+1}(B_{n}K)\]
+        bởi \[s_n(B_nK)=t_{n+1}(B_nK),\quad s_n(t_n(B_{n-1}K)) = 0.\]
+        Khi đó
+        \[(\partial_{n+1} s_n + s_{n-1}\partial_n)(B_nK)= \partial_{n+1} s_n(B_nK) = \partial_{n+1}t_{n+1}(B_nK) = \Id_{K_n}(B_nK)=B_nK.\]
+        \[(\partial_{n+1} s_n + s_{n-1}\partial_n)(t_n(B_{n-1}K))= s_{n-1}\partial_n(t_n(B_{n-1}K))=s_{n-1}(B_{n-1}K)=t_n(B_{n-1}K).\]
+        Vì vậy $\partial_{n+1} s_n + s_{n-1}\partial_n=\Id_{K_n}$, tức $\Id_K \simeq 0$.
+    \end{itemize}
+\end{proof}
+\begin{remark}
+    Ngược lại, xét phức $K$ với $K_n=\Z/4$, $\partial_n(x)=2x$. Khi đó $K \not\simeq 0$ nhưng $H_nK=0$.
+\end{remark}
+\begin{proposition}
+    Nếu nón ánh xạ $Cf$ của ánh xạ dây chuyền $f:K \to L$ là co rút được, tức $Cf\simeq 0$ thì $f$ là một tương đương đồng luân.
+\end{proposition}
+\begin{proof}
+    Ta sẽ chỉ ra $f$ có nghịch đảo trái và nghịch đảo phải.
+
+    Vì $Cf \simeq 0$ nên tồn tại dãy đồng cấu $s_n:(Cf)_n \to (Cf)_{n+1}$ sao cho 
+    \[\partial_{n+1}^{Cf}s_n + s_{n-1}\partial^{Cf}_n = \Id_{(Cf)_n}.\]
+    Với mỗi $n$ ta có dãy khớp chẻ ra
+    \[0 \to L_n \xlongrightarrow{i_n} (Cf)_n= L_n \oplus K_{n-1}\xlongrightarrow{\kappa_n} K_{n-1}\to 0\]
+    \begin{enumerate}
+        \item \textbf{Ta chứng minh $i \simeq 0$.}
+
+        Xét dãy đồng cấu $t_n = s_n\circ i_n: L_n \xlongrightarrow{i_n} (Cf)_n \xlongrightarrow{s_n} (Cf)_{n+1}$, ta có
+        \begin{align*}
+            \partial_{n+1}^{Cf}t_n + t_{n-1}\partial^{L}_n
+            &= \partial_{n+1}^{Cf}s_ni_n + s_{n-1}i_{n-1}\partial^L_n\\
+            &= \partial_{n+1}^{Cf}s_ni_n + s_{n-1}\partial^{Cf}_ni_n\\
+            &= (\partial_{n+1}^{Cf}s_n + s_{n-1}\partial^{Cf}_n)i_n\\
+            &= \Id_{(Cf)_n}i_n = i_n.
+        \end{align*}
+
+        \item \textbf{Ta chứng minh $\kappa \simeq 0$.}
+
+        Xét dãy đồng cấu $l_n = \kappa_{n+1} \circ s_n: (Cf)_n \xlongrightarrow{s_n} (Cf)_{n+1} \xlongrightarrow{\kappa_{n+1}} K_n$, ta có
+        \begin{align*}
+            \partial_{n+1}^{K[-1]}l_n + l_{n-1}\partial^{Cf}_n
+            &= \partial_{n+1}^{K[-1]}\kappa_{n+1}s_n + \kappa_{n}s_{n-1}\partial^{Cf}_n\\
+            &= \kappa_n\partial^{Cf}_{n+1}s_n + \kappa_{n}s_{n-1}\partial^{Cf}_n\\
+            &= \kappa_n(\partial^{Cf}_{n+1}s_n + s_{n-1}\partial^{Cf}_n)\\
+            &= \kappa_n\Id_{(Cf)_n}=\kappa_n.
+        \end{align*}
+
+        \item \textbf{Chứng minh $f$ có đồng luân nghịch đảo phải}.
+
+        Với mỗi $t_n:L_n \to L_{n+1} \oplus K_n$, ta viết 
+        \[t_n(y) = (\gamma_n(y), g_n(y)),\text{ với } \gamma_n: L_n \to L_{n+1},~g_n:L_n\to K_{n}.\]
+        Khi đó, với mọi $y \in L_n$ ta có
+        \begin{align*}
+            (y,0)=i(y) 
+            &= (\partial^{Cf}t + t\partial^{L})(y)\\
+            &= \partial^{Cf}(\gamma(y), g(y)) + (\gamma\partial^{L}(y), g\partial^{L}(y))\\
+            &= (\partial^L\gamma(y)+fg(y),~-\partial^Kg(y)) + (\gamma\partial^{L}(y), g\partial^{L}(y))\\
+            &= (\partial^L\gamma(y) + fg(y)+ \gamma\partial^{L}(y), -\partial^Kg(y) + g\partial^{L}(y))
+        \end{align*}
+        Do đó
+        \[\partial^Kg = g\partial^{L},\quad \partial^L\gamma + \gamma\partial^{L} = \Id_{L} - fg.\]
+        Dẫn đến $g$ là một ánh xạ dây chuyền và $fg \simeq \Id_L$.
+
+        \item \textbf{Chứng minh $f$ có đồng luân nghịch đảo trái}.
+
+        Với mỗi $l_n: (Cf)_n \to  K_{n}$, đặt $h:L_n \to K_n,~\eta: K_{n-1} \to K_n$
+        \[l(y,x)=l(y,0) + l(0,x) := h(y) + \eta(x)\]
+        Khi đó
+        \begin{align*}
+            x = \kappa(y,x)
+            &= (\partial^{K[-1]}l + l\partial^{Cf})(y,x)\\
+            &= \partial^{K[-1]}l(y,x) + l\partial^{Cf}(y,x)\\
+            &= \partial^{K[-1]}(hy+\eta x) + l(\partial^L(y)+fx,-\partial^Kx)\\
+            &= -\partial^{K}(hy+\eta x) + h(\partial^L(y)+fx) + \eta(-\partial^Kx)\\
+            &= (-\partial^Kh+h\partial^L)(y) +(-\partial^K\eta +hf-\eta \partial^K)(x).
+        \end{align*}
+        Do đó
+        \[\partial^Kh = h\partial^L,\quad \partial^K\eta + \eta \partial^K = hf-\Id_{K}\]
+        tức $h$ là một ánh xạ dây chuyền và $hf\simeq \Id_K$.
+    \end{enumerate}
+\end{proof}
+\begin{definition}
+    Một phức dây chuyền $K$ được gọi là \textit{tự do} nếu $K_n$ là các \textit{nhóm abel tự do} với mọi $n \in \Z$.
+\end{definition}
+\begin{proposition}
+    Nếu $F$ là một nhóm abel tự do thì mọi dãy khớp ngắn 
+    \[0 \to A' \to A \xlongrightarrow{\alpha} F \to 0\] đều chẻ ra (tức $A \cong A' \oplus F$).
+\end{proposition}
+\begin{proof}
+    Giả sử $S$ là một cơ sở của $F$, chọn $\{a_s \in A\}_{s\in S}$ sao cho $\alpha(a_s)=s~\forall s\in S$. Theo tính phổ dụng của module tự do, tồn tại đồng cấu $\beta: F \to A,~s \mapsto a_s$. Khi đó $\alpha\beta(s)=\alpha(a_s)=s$, tức $\alpha\beta = \Id_F$. Vì vậy $\alpha$ có nghịch đảo phải và do đó dãy khớp trên là chẻ ra.
+\end{proof}
+\begin{proposition}
+    Cho $K$ là một phức tự do. Khi đó $Z_nK$ là một hạng tử trực tiếp của $K_n$ với mọi $n$.
+\end{proposition}
+\begin{proof}
+    Với mỗi $n$ ta có dãy khớp
+    \[0 \to Z_nK \to Z_n \to B_{n-1}K\to 0\]
+    Do $B_{n-1}K \leq K_{n-1}$ là một nhóm tự do vì nó là nhóm con của nhóm tự do $K_{n-1}$. Vì thế theo \textbf{Mệnh đề 1.51} ta thu được dãy khớp trên là chẻ ra, dẫn đến $K_n \cong Z_nK \oplus B_{n-1}K$.
+\end{proof}
+\begin{proposition}
+    Một ánh xạ dây chuyền giữa các phức dây chuyền tự do cảm sinh một đẳng cấu trên đồng điều thì là một tương đương đồng luân.
+\end{proposition}
+\begin{proof}
+    Giả sử $f:K\to L$ là một ánh xạ dây chuyền giữa các phức tự do thoả mãn 
+    \[f_*: HK \cong HL\] 
+    ta cần chỉ ra $f$ là một tương đương đồng luân.
+
+    Theo \textbf{Mệnh đề 1.49} ta chỉ cần chỉ ra $Cf \simeq 0$. Lại theo \textbf{Mệnh đề 1.47} thì $Cf \simeq 0$ khi và chỉ khi $Z_nK$ là một hạng tử trực tiếp của $K_n$ với mọi $n$ và $Cf$ là một phức acyclic, tức $H_n(Cf)=0$. Theo \textbf{Hệ quả 1.34} ta có điều phải chứng minh.
+\end{proof}
+
+
+\begin{problem}
+Đơn hình tiêu chuẩn, các mặt của đơn hình tiêu chuẩn, ánh xạ tuyến tính từ một đơn hình tiêu chuẩn vào không gian $\mathbb{R}^n$, các tính chất của ánh xạ mặt (xem Ch.~III, Mục~1).
+\end{problem}
+\begin{definition}[Đơn hình tiêu chuẩn]
+    Một $q-$đơn hình tiêu chuẩn, được kí hiệu
+    \[\Delta_q:=\{x=(x_0,x_1,\ldots,x_q)\in \R^{q+1} \mid x_i \in [0,1],~\sum_{i=0}^{q}x_i=1\}.\]
+
+    Các điểm $e^j = (0,\ldots,\underbrace{1}_{j},\ldots,0)$ được gọi là các \textit{đỉnh} của $\Delta_q$.
+
+    Tập $F_j:=\{x=(x_0,\ldots,x_q) \in \Delta_q \mid x_j = 0 \}$ được gọi là \textit{mặt thứ $j$} của $\Delta_q$.  
+
+    Hợp tất cả các mặt của $\Delta_q$ được gọi là \textit{biên} của $\Delta_q$, kí hiệu 
+    \[\partial\Delta_q = \bigcup_{j=0}^{q}F_j =\bigcup_{j=0}^{q}\{x_j = 0\}.\]
+\end{definition}
+\begin{remark}
+    $\Delta_q$ là đóng và bị chặn trong $\R^{q+1}$, do đó nó compact. Hơn nữa, nó cũng lồi.
+    
+    Ta có
+    \[\Delta_q =\left\{\sum_{j=0}^{q}x_je^j\in \R^{q+1} \mid x_i \geq 0,~\sum_{i=0}^{q}x_i=1\right\}= \left\{\sum_{i}x_i=1\right\} \cap \bigcap\{x_i \geq 0\}\]
+    là giao của \textit{siêu mặt} $\left\{\sum_{i}x_i=1\right\}$ và các \textit{nửa mặt phẳng} $\{x_i \geq 0\}$.
+
+    Coi $\R^{q+1}$ là một $\R-$không gian vector với một cơ sở $(e^0,\ldots,e^q)$ thì $\Delta_q$ \textbf{không là một không gian vector con} của $\R^{q+1}$.
+\end{remark}
+
+\begin{definition}[Ánh xạ tuyến tính]
+    Ánh xạ $f:\Delta_q \to A\subseteq \R^n$ được gọi là \textit{tuyến tính} nếu tồn tại ánh xạ tuyến tính $F: \R^{q+1} \to \R^n$ sao cho $F|_{\Delta_q} = f$.
+\end{definition}
+\begin{remark}
+    Vì $F$ được xác định duy nhất qua ảnh của cơ sở $(e^0,\ldots,e^q)$. Do đó
+    \[f\left(\sum_{i=0}^{q}x_je^j\right) = F\left(\sum_{i=0}^{q}x_je^j\right) = \sum_{j=0}^{q}x_jF(e^j)=\sum_{j=0}^{q}x_jf(e^j)\]
+    Do đó \textit{$f$ được xác định duy nhất qua ảnh của các đỉnh $e^0,\ldots,e^q$}.
+\end{remark}
+\begin{definition}[Ánh xạ mặt]
+    Với mỗi $j = 0,\ldots,q$, ánh xạ tuyến tính 
+    \[\varepsilon^j=\varepsilon_q^j: \Delta_{q-1} \to \Delta_q,~e^i \mapsto \begin{cases}
+        e^i, &\quad i<j\\
+        e^{i+1}, &\quad i\geq j
+    \end{cases}\]
+    được gọi là một \textit{ánh xạ mặt} của đơn hình tiêu chuẩn.
+
+    Tập ảnh $\varepsilon^j_q(\Delta_{q-1}) = \{x_j=0\} \subset \Delta_q$ là mặt thứ $j$ của $\Delta_q$ (tức mặt đối diện đỉnh $e^j$ của $\Delta_q$).
+\end{definition}
+\begin{lemma}
+    Với $k<j$ thì
+    \begin{equation}
+        \varepsilon_{q+1}^j\varepsilon_q^k = \varepsilon_{q+1}^k\varepsilon_{q}^{j-1}.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Với mỗi $e^i \in \Delta_{q-1}$ ta có
+    \begin{align*}
+        \varepsilon_{q+1}^j\varepsilon_q^k(e^i)
+        &= \begin{cases}
+            \varepsilon_{q+1}^j(e^i),&\quad i<k\\
+            \varepsilon_{q+1}^j(e^{i+1}),&\quad i\geq k
+        \end{cases}\\
+        &= \begin{cases}
+            e^i,&\quad i<k,~i<j\\
+            e^{i+1},&\quad i< k,~i \geq j\\
+            e^{i+1},&\quad i \geq k,~i+1 < j\\
+            e^{i+2},&\quad i \geq k,~i+1 \geq j
+        \end{cases}\\
+        &= \begin{cases}
+            e^i,&\quad i<k<j\\
+            e^{i+1},&\quad k \leq i <j-1\\
+            e^{i+2},&\quad i \geq j-1
+        \end{cases}
+    \end{align*}
+    \begin{align*}
+        \varepsilon_{q+1}^k\varepsilon_q^{j-1}(e^i)
+        &= \begin{cases}
+            \varepsilon_{q+1}^k(e^i),&\quad i<j-1\\
+            \varepsilon_{q+1}^k(e^{i+1}),&\quad i\geq j-1
+        \end{cases}\\
+        &= \begin{cases}
+            e^i,&\quad i<k,~i< j-1\\
+            e^{i+1},&\quad i \geq k,~i <j-1\\
+            e^{i+1},&\quad i+1<k,~i \geq j-1,~(\text{loại})\\
+            e^{i+2},&\quad i+1 \geq k,~i \geq j-1
+        \end{cases}\\
+        &= \begin{cases}
+            e^i,&\quad i<k<j\\
+            e^{i+1},&\quad k \leq i <j-1\\
+            e^{i+2},&\quad i \geq j-1
+        \end{cases}
+    \end{align*}
+\end{proof}
+
+\begin{problem}
+Trình bày xây dựng và các tính chất của phức kì dị của một không gian tô pô; phức kì dị tương đối (của một cặp không gian). (Xem Ch.~III, Mục~2.)
+\end{problem}
+Cho $X$ là một không gian topo.
+\begin{definition}[Đơn hình kì dị]
+    \begin{enumerate}
+        \item \textit{Một $q-$đơn hình kì dị} của $X$ là một ánh xạ liên tục $\sigma =  \sigma_q: \Delta_q \to X,~q \geq 0$. 
+        
+        \item Kí hiệu 
+    \[S_qX = \left\{\sum_{\sigma: \Delta_q \to X}c_{\sigma}\sigma \mid c_{\sigma} \in \Z\right\}\] là nhóm abel tự do sinh bởi các $q-$đơn hình kì dị của không gian topo $X$. 
+    
+        \item \textbf{Quy ước $S_qX = 0$ với mọi $q < 0$.}
+
+        \item Mỗi phần tử $c = \sum_{\sigma: \Delta_q \to X}c_{\sigma}\sigma \in S_qX$ được gọi là \textit{một $q-$dây chuyền kì dị}.
+
+        \item Định nghĩa \textit{ánh xạ biên}
+        \[\partial_q: S_qX \to S_{q-1}X,~\sigma \mapsto \partial_q(\sigma) = \sum_{j=0}^{q}(-1)^j(\sigma \circ \varepsilon_q^j)\]
+        với $\varepsilon_q^j: \Delta_{q-1}\to \Delta_q$ là ánh xạ mặt thứ $j$.
+        \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+    	{\Delta_{q-1}} \&\& {\Delta_q} \\
+    	\\
+    	\& X
+    	\arrow["{\varepsilon^j_q}", from=1-1, to=1-3]
+    	\arrow["{\sigma\circ \varepsilon_q^j}"', color={rgb,255:red,214;green,92;blue,92}, from=1-1, to=3-2]
+    	\arrow["\sigma", from=1-3, to=3-2]
+        \end{tikzcd}\]
+    \end{enumerate}
+\end{definition}
+\begin{proposition}
+    \begin{equation}
+        \partial_{q-1}\partial_q = 0,~\forall q \geq 1.  
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    Với mọi $\sigma:\Delta_q \to X$, ta có
+    \begin{align*}
+        \partial_{q-1}\partial_q(\sigma)
+        &= \sigma_{q-1}\left(\sum_{j=0}^{q}(-1)^j(\sigma \circ \varepsilon_q^j)\right)\\
+        % &= \sum_{j=0}^{q}(-1)^j\sigma_{q-1}(\sigma \circ \varepsilon_q^j)\\
+        &= \sum_{j=0}^{q}(-1)^j\left[\sum_{k=0}^{q-1}(-1)^k(\sigma\circ \varepsilon_q^j)\circ \varepsilon_{q-1}^k\right]\\
+        &= \sum_{j=0}^{q}\sum_{k=0}^{q-1}(-1)^{j+k}\sigma\circ (\varepsilon_q^j \varepsilon_{q-1}^k)\\
+        &= \sum_{k<j}(-1)^{j+k}\sigma\circ (\varepsilon_q^j \varepsilon_{q-1}^k) + \sum_{k\geq j}(-1)^{j+k}\sigma\circ (\varepsilon_q^j \varepsilon_{q-1}^k)\\
+        &= \sum_{k<j}(-1)^{j+k}\sigma\circ (\varepsilon_q^k \varepsilon_{q-1}^{j-1}) + \sum_{k\geq j}(-1)^{j+k}\sigma\circ (\varepsilon_q^j \varepsilon_{q-1}^k)\\
+        &= \sum_{a = j-1\geq k=b}(-1)^{a+b+1}\sigma\circ (\varepsilon_q^{b} \varepsilon_{q-1}^a) + \sum_{k\geq j}(-1)^{j+k}\sigma\circ (\varepsilon_q^j \varepsilon_{q-1}^k)\\
+        &= \sum_{a \geq b}(-1)^{a+b+1}\sigma\circ (\varepsilon_q^{b} \varepsilon_{q-1}^a) + \sum_{a \geq b}(-1)^{a+b}\sigma\circ (\varepsilon_q^{b} \varepsilon_{q-1}^a)\\
+        &= 0.
+    \end{align*}
+    Do đó $\partial_{q-1}\partial_q = 0,~\forall q \geq 1$.
+\end{proof}
+\begin{definition}
+    Phức dây chuyền $SX := \{S_qX,~\partial_q\}_{q \in \Z}$
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+    	\cdots \&\& {S_{q+1}X} \&\& {S_qX} \&\& {S_{q-1}X} \&\& \cdots
+    	\arrow[from=1-1, to=1-3]
+    	\arrow["{\partial_{q+1}}", from=1-3, to=1-5]
+    	\arrow["{\partial_q}", from=1-5, to=1-7]
+    	\arrow["{\partial_{q-1}}", from=1-7, to=1-9]
+    \end{tikzcd}\]
+    được gọi là \textit{phức kì dị} của không gian topo $X$.
+\end{definition}
+\begin{remark}
+    Giả sử $f: X \to Y$ là một ánh xạ liên tục và $\sigma: \Delta_q \to X$ là một đơn hình kì dị của $X$ thì $f\circ \sigma: \Delta_q \to Y$ là một đơn hình kì dị của $Y$. Từ đó ta thu được đồng cấu cảm sinh từ $f$ là
+    \[S_qf: S_qX \to S_qY,~\sigma \mapsto f\sigma.\]
+\end{remark}
+
+\begin{proposition}
+    Cho $f: X\to Y$ là một ánh xạ liên tục. Khi đó $Sf:=\{S_qf\}_{q \in \Z}$ là một ánh xạ dây chuyền từ $SX$ vào $SY$.
+\end{proposition}
+\begin{proof}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \&\& {S_{q+1}X} \&\& {S_qX} \&\& {S_{q-1}X} \&\& \cdots \\
+	\\
+	\cdots \&\& {S_{q+1}Y} \&\& {S_qY} \&\& {S_{q-1}Y} \&\& \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow["{\partial_{q+1}^X}", from=1-3, to=1-5]
+	\arrow["{S_{q+1}f}"{description}, from=1-3, to=3-3]
+	\arrow["{\partial_q^X}", from=1-5, to=1-7]
+	\arrow["{S_qf}"{description}, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{S_{q-1}f}"{description}, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial_{q+1}^Y}", from=3-3, to=3-5]
+	\arrow["{\partial_q^Y}", from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+    Với mọi $\sigma \in S_qX$ thì
+    \begin{align*}
+        S_{q-1}f\circ \partial_{q}^X (\sigma)
+        &= f\circ \left(\sum_{j=0}^{q}(-1)^j\sigma\circ \varepsilon_q^j\right)\\
+        &= \sum_{j=0}^{q}(-1)^j(f \circ \sigma)\circ \varepsilon_q^j\\
+        &= \sum_{j=0}^{q}(-1)^jS_qf(\sigma)\circ \varepsilon_q^j\\
+        &=\partial_q^Y\circ S_qf(\sigma).
+    \end{align*}
+    Dẫn đến $S_{q-1}f\circ \partial_{q}^X = \partial_q^Y\circ S_qf$. 
+\end{proof}
+\begin{proposition}
+    Cho $f:X\to Y$ và $g: Y \to Z$ là các ánh xạ liên tục. Khi đó
+    \[S(g\circ f)=Sg \circ Sf,\quad S(\Id_X) = \Id_{SX}.\]
+\end{proposition}
+\begin{proof}
+    Với mọi $\sigma \in S_qX$ ta có
+    \[S_q(gf)(\sigma)=(gf)\sigma = g(f\sigma)=S_qg \circ S_qf(\sigma)\]
+    và 
+    \[S_q(\Id_X)(\sigma)=\Id_X\circ \sigma = \sigma = \Id_{S_qX}(\sigma).\]
+\end{proof}
+\begin{remark}
+    Vậy $S$ là một hàm tử từ phạm trù các không gian topo $\mathbf{Top}$ vào phạm trù các phức dây chuyền $\mathcal{\partial AG}$.
+    \[S: \mathbf{Top}\to \mathcal{\partial AG},~X \mapsto SX,~f\mapsto Sf.\]
+\end{remark}
+\begin{definition}[Phức kì dị tương đối]
+    Cho $(X,A)$ là một cặp không gian topo với $A \subseteq X$. Với mỗi  $\sigma \in S_qA$ thì $\sigma: \Delta_q \to A \xhookrightarrow{i} X$ cũng là một $q-$đơn hình kì dị của $X$ qua hợp thành, nên $S_qA \leq S_qX$ với mọi $q\geq 0$, tức $SA$ là một phức con của $SX$. Khi đó
+    phức thương 
+    \[S(X,A):= SX/SA = \{S_qX/S_qA\}_{q \in \Z}\]
+    với vi phân $\overline{\partial_q}:S_q(X,A) \to S_{q-1}(X,A)$ cảm sinh từ vi phân $\partial_q:S_qX \to S_{q-1}X$. Cụ thể với mọi $c = \displaystyle\sum_{\sigma:\Delta_q \to X}c_{\sigma}\sigma \in S_qX$ thì 
+    \[\overline{\partial_q}[c] = \sum_{\sigma:\Delta_q \to X}c_{\sigma}[\sigma]\in S_q(X,A)\]
+    Nếu $\im(\sigma) \subseteq A$ thì $\sigma \in S_qA$, dẫn đến $[\sigma] = [0] \in S_q(X,A)$. Do đó
+    \[\overline{\partial_q}[c] = \sum_{\sigma:\Delta_q \to X\setminus A}c_{\sigma}[\sigma]\in S_q(X,A)\]
+\end{definition}
+\begin{remark}
+    Với $(X,A)$ là một cặp không gian topo, ta thu được dãy khớp các các ánh xạ dây chuyền
+    \begin{equation}
+        0 \longrightarrow SA \xlongrightarrow{i} SX \xlongrightarrow{p} S(X,A) \longrightarrow 0
+    \end{equation}
+    Vì $S_qX \cong S_qA \oplus S_q(X,A)$ nên dãy khớp các ánh xạ dây chuyền trên chẻ ra tại mọi chiều $q$.
+
+    \textbf{Lưu ý: $S(X,\emptyset)=SX$.}
+\end{remark}
+\begin{remark}
+    Ánh xạ liên tục $f:(X,A) \to (Y,B)$ (tức $f(A) \subset B)$ cảm sinh biểu đồ giao hoán các ánh xạ dây chuyền
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	0 \&\& SA \&\& SX \&\& {S(X,A)} \&\& 0 \\
+	\\
+	0 \&\& SB \&\& SY \&\& {S(Y,B)} \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[hook, from=1-3, to=1-5]
+	\arrow["{S(f|_A)}"{description}, from=1-3, to=3-3]
+	\arrow[two heads, from=1-5, to=1-7]
+	\arrow["Sf"{description}, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{\overline{Sf}}"{description}, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow[hook, from=3-3, to=3-5]
+	\arrow[two heads, from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+    Từ đó ta có thể xem $S$ như một hàm tử từ các cặp không gian topo vào các dãy khớp các phức dây chuyền.
+\end{remark}
+
+
+\begin{problem}
+Trình bày đồng điều kì dị, dãy khớp dài của cặp không gian $(X,A)$, dãy khớp dài của bộ ba không gian $(X,A,B)$; làm Bài tập~3.5. (Xem Ch.~III, Mục~3.)
+\end{problem}
+\begin{definition}
+    \begin{enumerate}
+        \item Cho $X$ là một không gian topo. Khi đó nhóm đồng điều kì dị thứ $q$ của phức kì dị $SX$, kí hiệu 
+    \[H_qX:= H_q(SX)=\ker(\partial_q)/\im(\partial_{q+1})\]
+        \item Với $(X,A)$ là cặp không gian topo thì nhóm đồng điều kì dị của phức thương $S(X,A) = SX/SA$,
+        \[H_q(X,A):= H_qS(X,A)\]
+        được gọi là \textit{nhóm đồng điều tương đối} của $X \mod A$.
+
+        \item Dãy khớp ngắn các ánh xạ dây chuyền 
+    \begin{equation*}
+        0 \longrightarrow SA \xlongrightarrow{i} SX \xlongrightarrow{p} S(X,A) \longrightarrow 0
+    \end{equation*}
+    cảm sinh dãy khớp dài các đồng điều
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \& {H_{q+1}X} \& {H_{q+1}(X,A)} \& {H_qA} \& {H_qX} \& {H_q(X,A)} \& {H_{q-1}A} \& \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{p_*}", from=1-2, to=1-3]
+	\arrow["{\partial_*}", from=1-3, to=1-4]
+	\arrow["{i_*}", from=1-4, to=1-5]
+	\arrow["{p_*}", from=1-5, to=1-6]
+	\arrow["{\partial_*}", from=1-6, to=1-7]
+	\arrow["{i_*}", from=1-7, to=1-8]
+    \end{tikzcd}\]
+
+    \item Nếu $f:(X,A) \to (Y,B)$ là ánh xạ liên tục giữa các cặp không gian topo thì $Sf:S(X,A) \to S(Y,B)$ cảm sinh đồng cấu $Hf=f_*:H(X,A) \to H(Y,B)$.
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \& {H_{q+1}A} \& {H_{q+1}X} \& {H_{q+1}(X,A)} \& {H_qA} \& {H_qX} \& \cdots \\
+	\\
+	\cdots \& {H_{q+1}B} \& {H_{q+1}Y} \& {H_{q+1}(Y,B)} \& {H_qB} \& {H_qY} \& \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{(f|_A)_*}"{description}, from=1-2, to=3-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{f_*}"{description}, from=1-3, to=3-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f_*}"{description}, from=1-4, to=3-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-5, to=3-5]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-6, to=3-6]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=3-5, to=3-6]
+	\arrow[from=3-6, to=3-7]
+    \end{tikzcd}\]
+
+    \item Ta có các hàm tử
+    \[\mathbf{Top} \xlongrightarrow{S} \mathcal{\partial AG} \xlongrightarrow{H} \mathcal{GAG}.\]
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Cho $(X,A,B)$ là một bộ ba không gian topo, với $B\subset A \subset X$. Khi đó $SB \subset SA \subset SX$ là các phức con, kết hợp với $\dfrac{S_qX/S_qB}{S_qA/S_qB} \cong S_qX/S_qA$ cho ta dãy khớp ngắn
+    \[0 \xlongrightarrow{}S(A,B) \xlongrightarrow{i} S(X,B) \xlongrightarrow{j}S(X,A) \xlongrightarrow{}0\]
+    Dãy khớp dài các nhóm đồng điều cảm sinh là
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \& {H_{q+1}(A,B)} \& {H_{q+1}(X,B)} \& {H_{q+1}(X,A)} \& {H_q(A,B)} \& {H_q(X,B)} \& \cdots
+	\arrow["{\partial_*}", from=1-1, to=1-2]
+	\arrow["{i_*}", from=1-2, to=1-3]
+	\arrow["{j_*}", from=1-3, to=1-4]
+	\arrow["{\partial_*}", from=1-4, to=1-5]
+	\arrow["{i_*}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+    \end{tikzcd}\]
+\end{definition}
+\begin{proposition}
+    Đồng cấu nối của bộ ba không gian $(X,A,B)$, 
+    \[\partial_*: H_{q+1}(X,A) \to H_q(A,B)\]
+    chính là hợp thành của
+    \[H_{q+1}(X,A) \xlongrightarrow{\partial_*'} H_qA \xlongrightarrow{j_*}H_q(A,B)\]
+    với $\partial'_*$ là đồng cấu nối của cặp không gian $(X,A)$. 
+\end{proposition}
+\begin{proof}
+    Cặp không gian $(X,A)$ có dãy khớp ngắn 
+    \[0 \to SA \xlongrightarrow{i_A} SX \xlongrightarrow{\pi_A} S(X,A) \longrightarrow 0\]
+    và đồng cấu nối của dãy khớp dài các đồng điều
+    \[\partial_*':H_{q+1}(X,A) \to H_q(A).\]
+    Xét các phép chiếu
+    \[\rho:SA \to S(A,B),\quad \pi_B:SX \to S(X,B)\]
+    thoả mãn 
+    \[\pi_B\circ i_A = i\circ \rho,\quad j\circ \pi_B = \pi_A\]
+    Khi đó ta có biểu đồ giao hoán sau
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	0 \&\& SA \&\& SX \&\& {S(X,A)} \&\& 0 \\
+	\\
+	0 \&\& {S(A,B)} \&\& {S(X,B)} \&\& {S(X,A)} \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow["{i_A}", from=1-3, to=1-5]
+	\arrow["\rho"{description}, from=1-3, to=3-3]
+	\arrow["{\pi_A}", from=1-5, to=1-7]
+	\arrow["{\pi_B}"{description}, from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["\Id"{description}, equals, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["i", from=3-3, to=3-5]
+	\arrow["j", from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+    Dựa vào tính tự nhiên của đồng đồng cấu nối cho ta biểu đồ giao hoán sau
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{H_{q+1}(X,A)} \&\& {H_qA} \\
+	\\
+	{H_{q+1}(X,A)} \&\& {H_q(X,B)}
+	\arrow["{\partial'_*}"{description}, from=1-1, to=1-3]
+	\arrow["\Id"{description}, equals, from=1-1, to=3-1]
+	\arrow["{\rho_*}"{description}, from=1-3, to=3-3]
+	\arrow["{\partial_*}"{description}, from=3-1, to=3-3]
+    \end{tikzcd}\]
+    Nói cách khác $\partial_* = \rho_* \circ \partial'_*$.
+\end{proof}
+\begin{proposition}
+    Nếu $B \subset A \subset X$ là một bộ ba các không gian topo thoả mãn $\imath_*: HB \cong HA$ thì $j_*:H(X,B) \cong H(X,A)$.
+\end{proposition}
+\begin{proof}
+    Dãy khớp tương ứng với cặp $(A,B)$ 
+    \[0 \xlongrightarrow{} SB \xlongrightarrow{\imath} SA \xlongrightarrow{\rho}S(A,B) \xlongrightarrow{}0\]
+    cảm sinh dãy khớp dài các đồng điều
+    \[\cdots \to H_qB \xlongrightarrow{\imath_*}H_qA \xlongrightarrow{\rho_*} H_q(A,B)\xlongrightarrow{\partial'_*}H_{q-1}B\xlongrightarrow{\imath_*}H_{q-1}A\xlongrightarrow{} \cdots\]
+    Vì $\imath_*:H_qB \to H_qA$ là đẳng cấu với mọi $q$ nên 
+    \[\ker(\rho_*) =  \im(\imath_*)=H_qA,\quad \im(\partial'_*) = \ker(\imath_*) = 0\]
+    Suy ra $\rho_* = 0$ và $\partial'_*=0$, dẫn đến $H_q(A,B)=0$ với mọi $q$.
+
+    Kết hợp với dãy khớp dài các đồng điều của bộ ba $(X,A,B)$
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \& {H_{q}(A,B)} \& {H_{q}(X,B)} \& {H_{q}(X,A)} \& {H_{q-1}(A,B)} \& {H_{q-1}(X,B)} \& \cdots
+	\arrow["{\partial_*}", from=1-1, to=1-2]
+	\arrow["{i_*}", from=1-2, to=1-3]
+	\arrow["{j_*}", from=1-3, to=1-4]
+	\arrow["{\partial_*}", from=1-4, to=1-5]
+	\arrow["{i_*}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+    \end{tikzcd}\]
+    tại mỗi $q$ ta thu được dãy khớp
+    \[0 \xlongrightarrow{}H_{q}(X,B) \xlongrightarrow{j_*}H_{q}(X,A) \xlongrightarrow{}0\]
+    Từ đó ta phải có
+    \[j_*:H_q(X,B) \cong H_q(X,A)~\forall q\]
+\end{proof}
+
+\begin{problem}
+Tính đồng điều kì dị của không gian gồm một điểm. (Xem Ch.~III, \S4.1.)
+\end{problem}
+\begin{proposition}
+    Cho $P = \{*\}$ là không gian chỉ gồm 1 điểm. Khi đó
+    \begin{equation}
+        H_qP = \begin{cases}
+            \Z, &\quad q = 0\\
+            0, &\quad q \neq 0
+        \end{cases}
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    Với mỗi $q \geq 0$, có duy nhất một $q-$đơn hình kì dị của $P$ là 
+    \[\sigma_q:\Delta_q\to P,~e^i \mapsto *\]
+    Từ đó $S_qP=\Z\sigma_q \cong \Z$.
+
+    Mặt khác, với mỗi ánh xạ mặt $\varepsilon_q^j:\Delta_{q-1} \to \Delta_q$ thì $\sigma_q\circ \varepsilon_q^j:\Delta_{q-1}\to P$ là một $(q-1)-$đơn hình kì dị của $P$. Do đó $\sigma_{q-1} = \sigma_q \circ \varepsilon_q^j$ với mọi $j=0,\ldots,q$.
+
+    Với toán tử biên $\partial_q:S_qP \cong \Z \to \Z\cong S_{q-1}P$ ta có
+    \[\partial_q(\sigma_q)=\sum_{j=0}^{q}(-1)^j\sigma_q\circ \varepsilon_q^j= \sum_{j=0}^{q}(-1)^j\sigma_{q-1}=\left(\sum_{j=0}^{q}(-1)^j\right)\sigma_{q-1}=\begin{cases}
+        \sigma_{q-1},&\quad 2\mid q\\
+        0,&\quad 2\nmid q
+    \end{cases}\]
+    Từ đó ta thu được dãy khớp
+    \[H_qP=\dfrac{\ker(\partial_q)}{\im(\partial_{q+1})}
+    \cong \begin{cases}
+          \Z/0 &\quad q=0\\
+          0/\im(\partial_{q+1})\cong 0, &\quad 2\mid q,~q>0\\
+          \Z/\Z \cong 0,&\quad 2\nmid q,~q>0
+    \end{cases}\]
+    Vậy $H_qP = \begin{cases}
+            \Z, &\quad q = 0\\
+            0, &\quad q \neq 0
+        \end{cases}$.
+    
+\end{proof}
+\begin{problem}
+Trình bày đồng điều rút gọn, dãy khớp dài đồng điều rút gọn của cặp không gian. (Xem Ch.~III, \S\S4.3–4.4.)
+\end{problem}
+\begin{definition}[Phép bổ sung và đồng điều rút gọn]
+    Cho $X$ là một không gian topo và $P$ là không gian chỉ gồm 1 điểm. Ánh xạ hằng
+    \[\gamma^X: X\to P\]
+    cảm sinh một đồng cấu nhóm
+    \[\gamma_*=\gamma_*^X:H_*X \to H_*P\]
+    được gọi là \textit{một phép bổ sung}.
+
+    \textit{Đồng điều rút gọn của $X$} được định nghĩa bởi
+    \[\widetilde{H}_qX:=\ker(\gamma^X_*:H_qX \to H_qP).\]
+\end{definition}
+\begin{remark}
+    Với $q\neq 0$ thì $H_qP=0$ nên $\widetilde{H}_qX=\ker(\gamma^X_*:H_qX \to 0)=H_qX$.
+
+    Còn với $q=0$ thì $\widetilde{H}_0X=\ker(\gamma^X_*:H_0X \to \Z)$.
+\end{remark}
+
+\begin{remark}
+    Nếu $f:X\to Y$ là một ánh xạ liên tục thì
+    \[\gamma^Y \circ f:X \to P\] cũng là ánh xạ hằng từ $X$ vào $P$ nên $\gamma^X = \gamma^Y \circ f$. Từ đó ta được 
+    \[\gamma_*^X = (\gamma^Y \circ f)_*=\gamma^Y_*\circ f_*.\]
+\end{remark}
+\begin{proposition}
+    Nếu $X \neq \emptyset$ thì $H_0X \cong \widetilde{H}_0X \oplus \Z$.
+\end{proposition}
+Ta cần bổ đề sau để chứng minh mệnh đề trên
+\begin{lemma}
+    Cho các đồng cấu module $f:X\to Y,~g: Y \to Z$ sao cho $gf$ là một đẳng cấu. Khi đó 
+    \[Y = \im(f) \oplus \ker(g).\]
+\end{lemma}
+\begin{proof}
+    Vì $X \neq \emptyset$ nên tồn tại ánh xạ $i:P \to X$ sao cho $\gamma^X \circ i = \Id_P$. Cảm sinh trên đồng điều cho ta
+    \[\gamma^X_* \circ i_* = (\gamma^X\circ i)_* = (\Id_P)_*=\Id_{H_*P}.\]
+    Áp dụng bổ đề trên cho $i_*: H_0P \to H_0X,~\gamma_*^X:H_0X \to H_0P$ ta được 
+    \[H_0X = \im(i_*) \oplus \ker(\gamma^X_*) \cong H_0P \oplus \widetilde{H}_0X \cong \Z \oplus \widetilde{H}_0X.\]
+\end{proof}
+\begin{corollary}
+    Cho $P$ là một không gian con 1 điểm của $X$, khi đó $\widetilde{H}_0X \cong H_0(X,P)$.
+\end{corollary}
+\begin{proof}
+    Từ dãy khớp trích từ dãy khớp dài đồng điều của cặp $(X,P)$,
+    \[\Z\cong H_0P \xlongrightarrow{i_*} H_0X \cong \Z \oplus \widetilde{H}_0X \xlongrightarrow{\kappa_*}H_0(X,P)\xlongrightarrow{\partial_*}H_{-1}P=0\]
+    ta được
+    \begin{align*}
+        H_0(X,P) = \ker(\partial_*)=\im(\kappa_*) \cong H_0X/\ker(\kappa_*)= H_0X/\im(i_*) \cong (\Z \oplus \widetilde{H}_0X)/\Z \cong \widetilde{H}_0X.
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    Nếu $(X,A)$ là một cặp không gian với $A \neq \emptyset$ thì ta có dãy khớp dài
+    \[
+        \cdots 
+        \xrightarrow{i_*} \widetilde{H}_{q+1}X 
+        \xrightarrow{j_*} H_{q+1}(X,A) 
+        \xrightarrow{\partial_*}\widetilde{H}_qA
+        \xrightarrow{i_*} \widetilde{H}_qX
+        \xrightarrow{j_*}\cdots
+    \]
+\end{proposition}
+
+\begin{proof}
+    Vì $A \neq \emptyset$, chọn một điểm $P \in A \subset X$. Khi đó ta có các ánh xạ của cặp không gian
+    \[
+        (P,P) \xlongrightarrow{i} (X,A) \xlongrightarrow{\gamma} (P,P)
+    \]
+    thoả mãn $\gamma \circ i = \Id_{(P,P)}$. Dẫn đến 
+    \[\LES(P,P) \xlongrightarrow{i_*} \LES(X,A) \xlongrightarrow{\gamma_*} \LES(P,P)\]
+    thoả mãn
+    $\gamma_* \circ i_* = \Id_{\LES(P,P)}$. Vì thế
+    \[\LES(X,A) \cong \im(i_*) \oplus \ker(\gamma_*).\]
+    Mà $\im(i_*) \cong \LES(P,P)$, còn $\ker(\gamma_*)$ được xác định bởi dãy khớp dài đồng điều cảm sinh sau
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\cdots \&\& {H_qA} \&\& {H_qX} \&\& {H_q(X,A)} \&\& {H_{q-1}A} \&\& 0 \\
+	\\
+	\cdots \&\& {H_qP} \&\& {H_qP} \&\& {H_q(P,P)} \&\& {H_{q-1}P} \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow["{i_*}", from=1-3, to=1-5]
+	\arrow["{\gamma_*}"{description}, color={rgb,255:red,214;green,92;blue,92}, from=1-3, to=3-3]
+	\arrow["{j_*}", from=1-5, to=1-7]
+	\arrow["{\gamma_*}"{description}, color={rgb,255:red,214;green,92;blue,92}, from=1-5, to=3-5]
+	\arrow["{\partial_{*}}", from=1-7, to=1-9]
+	\arrow["{\gamma_*}"{description}, color={rgb,255:red,214;green,92;blue,92}, from=1-7, to=3-7]
+	\arrow[from=1-9, to=1-11]
+	\arrow["{\gamma_*}"{description}, color={rgb,255:red,214;green,92;blue,92}, from=1-9, to=3-9]
+	\arrow[from=3-1, to=3-3]
+	\arrow["\Id"{description}, from=3-3, to=3-5]
+	\arrow["0"{description}, from=3-5, to=3-7]
+	\arrow["0"{description}, from=3-7, to=3-9]
+	\arrow[from=3-9, to=3-11]
+\end{tikzcd}\]
+
+Tại $H_qA$ thì $\ker(\gamma_*) = \ker((\gamma|_A)_*) = \widetilde{H}_qA$.
+
+Tại $H_qA$ thì $\ker(\gamma_*) = \widetilde{H}_qX$.
+
+Tại $H_q(X,A)$, vì $H_q(P,P)=0$ nên $\ker(\gamma_*)=H_q(X,A)$.
+
+Ta có 
+\[\underbrace{H(\LES(X,A))}_{0} \cong \underbrace{H(\LES(P,P))}_{0} \oplus H(\ker(\gamma_*)) \iff H(\ker(\gamma_*)) = 0.\]
+Vậy ta thu được dãy khớp
+\[\ker(\gamma_*): \cdots 
+        \xrightarrow{i_*} \widetilde{H}_{q+1}X 
+        \xrightarrow{j_*} H_{q+1}(X,A) 
+        \xrightarrow{\partial_*}\widetilde{H}_qA
+        \xrightarrow{i_*} \widetilde{H}_qX
+        \xrightarrow{j_*}\cdots\]
+\end{proof}
+
+\begin{problem}
+Ánh xạ bổ sung $\eta_X$, phép xây dựng nón và các tính chất. (Xem Ch.~III, \S\S4.5, 4.6, 4.11.)
+\end{problem}
+\begin{definition}
+    Phép bổ sung $\eta^X:SX \to (\Z,0)$ gửi mỗi $0-$đơn hình $\sigma_0$ vào $1 \in \Z$.
+\end{definition}
+\begin{proposition}
+    Cho $X$ là một không gian topo và $P$ là một không gian một điểm. Gọi
+    \[\eta^X: SX \to (\Z,0),\quad \gamma^X: SX \to SP,\quad \eta^P: SP \to (\Z,0)\]
+    Khi đó
+    \begin{enumerate}
+        \item $\eta^X = \eta^P \circ \gamma^X$.
+
+        \item $\eta^P$ là tương đương đồng luân.
+
+        \item $\ker(\eta^X_*)=\ker(\gamma_*^X)=\widetilde{H}_*X$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item \textbf{Chứng minh $\eta^X = \eta^P \circ \gamma^X$}.
+
+        Với mọi $\sigma_q \in S_qX$ thì 
+        \[\eta^X(\sigma_q)=\begin{cases}
+            1 &\quad q = 0\\
+            0 &\quad q \neq 0
+        \end{cases}\]
+        còn 
+        \[\eta^P\circ \gamma^X (\sigma_q)= \eta^P(\underbrace{\gamma^X(\sigma_q)}_{\in S_qP}) = \begin{cases}
+            1 \in \Z,&\quad q = 0\\
+            0 \in \Z,&\quad q \neq 0
+        \end{cases}\]
+
+        \item \textbf{Chứng minh $\eta^P$ là tương đương đồng luân.}
+
+        Với mọi $e_q \in S_qP$ ta có $S_qP = \Z e_q \cong \Z$ và $\partial_q(e_q)=\begin{cases}
+            e_{q-1} &\quad 2\mid q\\
+            0, &\quad 2\nmid q\\
+        \end{cases}$
+        
+        Xét ánh xạ 
+        \[i: (\Z,0) \to SP,~1\mapsto e_0\]
+        
+        Khi đó $\eta^P \circ i=\Id_{(\Z,0)}$ (vì $\eta^P(e_0) = 1$ và $\eta^P(e_q)=0~\forall q \neq 0$).
+
+        Xét ánh xạ 
+        \[s: S_qP = \Z e_q \to S_{q+1}P = \Z e_{q+1},~e_q \mapsto e_{q+1}~\forall q \geq 0\]
+        Ta sẽ chỉ ra $(\partial s + s\partial)(e_q) = (\Id_{SP} - i \circ \eta^P)(e_q)$ với mọi $e_q \in S_qP,~q\geq 0$.
+
+        Với $q = 0$ thì
+        \[(\partial s + s\partial)(e_0) = \partial(e_1) + s(0)=0.\]
+        và \[(\Id_{SP} - i \circ \eta^P)(e_0)=e_0-i(1)=e_0-e_0=0.\]
+        Với $q\geq 1$ thì
+        \[(\partial s + s\partial)(e_q) = \partial(e_{q+1}) + s(\partial e_q) = \begin{cases}
+            0 + s(e_{q-1}) = e_q &\quad 2\mid q\\
+            e_q + s(0) = e_q &\quad 2\nmid q\\
+        \end{cases}\]
+        và 
+        \[(\Id_{SP} - i \circ \eta^P)(e_q) = e_q-i(\eta^P(e_q)) = e_q-i(0)=e_q.\]
+
+        \item \textbf{Chứng minh $\ker(\eta^X_*)=\ker(\gamma_*^X)=\widetilde{H}_*X$.}
+
+        Ta có $\eta^X = \eta^P \circ \gamma^X$ nên $\eta^X_* = \eta^P_* \circ \gamma^X_*$. Mà $\eta^P_*\circ i_* = (\eta^P \circ i)_*=(\Id_{(\Z,0)})_*=\Id_{H_*(\Z,0)}$ và $i\eta^P \simeq \Id_{SP}$ nên $i_* \circ \eta^P_* = (\Id_{SP})_*=\Id_{H_*P}$ nên $\eta^P_*$ là một đẳng cấu. Và do đó
+        \[\ker(\eta^X_*) = \ker(\gamma^X_*)=\widetilde{H}_*X.\]
+    \end{enumerate}
+\end{proof}
+\begin{proposition}
+    Nếu $X$ là một tập con lồi khác rỗng của không gian Euclid $\R^n$ thì phép bổ sung $\eta:SX \to (\Z,0)$ là một tương đương đồng luân và $\widetilde{H}X=0$.
+\end{proposition}
+\begin{proof}
+    Lấy $P \in X$, với mỗi $\sigma_q:\Delta_q \to X,~q \geq 0$ ta định nghĩa $(P \cdot \sigma_q): \Delta_{q+1} \to X$ bởi
+    \[(P\cdot \sigma_q)(x_0,\ldots,x_q,x_{q+1})=\begin{cases}
+        P, &\quad x_0=1\\
+        x_0P + (1-x_0)\sigma_q\left(\dfrac{x_1}{1-x_0},\ldots,\dfrac{x_{q+1}}{1-x_0}\right),&\quad x_0 \neq 1
+    \end{cases}\]
+    Từ đó ta định nghĩa được đồng cấu
+    \[P=P_q:S_qX \to S_{q+1}X,\quad P_q(\sigma)=P\cdot \sigma\]
+    Ta tính các mặt của $P \cdot \sigma$
+    \[(P\cdot \sigma)\varepsilon^i(x_0,x_1,\ldots,x_q)=(P\cdot \sigma)(x_0,\ldots,x_{i-1},0,x_i,\ldots,x_q)\]
+    
+    Nếu $i=0$ thì $VP = (P\cdot \sigma)(0,x_1,\ldots,x_{q+1})= \sigma_q(x_0,\ldots,x_q)$.
+
+    Nếu $q=0$ và $i=1$ thì $VP=P$.
+
+    Nếu $q>0,~i>0$ thì
+    \begin{align*}
+        VP &= x_0P+(1-x_0)\sigma_q\left(\dfrac{x_1}{1-x_0},\ldots,\dfrac{x_{i-1}}{1-x_0},0, \dfrac{x_i}{1-x_0},\ldots,\dfrac{x_{q}}{1-x_0}\right)\\
+        &= x_0P + (1-x_0)(\sigma_q\varepsilon^{i-1})\left(\dfrac{x_1}{1-x_0},\ldots,\dfrac{x_q}{1-x_0}\right)\\
+        &= [P \cdot (\sigma_q\varepsilon^{i-1})](x_0,\ldots,x_q).
+    \end{align*}
+
+    Ta định nghĩa một ánh xạ dây chuyền 
+    \[\widehat{P}: (\Z,0) \to SX,~\widehat{P}(m)=mP\]
+    Ta có
+    \[(P \cdot \sigma_q)\varepsilon^0 = \sigma_q,\quad (P \cdot \sigma_q)\varepsilon^{i+1} = P\cdot (\sigma_q\varepsilon^i)(~q>0),\quad (P\cdot \sigma_0)\varepsilon^1 = (\widehat{P}\eta)(\sigma_0).\]
+    Suy ra
+    \[\partial_{q+1}P_q = \Id - P_{q-1}\partial_q,~q>0\]
+    \[\partial_1P_0=\Id- (\widehat{P}\eta)_0\]
+    Dẫn đến $\{P_q\}_q$ là một đồng luân $\Id \simeq \widehat{P}\eta$. Rõ ràng $\eta\widehat{P} =  \Id$.
+
+    Dẫn đến $\eta_*:H_*X \cong H_*(\Z,0)$ và do đó $\widetilde{H}_*X \cong \widetilde{H}_*(\Z,0)=0$.
+\end{proof}
+\begin{corollary}
+    Nếu $Y\subset \R^n$ là một không gian con khác rỗng thì $\partial_*:H_q(\R^n, Y) \cong \widetilde{H}_{q-1}Y$.
+\end{corollary}
+\begin{proof}
+    Xét $\LES(\R^n,Y)$ là
+    \[\cdots \xrightarrow{\partial_*}\underbrace{\widetilde{H}_qY}_{0} \xrightarrow{i_*} \underbrace{\widetilde{H}_q\R^n}_{0}\xrightarrow{j_*}H_q(\R^n,Y)\xrightarrow{\partial_*}\widetilde{H}_{q-1}Y\xrightarrow{i_*} \underbrace{\widetilde{H}_{q-1}\R^n}_{0}\xrightarrow{j_*}\cdots\]
+    Dẫn đến $H_q(\R^n, Y) \cong \widetilde{H}_{q-1}Y$.
+\end{proof}
+\begin{proposition}
+    Nếu $X$ là một không gian liên thông đường khác rỗng thì phép bổ sung $\eta: SX \to (\Z,0)$ cảm sinh đẳng cấu $\eta_*:H_0X=H_0(\Z,0)=\Z$.
+\end{proposition}
+\begin{proof}
+    Lấy $P \in X\neq \emptyset$ và định nghĩa $\widehat{P}: (\Z,0) \to SX,~m \mapsto mP$. Rõ ràng $\eta\widehat{P}=\Id$. 
+
+    Với mọi $0-$đơn hình $\sigma_0:\Delta_0 \to X$ ta có thể tìm được một $1-$đơn hình $\pi\sigma_0:\Delta_1 \to X$ với $(\pi\sigma_0)\varepsilon^0 = \sigma_0$ và $(\pi\sigma_0)\varepsilon^1=P$, khi đó 
+    \[\partial(\pi\sigma_0)=(\Id-\widehat{P}\eta)\sigma_0.\]
+    Từ đó ta định nghĩa được một đồng cấu
+    \[\pi: S_0X\to S_1X,~\partial(\pi)=\Id-\widehat{P}\eta.\]
+    Ta có
+    \[[0]=[\partial\pi z]=[z]-[\widehat{P}\eta z]=[z]-\widehat{P}_*\eta_*[z],~z\in Z_0X\]
+    tức $\Id_{H_0X} = \widehat{P}_* \circ \eta_*$ và do đó $\eta_*$ là một đẳng cấu nên $H_0X=H_0(\Z,0)=\Z$.
+\end{proof}
+\begin{proposition}
+    Cho $X$ là một không gian bất kỳ có các thành phần liên thông là $X_{i},~i\in I$. Cho $A\subset X$ là một không gian con và $A_i:= A\cap X_i$. Khi đó các ánh xạ bao hàm
+    \[(X_i,A_i) \xhookrightarrow{\subset} (X,A)\]
+    cảm sinh 
+    \[\bigoplus_{i \in I}S(X_i,A_i)\cong S(X,A),\quad \bigoplus_{i \in I}H(X_i,A_i)\cong H(X,A).\]
+\end{proposition}
+\begin{corollary}
+    Nêú $X$ là một không gian rời rạc thì $H_iX = 0~\forall i\neq 0$ và $H_0X \cong \bigoplus_{x\in X}\Z$.
+\end{corollary}
+
+
+\begin{problem}
+Ánh xạ co rút một không gian về một không gian con, và tính chất. (Ch.~III, \S\S4.14, 4.16.) Không gian co rút được và tính chất (Bài tập~4.17, ý~2).
+\end{problem}
+\begin{definition}
+    Cho $(X,A)$ là một cặp không gian. Ta nói $A$ được gọi là \textit{một co rút của $X$} nếu tồn tại ánh xạ liên tục $r: X\to A$ sao cho $r\circ i = \Id_A$. Khi đó $r$ được gọi là một \textit{phép co rút}.
+\end{definition}
+\begin{definition}
+    Mọi điểm $P \in X$ đều là một co rút của $X$.
+
+    Nếu $Q \in B$ thì $A \approx A \times Q \subset A \times B$ và $r: A\times B \to A\times Q,~r(a,b) = (a,Q)$ là một phép co rút.
+
+    Với cặp $(X,A)$ nói trên thì $A$ được gọi là \textbf{một không gian co rút lân cận trong $X$} nếu $A$ có một lân cận $U$ trong $X$ mà $A$ là một co rút của lân cận $U$ chứ không phải toàn bộ $X$.
+
+    Mọi không gian co rút đều là không gian co rút lân cận, còn ngược lại không đúng.
+
+    \begin{example}
+        Với $X=[0,1]$ và $A=\{0,1\}$ là một co rút lân cận nhưng không phải một co rút.
+        \begin{proof}
+            \begin{itemize}
+                \item \textbf{Chứng minh $A$ là một co rút lân cận.}
+
+                Chọn lân cận $U=[0,1/3)\cup (2/3,1] \subsetneq X$ của $A$, thì $U$ là mở trong $X=[0,1]$ với topo cảm sinh.
+
+                Xét $r: U \to A,~x\mapsto \begin{cases}
+                    0, &\quad x\in [0,1/3)\\
+                    1, &\quad x\in (2/3,1]
+                \end{cases}$.
+
+                Rõ ràng $r$ liên tục và do đó là một phép co rút.
+
+                \item \textbf{Chứng minh $A$ không là một co rút}
+
+                Giả sử phản chứng $A$ là một không gian co rút của $X$, khi đó tồn tại ánh xạ liên tục $r:X\to A$ sao cho $r(a)=a~\forall a\in A$.
+
+                Nhắc lại, ảnh của một không gian liên thông qua ánh xạ liên tục là liên thông, tuy nhiên $X$ liên thông còn $r(X)=A$ không liên thông.
+            \end{itemize}
+        \end{proof}
+    \end{example}
+\end{definition}
+\begin{remark}
+    \textbf{Từ bây giờ, ta chỉ nói đến co rút (co rút lân cận để sau).}
+
+    Nếu $r: X\to A$ là một phép co rút thì $r:SX \to SA$ làm dãy khớp sau chẻ ra
+    \[0\to SA \xrightarrow{i} SX \xrightarrow{j} S(X,A) \to 0\]
+    Do đó \[(r,j):SX \cong SA \oplus S(X,A)\]
+    và vì thế
+    \[(r_*,j_*):HX \cong HA \oplus H(X,A).\]
+\end{remark}
+
+\begin{proposition}
+    Nếu $A$ là một co rút của $X$ thì dãy đồng điều của $(X,A)$ được phân ra thành các dãy khớp ngắn
+    \[0 \xrightarrow{\partial_*} H_qA \xrightarrow{i_*}H_qX \xrightarrow{j_*}H_q(X,A) \to 0\]
+    chẻ ra bởi $r_*$.
+\end{proposition}
+\begin{proof}
+    Vì $A$ là một co rút của $X$ nên tồn tại $i:A \to X$ và $r:X \to A$ là các ánh xạ liên tục thoả mãn $r\circ i = \Id_A$.
+
+    Khi đó $\LES$ của $(X,A)$ là
+    \[\cdots \to H_{q+1}(X,A)\xrightarrow{\partial_*}H_qA \xrightarrow{i_*}H_qX\xrightarrow{j_*}H_q(X,A)\xrightarrow{\partial_*}H_{q-1}A\xrightarrow{} \cdots\]
+
+    Vì $r_* \circ i_* = (\Id_A)_*=\Id_{H_*A}$ nên $i_*$ đơn cấu vì nếu $[a] \in \ker(i_*)$ thì $[0]=r_*[0]=r_*i_*[a]=\Id_{H_*A}[a]=[a]$.
+
+    Dẫn đến $\im(\partial_*)=\ker(i_*)=0$, tức $\partial_*=0$.
+    Từ đó, tại mỗi $q$ ta được dãy khớp chẻ ra bởi $r_*$
+    \[0 \xrightarrow{\partial_*} H_qA \xrightarrow{i_*}H_qX \xrightarrow{j_*}H_q(X,A) \to 0\]
+\end{proof}
+\begin{proposition}
+    Nếu $X$ là một không gian co rút được, tức $X \simeq P$ thì $\eta: SX \to (\Z,0)$ là một tương đương đồng luân.
+\end{proposition}
+\begin{proof}
+    Ta cần xây dựng ánh xạ dây chuyền $g:(\Z,0) \to SX$ sao cho $g\circ \eta \simeq \Id_{SX}$ và $\eta \circ g \simeq \Id_{(\Z,0)}$.
+
+    Vì $X$ co rút được nên $X \neq \emptyset$, chọn $P \in X$ và định nghĩa 
+    \[\widehat{P}:(\Z,0) \to SX,~m\mapsto mP\]
+    Khi đó $\eta \circ \widehat{P} = \Id_{(\Z,0)}$.
+    
+    Xây dựng $P=P_q:S_qX \to S_{q+1}X,~\sigma \mapsto P \cdot \sigma$.
+
+    Khi đó
+    \[\partial P + P\partial = \Id - \widehat{P}\eta\]
+    Dẫn đến $\Id_{SX} \simeq \widehat{P}\circ \eta$, ta được điều phải chứng minh.
+\end{proof}
+
+
+\begin{problem}
+Phát biểu bất biến đồng luân và ý chứng minh của tính chất đó (Prop.~5.1, Prop.~5.7, trang~37–38). Phát biểu và chứng minh các hệ quả (Prop.~5.2, 5.3, 5.11; Ch.~III).
+\end{problem}
+\begin{proposition}
+    Nếu $f\simeq g: (X,A) \to (Y,B)$ thì $Sf \simeq Sg: S(X,A) \to S(Y,B)$.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+\begin{corollary}
+    Nếu $f\simeq g: (X,A) \to (Y,B)$ thì $f_*=g_*:H(X,A) \to H(Y,B)$.
+\end{corollary}
+\begin{proof}
+    Theo \textbf{Mệnh đề 1.103} ta được $Sf\simeq Sg:S(X,A) \to S(Y,B)$.
+
+    Suy ra $f_*=H_q(Sf)=H_q(Sg)=g_*:H_q(X,A)\to H_q(Y,B)$.
+\end{proof}
+\begin{corollary}
+    Nếu $(X,A) \simeq (Y,B)$ thì $H(X,A) \cong H(Y,B)$.
+\end{corollary}
+\begin{proof}
+    Tồn tại $f:(X,A) \to (Y,B)$ và $g:(Y,B) \to (X,A)$ sao cho \[gf \simeq \Id_{(X,A)}\quad fg \simeq \Id_{(Y,B)}\] 
+
+    Suy ra $g_* f_* = \Id_{H_*(X,A)},\quad f_*g_* = \Id_{H_*(Y,B)}$.
+\end{proof}
+\begin{corollary}
+    Nếu $X$ co rút được thì $\widetilde{H}X=0$ (do phép bổ sung $\eta: SX \to (\Z,0)$ là một tương đương đồng luân).
+\end{corollary}
+\begin{proposition}
+    Nếu $F^0,F^1:SX \to S(X \times I)$ là các ánh xạ dây chuyền tự nhiên và 
+    \[S\Delta_0 \xlongrightarrow{F^0,F^1} S(\Delta_0 \times I) \xlongrightarrow{\eta} (\Z,0)\]
+    $\eta\circ F^0 = \eta \circ F^1$ với phép bổ sung $\eta:S_0X\to \Z,~\sigma_0 \mapsto 1$.
+
+    Khi đó tồn tại một đồng luân tự nhiên
+    \[s:F^0 \simeq F^1\]
+
+    Tính tự nhiên của $\phi \in \{F^0,F^1\}$, tức với mọi $h:X\to X'$ liên tục ta có biểu đồ giao hoán sau
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	SX \&\& {S(X\times I)} \\
+	\\
+	{SX'} \&\& {S(X'\times I)}
+	\arrow["\phi"{description}, from=1-1, to=1-3]
+	\arrow["Sh"{description}, from=1-1, to=3-1]
+	\arrow["{S(h\times \Id_I)}"{description}, from=1-3, to=3-3]
+	\arrow["\phi"{description}, from=3-1, to=3-3]
+    \end{tikzcd}\]
+\end{proposition}
+\begin{proof}
+    Ta cần xây dựng dãy đồng cấu $s_n: S_nX \to S_{n+1}(X \times I)$ sao cho
+    \[\partial_{n+1}s_n + s_{n-1}\partial_n = F^1_n-F^0_n.\]
+    \begin{enumerate}
+        \item Trường hợp $n=0$. Ta cần xây dựng $s_0:S_0X \to S_1(X \times I)$.
+        
+        Xét $X = \Delta_0$, ta cần định nghĩa $s_0(\Id_0) \in S(\Delta_0 \times I)$ với $\Id_0 \in S_0(\Delta_0)$.
+
+        Ta cần
+        \[\partial_1s_0 + s_{-1}\partial_0=F_0^1-F_0^0\]
+        vì $s_{-1}=0$ nên ta cần 
+        \[\partial_1(s_0(\Id_0))=F_0^1(\Id_0)-F_0^0(\Id_0):=c\]
+        ta có $c$ là một $0-$dây chuyền của không gian $\Delta_0 \times I \cong I$.
+
+        Vì $\eta(F_0^1(\Id_0))=\eta(F_0^0(\Id_0))$ nên $\eta(c)=0$. Tức $c$ là một $0$ chu trình có bổ sung bằng $\eta(c)=0$.
+
+        Vì $\Delta_0 \times I \cong I$ co rút được nên đồng điều rút gọn của nó bằng $\widetilde{H}_0=\ker(\eta)/\im(\partial_1)=0$. Suy ra $c \in \ker(\eta)=\im(\partial_1)$, tức tồn tại $s_P \in S_1(\Delta_0 \times I)$ sao cho $\partial_1(s_P)=c$. 
+
+        Từ đó ta định nghĩa $s_0(\Id_0)=s_P$.
+
+        \item Quy nạp
+    \end{enumerate}
+\end{proof}
+\begin{proof}[Mệnh đề 1.103]
+    Với mọi không gian $X$ ta có phép nhúng
+    \[F': X \to X \times I,~x\mapsto (x,t)\]
+    định nghĩa ánh xạ dây chuyền tự nhiên
+    \[F':SX \to S(X\times I)\]
+    và tồn tại $s:F^0 \simeq F^1$. 
+
+    Nếu $A \subset X$ là một không gian con thì 
+    \[F'(SA)\subset F'(S(A\times I)),\quad s(SA) \subset S(A\times I)\]
+    Qua phép chia thương ta được
+    \[\overline{F'}:S(X,A) \to S(X \times I,A \times I),\quad \overline{s}:\overline{F}^0\simeq \overline{F}^1.\]
+
+    Bây giờ, giả sử $\phi: f\simeq g$ thì $\phi_t=\phi F'$ và do đó ta được $\overline{\phi_t}=\overline{\phi}\circ \overline{F'}: S(X,A) \to S(Y,B)$ qua phép chia thương.
+
+    Vậy
+    \[Sf=\overline{\phi}_0=\overline{\phi}\circ \overline{F^0}\simeq \overline{\phi}\circ \overline{F^1}=\overline{\phi}_1=Sg.\]
+\end{proof}
+%=== Deformation retract & strong deformation retract ===%
+
+\begin{definition}[Deformation retract]
+Cho cặp không gian topo $(X,A)$ với $A\subset X$.
+Ta gọi $A$ là một \emph{deformation retract} của $X$ nếu tồn tại một phép đồng luân
+\[
+\Theta : X\times I \longrightarrow X
+\]
+sao cho
+\[
+\Theta_0=\mathrm{id}_X,\qquad \Theta_1(X)\subset A,\qquad \text{và}\quad 
+\Theta_t|_{A} = \Theta_1|_{A}\ \text{(tức bảo toàn $A$ như một tập con) .}
+\]
+Khi đó đặt $r:=\Theta_1: X\to A$; ta có $r\circ i = \mathrm{id}_A$, trong đó $i:A\hookrightarrow X$ là bao hàm.
+Nếu mạnh hơn nữa
+\[
+\Theta_t|_{A}=\mathrm{id}_A\quad \text{với mọi }t\in I,
+\]
+ta gọi $A$ là một \emph{strong deformation retract} của $X$.
+\end{definition}
+
+\begin{proposition}[Hệ quả đồng luân]
+Với ký hiệu như trên, $i$ và $r$ là các \emph{đồng luân tương đương} (reciprocal homotopy equivalences), cụ thể
+\[
+r\circ i=\mathrm{id}_A,\qquad i\circ r \simeq \mathrm{id}_X \ \text{qua đồng luân } \Theta.
+\]
+Hệ quả: $i_*\!: H_q(A)\xrightarrow{\;\cong\;} H_q(X)$ là đẳng cấu với mọi $q$, và tương tự cho đồng điều rút gọn.
+\end{proposition}
+
+\begin{proof}
+Theo định nghĩa, $r=\Theta_1$ và $\Theta_0=\mathrm{id}_X$, nên $\Theta$ chính là đồng luân giữa $i\circ r=\Theta_1$ và $\mathrm{id}_X=\Theta_0$.
+Do đó $i$ và $r$ là các đồng luân tương đương. Từ tính bất biến đồng luân của đồng điều, $i_*$ là đẳng cấu.
+\end{proof}
+
+\begin{example}[Điểm là deformation retract khi và chỉ khi $X$ co rút được]
+Nếu $A=\{P\}$ là một điểm trong $X$, thì $A$ là deformation retract của $X$ khi và chỉ khi $X$ \emph{contractible}.
+Khi đó $\widetilde{H}_q(X)=0$ với mọi $q$.
+\end{example}
+
+\begin{example}[Co hướng tâm lên mặt cầu: $S^{n-1}$ là strong deformation retract]
+Ký hiệu $S^{n-1}=\{x\in\mathbb{R}^n:\|x\|=1\}$, $\mathbb{B}^n=\{x\in\mathbb{R}^n:\|x\|\le 1\}$.
+Xét đồng luân \emph{hướng tâm} (radial deformation)
+\[
+\Theta_t(x) \;:=\; \bigl(1-t+t/\|x\|\bigr)\,x,\qquad x\in \mathbb{R}^n\setminus\{0\},\ t\in I.
+\]
+Ta có:
+\[
+\Theta_0(x)=x,\qquad \Theta_1(x)=\frac{x}{\|x\|}\in S^{n-1},\qquad 
+\text{và nếu } x\in S^{n-1}\ \text{thì } \Theta_t(x)=x\ \forall t.
+\]
+Vì vậy $S^{n-1}$ là \emph{strong deformation retract} của $\mathbb{R}^n\setminus\{0\}$.
+
+Hơn nữa, với $x\in \mathbb{B}^n\setminus\{0\}$, ta có
+\[
+\|\Theta_t(x)\| \;=\; \bigl(1-t+t/\|x\|\bigr)\,\|x\| \;=\; (1-t)\|x\|+t \;\le\; (1-t)\cdot 1+t \;=\;1,
+\]
+nên $\Theta_t$ còn hạn chế thành một đồng luân trong $\mathbb{B}^n\setminus\{0\}$ và cố định $S^{n-1}$.
+Do đó $S^{n-1}$ cũng là \emph{strong deformation retract} của $\mathbb{B}^n\setminus\{0\}$.
+\end{example}
+
+\begin{corollary}[Đồng điều của không gian xóa gốc]
+Vì $S^{n-1}$ là strong deformation retract của cả $\mathbb{R}^n\setminus\{0\}$ và $\mathbb{B}^n\setminus\{0\}$, nên
+\[
+H_q\!\left(\mathbb{R}^n\!-\!\{0\}\right)\;\cong\; H_q\!\left(\mathbb{B}^n\!-\!\{0\}\right)
+\;\cong\; H_q(S^{n-1})
+\quad \text{với mọi } q.
+\]
+Tương đương với đồng điều rút gọn, ta cũng có
+\[
+\widetilde{H}_q\!\left(\mathbb{R}^n\!-\!\{0\}\right)
+\;\cong\; \widetilde{H}_q\!\left(\mathbb{B}^n\!-\!\{0\}\right)
+\;\cong\; \widetilde{H}_q(S^{n-1}).
+\]
+Đặc biệt,
+\[
+\widetilde{H}_{n-1}\!\left(\mathbb{R}^n\!-\!\{0\}\right)\cong \mathbb{Z},\qquad
+\widetilde{H}_q\!\left(\mathbb{R}^n\!-\!\{0\}\right)=0\ \text{với } q\neq n-1.
+\]
+\end{corollary}
+
+%--- (Tùy chọn) Liên hệ dãy khớp tương đối ---%
+\begin{remark}[Liên hệ với dãy khớp tương đối]
+Từ strong deformation retract $S^{n-1}\subset \mathbb{B}^n\setminus\{0\}$, bao hàm
+$i:S^{n-1}\hookrightarrow \mathbb{B}^n\setminus\{0\}$ cảm sinh đẳng cấu trên đồng điều.
+Kết hợp với dãy khớp dài của cặp $(\mathbb{B}^n,\mathbb{B}^n\setminus\{0\})$ hoặc nhận diện cổ điển
+$H_q(\mathbb{R}^n\setminus\{0\})\cong \widetilde{H}_q(S^{n-1})$ cũng thu được kết luận trên.
+\end{remark}
+
+% \begin{problem}
+% Trình bày phép chia nhỏ trọng tâm và các tính chất. (Mục~6, Ch.~III.)
+% \end{problem}
+
+\begin{problem}
+Phát biểu và chứng minh \emph{định lý khoét} (Excision). (Mục~7, Ch.~III.)
+\end{problem}
+%==========================
+% EXCISION THEOREM
+%==========================
+\begin{theorem}[Định lý Khoét – Excision Theorem]
+\label{thm:excision}
+Cho cặp không gian topo $(X,A)$ và một tập con $U\subset A$ sao cho
+$\overline{U} \subset \mathrm{int}(A)$.
+Khi đó, ánh xạ bao hàm tự nhiên
+\[
+j : (X\setminus U,\, A\setminus U) \hookrightarrow (X,\,A)
+\]
+cảm sinh một \emph{đẳng cấu} trên các nhóm đồng điều kỳ dị:
+\[
+j_* : H_n(X\setminus U,\, A\setminus U)
+~\xrightarrow{\;\cong\;}~
+H_n(X,\,A)
+\qquad \forall\, n\ge 0.
+\]
+\end{theorem}
+
+\begin{theorem}[Định lý Khoét]
+Cho cặp $(X,A)$ và $U\subset A$ sao cho $\overline{U}\subset \mathrm{int}(A)$. 
+Khi đó bao hàm
+\[
+j:(X\setminus U,\,A\setminus U)\hookrightarrow (X,A)
+\]
+cảm sinh đẳng cấu
+\[
+j_*:H_n(X\setminus U,\,A\setminus U)\xrightarrow{\;\cong\;} H_n(X,A)
+\quad \forall n.
+\]
+\end{theorem}
+
+\begin{proof}
+\textbf{Bước 1.} Với một phủ mở $\mathcal{U}=\{U_\alpha\}$ của $X$, đặt
+\[
+S_n^{\mathcal{U}}(X)
+=\big\langle\sigma:\Delta^n\!\to\!X\mid
+\exists\,U_\alpha\in\mathcal{U}:\operatorname{im}(\sigma)\subset U_\alpha\big\rangle
+\subset S_n(X).
+\]
+Đây là phức con của $S_*(X)$ gọi là \emph{phức chuỗi nhỏ}.
+
+\textbf{Bước 2.} Phép chia nhỏ barycentric $Sd:S_*(X)\to S_*(X)$ thỏa
+\[
+\partial Sd = Sd\,\partial,\quad Sd\simeq \mathrm{id},
+\]
+và với mọi phủ $\mathcal{U}$ tồn tại $N$ sao cho
+$Sd^N(S_*(X))\subset S_*^{\mathcal{U}}(X)$.
+
+\textbf{Bước 3.} Chọn phủ $\mathcal{U}=\{X\setminus U,\,A\}$.  
+Khi đó:
+\[
+S_*^{\mathcal{U}}(X,A)
+:=S_*^{\mathcal{U}}(X)/S_*^{\mathcal{U}}(A)
+\cong S_*(X\setminus U,\,A\setminus U),
+\]
+vì mọi simplex “nhỏ” đều nằm trọn trong $X\setminus U$ hoặc trong $A$, 
+và $U\subset\mathrm{int}(A)$.
+
+\textbf{Bước 4.} Do $Sd^N\simeq \mathrm{id}$, ta có
+\[
+H_n(S_*^{\mathcal{U}}(X,A)) \cong H_n(S_*(X,A)).
+\]
+Kết hợp với \(\textbf{Bước 3}\), suy ra
+\[
+H_n(X,A)\cong H_n(X\setminus U,\,A\setminus U).
+\]
+\end{proof}
+
+
+% \begin{problem}
+% Định nghĩa $n$-mặt cầu, $n$-hình cầu, $n$-tế bào chuẩn và các tính chất. (Xem \S1, \S1.2, \S1.3, Ch.~IV, trang~54.)
+% \end{problem}
+
+% \begin{problem}
+% Tính đồng điều kì dị của các tế bào và mặt cầu. (Prop.~2.2, Ch.~IV.)
+% \end{problem}
+
+% % \begin{problem}
+% % Bậc của ánh xạ và ứng dụng. (Mục~IV.4.)
+% % \end{problem}
+
+% % \begin{problem}
+% % Đồng điều địa phương: bất biến số chiều, bất biến về biên. (Prop.~3.8, 3.9.)
+% % \end{problem}
+
+% \begin{problem}
+% Các ứng dụng: các mặt cầu khác chiều không đồng phôi (Cor.~2.3); mặt cầu không là một co rút của hình cầu (Cor.~2.4); Định lý điểm bất động Brouwer (Cor.~2.5, 2.6).
+% \end{problem}
